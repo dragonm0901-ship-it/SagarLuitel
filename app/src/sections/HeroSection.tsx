@@ -55,7 +55,7 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 1
 
 // Custom SVG Icons for Brands
 const ReactIcon = (props: any) => (
-  <svg viewBox="-11.5 -10.23174 23 20.46348" {...props} fill="none">
+  <svg viewBox="-5.5 -10.23174 23 20.46348" {...props} fill="none">
     <circle cx="0" cy="0" r="2.05" fill="currentColor" />
     <g stroke="currentColor" strokeWidth="1" fill="none">
       <ellipse rx="11" ry="4.2" />
@@ -222,7 +222,7 @@ export function HeroSection() {
       {/* Background Text Layer (Behind Image) */}
       <div 
         ref={textBgRef}
-        className="absolute top-[35%] md:top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-0 pointer-events-none select-none"
+        className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-0 pointer-events-none select-none"
       >
         <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
           FRONT END
@@ -235,7 +235,7 @@ export function HeroSection() {
       {/* Hero Image Layer */}
       <div 
         ref={imageRef}
-        className="absolute top-[35%] md:top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] z-10 flex justify-center items-center h-auto"
+        className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] z-10 flex justify-center items-center h-auto"
       >
         <div className="relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame">
           {/* Soft Glow Background */}
@@ -252,7 +252,7 @@ export function HeroSection() {
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
         ref={textFgRef}
-        className="absolute top-[35%] md:top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-20 pointer-events-none select-none"
+        className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-20 pointer-events-none select-none"
       >
         <h1 
           className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
