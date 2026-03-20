@@ -19,20 +19,10 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 1
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ 
-        opacity: 1, 
-        scale: 1,
-        y: [0, -10, 0],
-      }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{
-        opacity: { duration: 0.5, delay },
-        scale: { duration: 0.5, delay },
-        y: {
-          duration: 3 + Math.random() * 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: delay
-        }
+        opacity: { duration: 0.8, delay, ease: "easeOut" },
+        scale: { duration: 0.8, delay, type: "spring", stiffness: 120 }
       }}
       whileHover={{ 
         scale: 1.4,
@@ -151,35 +141,37 @@ export function HeroSection() {
         .fromTo(imageRef.current, { y: 100, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: 'expo.out' }, '-=0.8')
         .fromTo(contentRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.6');
 
-      // Parallax effect on scroll
+      // Senior-Level Parallax effect on scroll
+      // Using `scrub: 1.2` gives it a premium, buttery-smooth follow-lag
+      // Depth layering: Bg (-80) -> Image (-150) -> Fg (-220)
       gsap.to(textBgRef.current, {
-        y: -100,
+        y: -80,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: true,
-        }
-      });
-      gsap.to(textFgRef.current, {
-        y: -100,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
+          scrub: 1.2,
         }
       });
       gsap.to(imageRef.current, {
-        y: -50,
+        y: -150,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: true,
+          scrub: 1.2,
+        }
+      });
+      gsap.to(textFgRef.current, {
+        y: -220,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2,
         }
       });
 
@@ -197,28 +189,28 @@ export function HeroSection() {
       {/* Floating Tech Icons */}
       <div className="absolute inset-0 z-[50] pointer-events-none">
         {/* All icons stacked below image/text on mobile (y > 60%) */}
-        {/* Left Side (Desktop) */}
-        <TechIcon icon={ReactIcon} color="#61DAFB" x="8%" y="15%" mx="10%" my="60%" delay={0.2} />
-        <TechIcon icon={TailwindIcon} color="#38B2AC" x="15%" y="45%" mx="25%" my="62%" delay={0.4} />
-        <TechIcon icon={FramerIcon} color="#1A1A1A" x="6%" y="65%" mx="15%" my="72%" delay={0.6} />
-        <TechIcon icon={NodeIcon} color="#339933" x="12%" y="82%" mx="35%" my="68%" delay={0.8} />
-        <TechIcon icon={HtmlIcon} color="#E34F26" x="25%" y="75%" mx="5%" my="65%" delay={1.0} />
+        {/* Clustered Left Side */}
+        <TechIcon icon={ReactIcon} color="#61DAFB" x="32%" y="25%" mx="20%" my="60%" delay={0.2} />
+        <TechIcon icon={TailwindIcon} color="#38B2AC" x="28%" y="45%" mx="35%" my="62%" delay={0.4} />
+        <TechIcon icon={FramerIcon} color="#1A1A1A" x="34%" y="65%" mx="50%" my="64%" delay={0.6} />
+        <TechIcon icon={NodeIcon} color="#339933" x="26%" y="82%" mx="65%" my="62%" delay={0.8} />
+        <TechIcon icon={HtmlIcon} color="#E34F26" x="36%" y="78%" mx="80%" my="60%" delay={1.0} />
 
-        {/* Right Side (Desktop) */}
-        <TechIcon icon={ViteIcon} color="#F5C518" x="85%" y="12%" mx="80%" my="60%" delay={0.3} />
-        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="80%" y="35%" mx="65%" my="62%" delay={0.5} />
-        <TechIcon icon={JsIcon} color="#F7DF1E" x="88%" y="60%" mx="85%" my="72%" delay={0.7} />
-        <TechIcon icon={GsapIcon} color="#88CE02" x="82%" y="85%" mx="65%" my="68%" delay={0.9} />
-        <TechIcon icon={CssIcon} color="#1572B6" x="70%" y="78%" mx="75%" my="65%" delay={1.1} />
+        {/* Clustered Right Side */}
+        <TechIcon icon={ViteIcon} color="#F5C518" x="68%" y="22%" mx="25%" my="68%" delay={0.3} />
+        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="72%" y="42%" mx="40%" my="70%" delay={0.5} />
+        <TechIcon icon={JsIcon} color="#F7DF1E" x="66%" y="60%" mx="55%" my="68%" delay={0.7} />
+        <TechIcon icon={GsapIcon} color="#88CE02" x="74%" y="76%" mx="70%" my="70%" delay={0.9} />
+        <TechIcon icon={CssIcon} color="#1572B6" x="64%" y="85%" mx="30%" my="75%" delay={1.1} />
         
-        {/* Extra Icons */}
-        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="18%" y="10%" mx="50%" my="75%" delay={1.3} />
-        <TechIcon icon={Layers} color="#1A1A1A" x="75%" y="8%" mx="45%" my="60%" delay={1.7} />
+        {/* Extra Icons close to center bottom/top */}
+        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="42%" y="15%" mx="48%" my="78%" delay={1.3} />
+        <TechIcon icon={Layers} color="#1A1A1A" x="58%" y="18%" mx="65%" my="75%" delay={1.7} />
       </div>
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-0 pointer-events-none select-none"
+        className="absolute inset-0 pb-12 md:pb-8 flex flex-col justify-center items-center z-0 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
           <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
@@ -232,9 +224,9 @@ export function HeroSection() {
 
       {/* Hero Image Layer */}
       <div 
-        className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] z-10 flex justify-center items-center h-auto"
+        className="absolute inset-0 pb-12 md:pb-8 pointer-events-none flex justify-center items-center z-10"
       >
-        <div ref={imageRef} className="w-full relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame">
+        <div ref={imageRef} className="w-[85vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto">
           {/* Soft Glow Background */}
           <div className="absolute -inset-2 bg-gradient-to-br from-[#F5C518] to-[#FF6B9D] opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
           
@@ -248,7 +240,7 @@ export function HeroSection() {
 
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
-        className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-20 pointer-events-none select-none"
+        className="absolute inset-0 pb-12 md:pb-8 flex flex-col justify-center items-center z-20 pointer-events-none select-none"
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full">
           <h1 
