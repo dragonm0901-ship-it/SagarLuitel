@@ -43,7 +43,7 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
     }, "-=0.1");
 
     return () => { tl.kill(); };
-  }, []);
+  }, [onComplete]);
 
   return (
     <AnimatePresence>
