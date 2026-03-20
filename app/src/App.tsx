@@ -8,7 +8,6 @@ import { HeroSection } from '@/sections/HeroSection';
 import { StatsSection } from '@/sections/StatsSection';
 import { AboutSection } from '@/sections/AboutSection';
 import { ServicesSection } from '@/sections/ServicesSection';
-import { ClientsSection } from '@/sections/ClientsSection';
 import { PortfolioSection } from '@/sections/PortfolioSection';
 import { StoreSection } from '@/sections/StoreSection';
 import { ContactCTA } from '@/sections/ContactCTA';
@@ -37,7 +36,6 @@ function HomePage() {
       <StatsSection />
       <AboutSection />
       <ServicesSection />
-      <ClientsSection />
       <PortfolioSection />
       <ContactCTA />
     </>
