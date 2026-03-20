@@ -144,7 +144,7 @@ export function HeroSection() {
       // Senior-Level Parallax effect on scroll
       // Using `scrub: 1.2` gives it a premium, buttery-smooth follow-lag
       // Depth layering: Bg (-80) -> Image (-150) -> Fg (-220)
-      gsap.to(textBgRef.current, {
+      gsap.fromTo(textBgRef.current, { y: 0 }, {
         y: -80,
         ease: 'none',
         scrollTrigger: {
@@ -152,9 +152,10 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: 1.2,
+          invalidateOnRefresh: true,
         }
       });
-      gsap.to(imageRef.current, {
+      gsap.fromTo(imageRef.current, { y: 0 }, {
         y: -150,
         ease: 'none',
         scrollTrigger: {
@@ -162,9 +163,10 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: 1.2,
+          invalidateOnRefresh: true,
         }
       });
-      gsap.to(textFgRef.current, {
+      gsap.fromTo(textFgRef.current, { y: 0 }, {
         y: -220,
         ease: 'none',
         scrollTrigger: {
@@ -172,6 +174,7 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: 1.2,
+          invalidateOnRefresh: true,
         }
       });
 
@@ -210,7 +213,7 @@ export function HeroSection() {
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        className="absolute inset-0 pb-12 md:pb-8 flex flex-col justify-center items-center z-0 pointer-events-none select-none"
+        className="absolute inset-0 pb-24 md:pb-8 flex flex-col justify-center items-center z-0 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
           <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
@@ -224,7 +227,7 @@ export function HeroSection() {
 
       {/* Hero Image Layer */}
       <div 
-        className="absolute inset-0 pb-12 md:pb-8 pointer-events-none flex justify-center items-center z-10"
+        className="absolute inset-0 pb-24 md:pb-8 pointer-events-none flex justify-center items-center z-10"
       >
         <div ref={imageRef} className="w-[85vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto">
           {/* Soft Glow Background */}
@@ -240,7 +243,7 @@ export function HeroSection() {
 
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
-        className="absolute inset-0 pb-12 md:pb-8 flex flex-col justify-center items-center z-20 pointer-events-none select-none"
+        className="absolute inset-0 pb-24 md:pb-8 flex flex-col justify-center items-center z-20 pointer-events-none select-none"
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full">
           <h1 
