@@ -263,12 +263,12 @@ export function HeroSection() {
 
       {/* Bottom Content Layer */}
       <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-30 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-end justify-between gap-6">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
+          <div className="flex flex-col items-center text-center">
             <div className="mb-3" ref={badgeRef}>
               <span className="inline-flex items-center gap-2 bg-black text-white px-3 py-1.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest shadow-xl">
                 <Code className="w-3.5 h-3.5 text-[#FF6B9D]" />
-                Interactive Architect
+                Developer Architect
               </span>
             </div>
             <p className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed">
