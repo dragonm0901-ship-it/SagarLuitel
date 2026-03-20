@@ -128,6 +128,15 @@ const CreativeDeveloperBadge = () => {
   const [displayText, setDisplayText] = useState("");
   const codeSnippet = `console.log("Hello World");\nconsole.log("I am Sagar");`;
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   useEffect(() => {
     if (isHovered) {
       let i = 0;
@@ -144,18 +153,24 @@ const CreativeDeveloperBadge = () => {
   }, [isHovered]);
 
   return (
-    <div className="relative mb-3 group"
+    <div className="relative mb-3 flex flex-col items-center group"
          onMouseEnter={() => setIsHovered(true)}
          onMouseLeave={() => setIsHovered(false)}
          onClick={() => setIsHovered(!isHovered)}
     >
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isHovered && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: -95 }}
-            exit={{ opacity: 0, scale: 0.8, y: 10 }}
-            className="absolute left-1/2 -translate-x-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-lg p-2.5 shadow-2xl z-[60] backdrop-blur-xl"
+            initial={{ opacity: 0, scale: isMobile ? 0.4 : 0.8, x: "-50%", y: 10 }}
+            animate={{ 
+              opacity: 1, 
+              scale: isMobile ? 0.6 : 1, 
+              x: "-50%", 
+              y: isMobile ? -65 : -95 
+            }}
+            exit={{ opacity: 0, scale: isMobile ? 0.4 : 0.8, x: "-50%", y: 10 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            className="absolute left-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-lg p-2.5 shadow-2xl z-[60] backdrop-blur-xl"
             style={{ originY: 1 }}
           >
             {/* Header / Traffic Lights */}
