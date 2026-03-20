@@ -309,7 +309,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6B9D]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Floating Tech Icons */}
-      <div className="absolute inset-0 z-[50] pointer-events-none">
+      <div className="absolute inset-0 z-[50] pointer-events-none pb-40 md:pb-24 -translate-y-16 md:translate-y-0">
         {/* All icons stacked below image/text on mobile (y > 60%) */}
         {/* Clustered Left Side */}
         <TechIcon icon={ReactIcon} color="#61DAFB" x="32%" y="25%" mx="20%" my="60%" delay={0.2} />
@@ -332,13 +332,13 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        className="absolute inset-0 flex flex-col justify-start pt-[18vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-0 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-center pb-40 md:pb-24 items-center z-0 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
-          <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
+          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
             FRONT END
           </h1>
-          <h1 className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
+          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
             MAGICIAN
           </h1>
         </div>
@@ -346,9 +346,9 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Hero Image Layer */}
       <div 
-        className="absolute inset-0 pb-24 md:pb-8 pointer-events-none flex justify-center items-center z-10"
+        className="absolute inset-0 pb-40 md:pb-24 pointer-events-none flex justify-center items-center z-10"
       >
-        <div ref={imageRef} className="w-[85vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto">
+        <div ref={imageRef} className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto">
           {/* Soft Glow Background */}
           <div className="absolute -inset-2 bg-gradient-to-br from-[#F5C518] to-[#FF6B9D] opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
           
@@ -362,18 +362,18 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
-        className="absolute inset-0 flex flex-col justify-start pt-[18vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-20 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-center pb-40 md:pb-24 items-center z-20 pointer-events-none select-none"
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full">
           <h1 
-            className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
-            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
+            className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+            style={{ WebkitTextStroke: '1.2px rgba(255,255,255,0.45)' }}
           >
             FRONT END
           </h1>
           <h1 
-            className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
-            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
+            className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+            style={{ WebkitTextStroke: '1.2px rgba(255,255,255,0.45)' }}
           >
             MAGICIAN
           </h1>
