@@ -11,10 +11,10 @@ const projects = [
     image: '/images/project-dots.png',
     title: '3D Bike Configurator',
     year: '2024',
-    tags: ['Three.js', 'React Three Fiber', 'GSAP', 'GLSL'],
-    challenge: 'Developing a high-performance 3D configurator with real-time parts swapping and dynamic textures for a premium brand.',
-    magic: 'Custom instanced geometry and raw GLSL shaders reduced GPU overhead by 80%, enabling butter-smooth interaction.',
-    metrics: { label: 'Performance Boost', value: '80%' }
+    tags: ['Next.js', 'GSAP', 'Framer Motion', 'State'],
+    challenge: 'Developing a high-performance interactive configurator with real-time state management and dynamic UI for a premium brand.',
+    magic: 'Custom state orchestration and GSAP timelines reduced logic overhead by 80%, enabling butter-smooth interaction.',
+    metrics: { label: 'Logic Efficiency', value: '80%' }
   },
   {
     image: '/images/project-ongito.png',
@@ -31,8 +31,8 @@ const projects = [
     year: '2025',
     tags: ['React', 'GSAP', 'Framer Motion', 'Contentful'],
     challenge: 'Designing a premium travel booking platform with immersive destination walkthroughs and interactive maps.',
-    magic: 'Developed a proprietary vertex-shading algorithm that moved critical math calculations to the GPU.',
-    metrics: { label: 'Math Processing', value: '99.9%' }
+    magic: 'Developed a proprietary animation system that moved complex UI transitions to hardware-accelerated layers.',
+    metrics: { label: 'Frame Density', value: '99.9%' }
   },
 ];
 

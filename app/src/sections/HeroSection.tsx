@@ -373,7 +373,7 @@ export function HeroSection() {
           <div className="flex flex-col items-center text-center">
             <CreativeDeveloperBadge />
             <p className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed">
-              Crafting immersive digital realms that blur the line between code and art using cutting-edge WebGL & GSAP.
+              Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP.
             </p>
           </div>
         </div>

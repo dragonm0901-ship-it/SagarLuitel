@@ -10,40 +10,40 @@ const products = [
   {
     id: 'course-1',
     category: 'Course',
-    title: 'The Shader Masterclass',
-    description: 'Learn to build GPU-accelerated visuals for the web from scratch.',
+    title: 'The GSAP Masterclass',
+    description: 'Learn to build cinematic, high-performance animations for the web from scratch.',
     price: '$199',
     level: 'Advanced',
     duration: '12 Hours',
     rating: 4.9,
     icon: Star,
     color: '#FF6B9D',
-    tags: ['GLSL', 'R3F', 'Math']
+    tags: ['GSAP', 'SVG', 'Math']
   },
   {
     id: 'build-1',
     category: 'Template',
-    title: 'Editorial 3D Portfolio',
-    description: 'A high-performance R3F boilerplate with premium scrollytelling.',
+    title: 'Premium Motion Portfolio',
+    description: 'A high-performance React boilerplate with cinematic scrollytelling.',
     price: '$49',
     level: 'Ready-to-Deploy',
-    features: ['GSAP Integrated', 'R3F Scene', 'Responsive'],
+    features: ['GSAP Core', 'Framer Layouts', 'Responsive'],
     icon: Monitor,
     color: '#F5C518',
-    tags: ['React', 'Three.js', 'Vite']
+    tags: ['React', 'Animation', 'Vite']
   },
   {
     id: 'course-2',
     category: 'Course',
-    title: 'GSAP Scrollytelling Architecture',
-    description: 'The definitive guide to building complex scroll-driven animations.',
+    title: 'Advanced React State',
+    description: 'The definitive guide to building complex, high-performance React applications.',
     price: '$149',
     level: 'Intermediate',
     duration: '8 Hours',
     rating: 4.8,
     icon: BookOpen,
     color: '#FF8C42',
-    tags: ['GSAP', 'Lenis', 'Performance']
+    tags: ['React', 'Zustand', 'Performance']
   }
 ];
 

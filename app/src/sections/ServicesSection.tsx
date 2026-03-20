@@ -9,22 +9,22 @@ gsap.registerPlugin(ScrollTrigger);
 const services = [
   {
     icon: Workflow,
-    title: 'Creative Coding & WebGL',
-    description: 'Transforming mathematical logic into stunning visual experiences with custom shaders and R3F.',
-    features: ['Shader Development', '3D Scene Design', 'Performance Optimization', 'WebGL Math'],
+    title: 'Interactive React Apps',
+    description: 'Building state-of-the-art interactive applications with advanced React patterns and motion.',
+    features: ['Custom Hooks', 'State Orchestration', 'Performance Profiling', 'Vite & TypeScript'],
   },
   {
     icon: Palette,
-    title: 'Immersive Interface Design',
-    description: 'Crafting UI that lives within 3D Space, blending traditional design with spatial awareness.',
-    features: ['Spatial UI', 'Dynamic Micro-interactions', 'Vite & React Mastery', 'Premium Aesthetics'],
-    badge: 'Magic',
+    title: 'Advanced Motion Design',
+    description: 'Crafting fluid motion systems that enhance UX, blending physics-based animation with UI.',
+    features: ['GSAP Timelines', 'Framer Motion Layouts', 'SVG Animation', 'Premium Aesthetics'],
+    badge: 'Impact',
   },
   {
     icon: Layers,
-    title: 'Interactive Storytelling',
-    description: 'Using GSAP and Lenis to choreograph scrollytelling experiences that captivate and convert.',
-    features: ['Timeline Orchestration', 'Parallax Systems', 'Physics-based Motion', 'Scroll Magic'],
+    title: 'Cinematic Storytelling',
+    description: 'Using GSAP and Lenis to choreograph immersive scroll experiences that captivate users.',
+    features: ['Scroll Scrubbing', 'Parallax Systems', 'Layered Compositions', 'Lenis Integration'],
   },
 ];
 
