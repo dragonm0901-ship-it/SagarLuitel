@@ -6,12 +6,12 @@ import { Brain, Hexagon, Circle, Square, Triangle, Star, ArrowRight } from 'luci
 gsap.registerPlugin(ScrollTrigger);
 
 const clients = [
-  { name: 'NeuroLink', icon: Brain },
-  { name: 'Logoipsum', icon: Hexagon },
-  { name: 'TechFlow', icon: Circle },
-  { name: 'DataSync', icon: Square },
-  { name: 'CloudBase', icon: Triangle },
-  { name: 'StarLabs', icon: Star },
+  { name: 'NeuroLink', icon: Brain, color: 'hover:text-[#F5C518] hover:drop-shadow-[0_0_10px_rgba(245,197,24,0.5)]' },
+  { name: 'Logoipsum', icon: Hexagon, color: 'hover:text-[#FF6B9D] hover:drop-shadow-[0_0_10px_rgba(255,107,157,0.5)]' },
+  { name: 'TechFlow', icon: Circle, color: 'hover:text-[#FF8C42] hover:drop-shadow-[0_0_10px_rgba(255,140,66,0.5)]' },
+  { name: 'DataSync', icon: Square, color: 'hover:text-[#F5C518] hover:drop-shadow-[0_0_10px_rgba(245,197,24,0.5)]' },
+  { name: 'CloudBase', icon: Triangle, color: 'hover:text-[#FF6B9D] hover:drop-shadow-[0_0_10px_rgba(255,107,157,0.5)]' },
+  { name: 'StarLabs', icon: Star, color: 'hover:text-[#FF8C42] hover:drop-shadow-[0_0_10px_rgba(255,140,66,0.5)]' },
 ];
 
 export function ClientsSection() {
@@ -106,10 +106,14 @@ export function ClientsSection() {
             return (
               <div
                 key={client.name}
-                className="group flex items-center justify-center gap-2 text-gray-400 hover:text-gray-700 transition-all duration-300 cursor-pointer"
+                className={`group flex items-center justify-center gap-3 text-gray-400 transition-all duration-300 cursor-pointer ${client.color} hover:scale-[1.3]`}
               >
-                <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
-                <span className="font-semibold text-sm hidden sm:inline">{client.name}</span>
+                <div className="relative">
+                  <Icon className="w-7 h-7 transition-all duration-500 group-hover:scale-[1.3]" />
+                </div>
+                <span className="font-bold text-sm hidden sm:inline transition-colors duration-300">
+                  {client.name}
+                </span>
               </div>
             );
           })}
