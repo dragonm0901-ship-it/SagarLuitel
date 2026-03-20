@@ -123,19 +123,10 @@ const SmoothLenisIcon = (props: any) => (
   </svg>
 );
 
-const CreativeDeveloperBadge = () => {
+const CreativeDeveloperBadge = ({ isMobile }: { isMobile: boolean }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const codeSnippet = `console.log("Hello World");\nconsole.log("I am Sagar");`;
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   useEffect(() => {
     if (isHovered) {
@@ -236,6 +227,15 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const textFgRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!isIntroDone) return;
@@ -320,7 +320,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        className="absolute inset-0 flex flex-col justify-start pt-[14vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-0 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-start pt-[24vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-0 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
           <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
@@ -350,18 +350,18 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
-        className="absolute inset-0 flex flex-col justify-start pt-[14vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-20 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-start pt-[24vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-20 pointer-events-none select-none"
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full">
           <h1 
             className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
-            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
+            style={{ WebkitTextStroke: `1.5px ${isMobile ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.85)'}` }}
           >
             FRONT END
           </h1>
           <h1 
             className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
-            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
+            style={{ WebkitTextStroke: `1.5px ${isMobile ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.85)'}` }}
           >
             MAGICIAN
           </h1>
@@ -372,7 +372,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[70] px-6">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
           <div className="flex flex-col items-center text-center">
-            <CreativeDeveloperBadge />
+            <CreativeDeveloperBadge isMobile={isMobile} />
             <p className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed">
               Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP.
             </p>
