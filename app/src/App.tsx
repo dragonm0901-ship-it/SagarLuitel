@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
@@ -29,10 +29,10 @@ function ScrollToTop() {
   return null;
 }
 
-function HomePage() {
+function HomePage({ isIntroDone }: { isIntroDone: boolean }) {
   return (
     <>
-      <HeroSection />
+      <HeroSection isIntroDone={isIntroDone} />
       <StatsSection />
       <AboutSection />
       <ServicesSection />
@@ -43,6 +43,8 @@ function HomePage() {
 }
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     // Refresh ScrollTrigger on load
     ScrollTrigger.refresh();
@@ -56,7 +58,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <SmoothScroll>
-        <PremiumIntro />
+        <PremiumIntro onComplete={() => setLoading(false)} />
         <CustomCursor />
         <LiquidBackground />
         <GrainOverlay />
@@ -64,7 +66,7 @@ function App() {
           <Navbar />
           <main>
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<HomePage isIntroDone={!loading} />} />
               <Route path="/store" element={<StoreSection />} />
             </Routes>
           </main>

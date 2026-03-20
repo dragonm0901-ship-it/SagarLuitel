@@ -230,7 +230,7 @@ const CreativeDeveloperBadge = () => {
   );
 };
 
-export function HeroSection() {
+export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
   const textBgRef = useRef<HTMLDivElement>(null);
   const textFgRef = useRef<HTMLDivElement>(null);
@@ -238,9 +238,11 @@ export function HeroSection() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!isIntroDone) return;
+
     const ctx = gsap.context(() => {
       // Basic entrance
-      const tl = gsap.timeline({ delay: 0.2 });
+      const tl = gsap.timeline({ delay: 0.1 }); // Shortened delay since intro already has one
 
       tl.fromTo(textBgRef.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out' })
         .fromTo(textFgRef.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out' }, '<')
