@@ -242,18 +242,17 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
     const ctx = gsap.context(() => {
       // Basic entrance
-      const tl = gsap.timeline({ delay: 0 }); // No delay, start exactly when the intro curtain begins to lift
-
-      tl.fromTo(textBgRef.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out' })
-        .fromTo(textFgRef.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out' }, '<')
-        .fromTo(imageRef.current, { y: 100, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: 'expo.out' }, '-=0.8')
-        .fromTo(contentRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.6');
+      const tl = gsap.timeline();
+      tl.fromTo(textBgRef.current, { y: -150, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: 'expo.out' })
+        .fromTo(textFgRef.current, { y: -200, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: 'expo.out' }, '<')
+        .fromTo(imageRef.current, { y: 150, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 1.5, ease: 'expo.out' }, '-=1.2')
+        .fromTo(contentRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.8');
 
       // Senior-Level Parallax effect on scroll
       // Using `scrub: 1.2` gives it a premium, buttery-smooth follow-lag
       // Depth layering: Bg (-80) -> Image (-150) -> Fg (-220)
       gsap.fromTo(textBgRef.current, { y: 0 }, {
-        y: -80,
+        y: 80, // Opposite direction from image
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -275,7 +274,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         }
       });
       gsap.fromTo(textFgRef.current, { y: 0 }, {
-        y: -220,
+        y: 120, // Opposite direction from image (moves even faster down)
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
