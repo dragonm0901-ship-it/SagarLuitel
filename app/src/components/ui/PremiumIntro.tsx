@@ -57,30 +57,30 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
     <AnimatePresence>
       {!complete && (
         <motion.div
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#0A0A0A] intro-bg"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-white intro-bg"
           exit={{ opacity: 0 }}
         >
           <div className="relative w-full max-w-sm px-6">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-white/5 rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-black/5 rounded-full" />
             
             <div className="text-center">
               <div className="overflow-hidden mb-2">
-                <h1 className="text-white text-3xl md:text-5xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
+                <h1 className="text-black text-3xl md:text-5xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
                   SAGAR LUITEL
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <p className="text-[#F5C518] text-[9px] tracking-[0.4em] font-mono uppercase intro-text opacity-0 translate-y-20">
+                <p className="text-[#FF6B9D] text-[9px] tracking-[0.4em] font-mono uppercase intro-text opacity-0 translate-y-20">
                   Front-End Magician
                 </p>
               </div>
               
-              <div className="mt-12 flex items-end justify-between font-mono text-[10px] text-gray-500 mb-2">
+              <div className="mt-12 flex items-end justify-between font-mono text-[10px] text-gray-400 mb-2">
                 <span>INITIALIZING</span>
                 <span>{progress}%</span>
               </div>
-              <div className="h-px w-full bg-white/10 overflow-hidden">
-                <div className="h-full bg-[#F5C518] w-0 intro-progress origin-left scale-x-0" />
+              <div className="h-px w-full bg-black/5 overflow-hidden">
+                <div className="h-full bg-black w-0 intro-progress origin-left scale-x-0" />
               </div>
             </div>
           </div>
