@@ -2,6 +2,7 @@
   "name": "new-portfolio-root",
   "private": true,
   "scripts": {
+    "postinstall": "npm install --prefix app",
     "dev": "npm --prefix app run dev",
     "build": "npm --prefix app run build",
     "lint": "npm --prefix app run lint",
