@@ -7,12 +7,7 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setComplete(true);
-        onComplete();
-      },
-    });
+    const tl = gsap.timeline();
 
     // Progress counter animation
     gsap.to({ val: 0 }, {
@@ -38,12 +33,14 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
       stagger: 0.05,
       ease: "expo.in",
       delay: 0.2,
+      onComplete: () => onComplete() // Signal Hero entrance BEFORE the bg slides up
     })
     .to(".intro-bg", {
       yPercent: -100,
-      duration: 1,
+      duration: 1.2, // Slightly slower for more cinematic lift
       ease: "expo.inOut",
-    }, "-=0.2");
+      onComplete: () => setComplete(true) // Unmount only when fully cleared
+    }, "-=0.1");
 
     return () => { tl.kill(); };
   }, []);

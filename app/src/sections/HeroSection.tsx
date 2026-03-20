@@ -242,7 +242,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
     const ctx = gsap.context(() => {
       // Basic entrance
-      const tl = gsap.timeline({ delay: 0.1 }); // Shortened delay since intro already has one
+      const tl = gsap.timeline({ delay: 0 }); // No delay, start exactly when the intro curtain begins to lift
 
       tl.fromTo(textBgRef.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out' })
         .fromTo(textFgRef.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out' }, '<')
