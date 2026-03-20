@@ -69,7 +69,7 @@
 
 /* Custom Cursor Orchestration */
 @media (pointer: fine) {
-  html, body, a, button, [role="button"], .cursor-pointer, input, textarea, select, label {
+  * {
     cursor: none !important;
   }
 }
