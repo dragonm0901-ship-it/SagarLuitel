@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Code, Zap, Layers } from 'lucide-react';
+import { Code, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,7 +29,7 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, size = 22 }: any) => (
       rotate: [0, -10, 10, 0],
       transition: { duration: 0.3 }
     }}
-    className="absolute z-[40] cursor-pointer pointer-events-auto group hidden md:block"
+    className="absolute z-[40] cursor-pointer pointer-events-auto group"
     style={{ left: x, top: y }}
   >
     <div className={`relative p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-[0_0_25px_var(--shadow-color)] group-hover:border-transparent group-hover:bg-white`}
@@ -182,24 +182,23 @@ export function HeroSection() {
 
       {/* Floating Tech Icons */}
       <div className="absolute inset-0 z-[50] pointer-events-none">
-        {/* Left Side */}
-        <TechIcon icon={ReactIcon} color="#61DAFB" x="12%" y="22%" delay={0.2} />
-        <TechIcon icon={TailwindIcon} color="#38B2AC" x="8%" y="45%" delay={0.4} />
-        <TechIcon icon={FramerIcon} color="#000000" x="15%" y="65%" delay={0.6} />
-        <TechIcon icon={NodeIcon} color="#339933" x="5%" y="75%" delay={0.8} />
-        <TechIcon icon={HtmlIcon} color="#E34F26" x="22%" y="80%" delay={1.0} />
+        {/* Left Side Group */}
+        <TechIcon icon={ReactIcon} color="#61DAFB" x="8%" y="15%" delay={0.2} />
+        <TechIcon icon={TailwindIcon} color="#38B2AC" x="15%" y="45%" delay={0.4} />
+        <TechIcon icon={FramerIcon} color="#1A1A1A" x="6%" y="65%" delay={0.6} />
+        <TechIcon icon={NodeIcon} color="#339933" x="12%" y="82%" delay={0.8} />
+        <TechIcon icon={HtmlIcon} color="#E34F26" x="25%" y="75%" delay={1.0} />
 
-        {/* Right Side */}
-        <TechIcon icon={ViteIcon} color="#F5C518" x="82%" y="18%" delay={0.3} />
-        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="88%" y="38%" delay={0.5} />
-        <TechIcon icon={JsIcon} color="#F7DF1E" x="80%" y="60%" delay={0.7} />
-        <TechIcon icon={GsapIcon} color="#88CE02" x="90%" y="78%" delay={0.9} />
-        <TechIcon icon={CssIcon} color="#1572B6" x="72%" y="85%" delay={1.1} />
-        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="18%" y="15%" delay={1.3} />
+        {/* Right Side Group */}
+        <TechIcon icon={ViteIcon} color="#F5C518" x="85%" y="12%" delay={0.3} />
+        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="80%" y="35%" delay={0.5} />
+        <TechIcon icon={JsIcon} color="#F7DF1E" x="88%" y="60%" delay={0.7} />
+        <TechIcon icon={GsapIcon} color="#88CE02" x="82%" y="85%" delay={0.9} />
+        <TechIcon icon={CssIcon} color="#1572B6" x="70%" y="78%" delay={1.1} />
+        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="18%" y="10%" delay={1.3} />
         
-        {/* Extra Center-ish but offset */}
-        <TechIcon icon={Zap} color="#FF8C42" x="25%" y="10%" delay={1.5} />
-        <TechIcon icon={Layers} color="#1A1A1A" x="75%" y="12%" delay={1.7} />
+        {/* Extra Center-ish but offset Top/Bottom */}
+        <TechIcon icon={Layers} color="#1A1A1A" x="75%" y="8%" delay={1.7} />
       </div>
 
       {/* Background Text Layer (Behind Image) */}
