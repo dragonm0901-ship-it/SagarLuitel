@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Code, Layers } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -123,13 +123,95 @@ const SmoothLenisIcon = (props: any) => (
   </svg>
 );
 
+const CreativeDeveloperBadge = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [displayText, setDisplayText] = useState("");
+  const codeSnippet = `console.log("Hello World");\nconsole.log("I am Sagar");`;
+
+  useEffect(() => {
+    if (isHovered) {
+      let i = 0;
+      setDisplayText(""); // Reset to start typing
+      const interval = setInterval(() => {
+        setDisplayText(codeSnippet.slice(0, i));
+        i++;
+        if (i > codeSnippet.length) clearInterval(interval);
+      }, 25);
+      return () => clearInterval(interval);
+    } else {
+      setDisplayText("");
+    }
+  }, [isHovered]);
+
+  return (
+    <div className="relative mb-3 group"
+         onMouseEnter={() => setIsHovered(true)}
+         onMouseLeave={() => setIsHovered(false)}
+         onClick={() => setIsHovered(!isHovered)}
+    >
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: -95 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            className="absolute left-1/2 -translate-x-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-lg p-2.5 shadow-2xl z-[60] backdrop-blur-xl"
+            style={{ originY: 1 }}
+          >
+            {/* Header / Traffic Lights */}
+            <div className="flex gap-1.5 mb-2 px-0.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#FF5F56]/80" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#FFBD2E]/80" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#27C93F]/80" />
+              <div className="ml-auto text-[6px] font-mono text-gray-500 tracking-tighter uppercase opacity-50">sh — 80x24</div>
+            </div>
+
+            {/* Typing Code Area */}
+            <div className="max-h-[60px] overflow-hidden">
+              <pre className="text-[10px] font-mono leading-relaxed tracking-tight break-all whitespace-pre-wrap">
+                {displayText.split("\n").map((line, idx) => (
+                  <div key={idx} className="flex gap-2">
+                    <span className="text-gray-600 select-none text-right pr-1 border-r border-white/5">{idx + 1}</span>
+                    <span className="text-gray-300">
+                      {line.startsWith('console') ? (
+                        <>
+                          <span className="text-[#BD93F9]">console</span>
+                          <span className="text-gray-400">.</span>
+                          <span className="text-[#50FA7B]">log</span>
+                          <span className="text-gray-400">(</span>
+                          <span className="text-[#F1FA8C]">{line.includes('"') ? line.split('"')[1] ? `"${line.split('"')[1]}"` : '"' : ''}</span>
+                          <span className="text-gray-400">)</span>
+                          <span className="text-gray-400">;</span>
+                        </>
+                      ) : line}
+                    </span>
+                  </div>
+                ))}
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ repeat: Infinity, duration: 0.6 }}
+                  className="inline-block w-1 h-3 ml-0.5 bg-white/50 align-middle"
+                />
+              </pre>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <span className="inline-flex items-center gap-2 bg-black text-white px-3 py-1.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest shadow-xl transition-all duration-300 hover:bg-gray-900 cursor-pointer active:scale-95 group-hover:scale-110">
+        <Code className="w-3.5 h-3.5 text-[#FF6B9D]" />
+        Creative Developer
+      </span>
+    </div>
+  );
+};
+
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const textBgRef = useRef<HTMLDivElement>(null);
   const textFgRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -265,12 +347,7 @@ export function HeroSection() {
       <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-30 px-6">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-3" ref={badgeRef}>
-              <span className="inline-flex items-center gap-2 bg-black text-white px-3 py-1.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest shadow-xl">
-                <Code className="w-3.5 h-3.5 text-[#FF6B9D]" />
-                Creative Developer 
-              </span>
-            </div>
+            <CreativeDeveloperBadge />
             <p className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed">
               Crafting immersive digital realms that blur the line between code and art using cutting-edge WebGL & GSAP.
             </p>
