@@ -55,7 +55,7 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 1
 
 // Custom SVG Icons for Brands
 const ReactIcon = (props: any) => (
-  <svg viewBox="-5.5 -10.23174 23 20.46348" {...props} fill="none">
+  <svg viewBox="-11.5 -10.23174 23 20.46348" {...props} fill="none">
     <circle cx="0" cy="0" r="2.05" fill="currentColor" />
     <g stroke="currentColor" strokeWidth="1" fill="none">
       <ellipse rx="11" ry="4.2" />
@@ -152,7 +152,7 @@ export function HeroSection() {
         .fromTo(contentRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.6');
 
       // Parallax effect on scroll
-      gsap.fromTo(textBgRef.current, { y: 0 }, {
+      gsap.to(textBgRef.current, {
         y: -100,
         ease: 'none',
         scrollTrigger: {
@@ -160,10 +160,9 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: true,
-          invalidateOnRefresh: true,
         }
       });
-      gsap.fromTo(textFgRef.current, { y: 0 }, {
+      gsap.to(textFgRef.current, {
         y: -100,
         ease: 'none',
         scrollTrigger: {
@@ -171,10 +170,9 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: true,
-          invalidateOnRefresh: true,
         }
       });
-      gsap.fromTo(imageRef.current, { y: 0 }, {
+      gsap.to(imageRef.current, {
         y: -50,
         ease: 'none',
         scrollTrigger: {
@@ -182,7 +180,6 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: true,
-          invalidateOnRefresh: true,
         }
       });
 
@@ -221,23 +218,23 @@ export function HeroSection() {
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        ref={textBgRef}
         className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-0 pointer-events-none select-none"
       >
-        <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
-          FRONT END
-        </h1>
-        <h1 className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
-          MAGICIAN
-        </h1>
+        <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
+          <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
+            FRONT END
+          </h1>
+          <h1 className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
+            MAGICIAN
+          </h1>
+        </div>
       </div>
 
       {/* Hero Image Layer */}
       <div 
-        ref={imageRef}
         className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] z-10 flex justify-center items-center h-auto"
       >
-        <div className="relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame">
+        <div ref={imageRef} className="w-full relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame">
           {/* Soft Glow Background */}
           <div className="absolute -inset-2 bg-gradient-to-br from-[#F5C518] to-[#FF6B9D] opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
           
@@ -251,21 +248,22 @@ export function HeroSection() {
 
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
-        ref={textFgRef}
         className="absolute top-[30%] md:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center z-20 pointer-events-none select-none"
       >
-        <h1 
-          className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
-          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
-        >
-          FRONT END
-        </h1>
-        <h1 
-          className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
-          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
-        >
-          MAGICIAN
-        </h1>
+        <div ref={textFgRef} className="flex flex-col justify-center items-center w-full">
+          <h1 
+            className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
+          >
+            FRONT END
+          </h1>
+          <h1 
+            className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
+          >
+            MAGICIAN
+          </h1>
+        </div>
       </div>
 
       {/* Bottom Content Layer */}
