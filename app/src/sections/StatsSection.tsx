@@ -53,7 +53,7 @@ export function StatsSection() {
             >
               <div 
                 className="text-4xl lg:text-7xl font-serif font-bold text-[#1A1A1A] mb-4 transition-all duration-500 group-hover:scale-110"
-                style={{ '--hover-color': stat.color } as any}
+                style={{ '--hover-color': stat.color } as React.CSSProperties}
               >
                 <span className="transition-colors duration-500 group-hover:text-[var(--hover-color)]">
                     {stat.label}

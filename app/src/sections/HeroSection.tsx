@@ -6,7 +6,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 18 }: any) => {
+interface TechIconProps {
+  icon: React.ElementType;
+  color: string;
+  delay: number;
+  x: string;
+  y: string;
+  mx?: string;
+  my?: string;
+  size?: number;
+  mSize?: number;
+}
+
+const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 18 }: TechIconProps) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -36,7 +48,7 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 1
       }}
     >
       <div className={`relative p-1.5 md:p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-[0_0_25px_var(--shadow-color)] group-hover:border-transparent group-hover:bg-white`}
-           style={{ '--shadow-color': color } as any}>
+           style={{ '--shadow-color': color } as React.CSSProperties}>
         <Icon className="transition-colors duration-300" style={{ width: isMobile ? mSize : size, height: isMobile ? mSize : size, color }} />
       </div>
     </motion.div>
@@ -44,7 +56,7 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 1
 };
 
 // Custom SVG Icons for Brands
-const ReactIcon = (props: any) => (
+const ReactIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="-11.5 -10.23174 23 20.46348" {...props} fill="none">
     <circle cx="0" cy="0" r="2.05" fill="currentColor" />
     <g stroke="currentColor" strokeWidth="1" fill="none">
@@ -55,25 +67,25 @@ const ReactIcon = (props: any) => (
   </svg>
 );
 
-const ViteIcon = (props: any) => (
+const ViteIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 32 32" {...props} fill="none">
     <path d="M18 4l-14 16h10l-2 8 14-16h-10l2-8z" fill="currentColor" />
   </svg>
 );
 
-const TailwindIcon = (props: any) => (
+const TailwindIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="currentColor">
     <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624C10.337,13.382,8.976,12,6.001,12z"/>
   </svg>
 );
 
-const FramerIcon = (props: any) => (
+const FramerIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="currentColor">
     <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" />
   </svg>
 );
 
-const FigmaIcon = (props: any) => (
+const FigmaIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 38 57" {...props} fill="currentColor">
     <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" />
     <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" />
@@ -83,39 +95,39 @@ const FigmaIcon = (props: any) => (
   </svg>
 );
 
-const NodeIcon = (props: any) => (
+const NodeIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="currentColor">
     <path d="M12 2L3.5 7v10l8.5 5 8.5-5V7L12 2zm7 14.2l-7 4.1L5 16.2V7.8l7-4.1 7 4.1v8.4z" />
     <path d="M12 6.5l-4 2.3v4.4l4 2.3 4-2.3V8.8l-4-2.3z" />
   </svg>
 );
 
-const JsIcon = (props: any) => (
+const JsIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="currentColor">
     <path d="M3 3h18v18H3V3zm13.3 15.5c1.1 0 2.1-.5 2.1-1.8 0-1-.6-1.5-1.7-1.9l-1.1-.5c-.5-.2-.7-.4-.7-.7 0-.3.3-.5.7-.5.5 0 .8.2 1 .5l1.1-.7c-.3-.6-.9-1-1.8-1-1.1 0-2 .6-2 1.7 0 1 .6 1.5 1.7 1.9l1.1.5c.5.2.7.4.7.7 0 .4-.4.6-.9.6-.6 0-1-.3-1.2-.8l-1.2.7c.4.9 1 .1.3 2.1 1.1 2.1 1.8zM12.2 13.5v5H13.6v-5h-1.4z" />
   </svg>
 );
 
-const HtmlIcon = (props: any) => (
+const HtmlIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="currentColor">
     <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
   </svg>
 );
 
-const CssIcon = (props: any) => (
+const CssIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="currentColor">
     <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" opacity="0.1" />
     <path d="M12 4.4l-7.23-.01.2 2.3h9.84l-.33 3.42h-6.72l.2 2.3h6.3l-.33 3.42-2.91.81-2.96-.81-.2-2.3H5.5l.33 4.17L12 19.35l5.38-1.44.82-8.59.33-3.04.14-1.88z" />
   </svg>
 );
 
-const GsapIcon = (props: any) => (
+const GsapIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
   </svg>
 );
 
-const SmoothLenisIcon = (props: any) => (
+const SmoothLenisIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
     <path d="M4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z" />
     <path d="M12 4v16M4 12h16" opacity="0.2" />
@@ -150,7 +162,7 @@ const CreativeDeveloperBadge = ({ isMobile }: { isMobile: boolean }) => {
     } else {
       setDisplayText("");
     }
-  }, [isHovered, isMobile]);
+  }, [isHovered, isMobile, codeSnippet]);
 
   return (
     <div className="relative mb-3 flex flex-col items-center group"
