@@ -288,7 +288,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
     }, sectionRef);
     return () => ctx.revert();
-  }, []);
+  }, [isIntroDone]);
 
   return (
     <section ref={sectionRef} className="relative pt-[72px] min-h-[100svh] bg-white overflow-hidden flex flex-col items-center justify-center">

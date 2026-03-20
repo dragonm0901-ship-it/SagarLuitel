@@ -31,11 +31,6 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
       stagger: 0.1,
       ease: "expo.out",
     })
-    .to(".intro-progress", {
-      scaleX: 1,
-      duration: 1.5,
-      ease: "power2.inOut",
-    }, 0)
     .to(".intro-text", {
       opacity: 0,
       y: -40,
@@ -60,27 +55,54 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
           className="fixed inset-0 z-[10000] flex items-center justify-center bg-white intro-bg"
           exit={{ opacity: 0 }}
         >
-          <div className="relative w-full max-w-sm px-6">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-black/5 rounded-full" />
+          <div className="relative flex items-center justify-center w-[300px] h-[300px]">
+            {/* Background Circle */}
+            <div className="absolute inset-0 border border-black/[0.03] rounded-full scale-[0.85]" />
             
-            <div className="text-center">
-              <div className="overflow-hidden mb-2">
-                <h1 className="text-black text-3xl md:text-5xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
+            {/* Circular Progress SVG */}
+            <svg className="absolute inset-0 w-full h-full -rotate-90">
+              <circle
+                cx="150"
+                cy="150"
+                r="135"
+                stroke="currentColor"
+                strokeWidth="1"
+                fill="transparent"
+                className="text-black/[0.05]"
+              />
+              <motion.circle
+                cx="150"
+                cy="150"
+                r="135"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="transparent"
+                strokeDasharray={2 * Math.PI * 135}
+                animate={{ strokeDashoffset: (2 * Math.PI * 135) * (1 - progress / 100) }}
+                transition={{ duration: 0.1, ease: "linear" }}
+                className="text-black"
+                strokeLinecap="round"
+              />
+            </svg>
+
+            {/* Centered Content */}
+            <div className="z-10 text-center">
+              <div className="overflow-hidden mb-1">
+                <h1 className="text-black text-3xl md:text-4xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
                   SAGAR LUITEL
                 </h1>
               </div>
               <div className="overflow-hidden">
-                <p className="text-[#FF6B9D] text-[9px] tracking-[0.4em] font-mono uppercase intro-text opacity-0 translate-y-20">
+                <p className="text-[#FF6B9D] text-[8px] tracking-[0.5em] font-mono uppercase intro-text opacity-0 translate-y-20">
                   Front-End Magician
                 </p>
               </div>
               
-              <div className="mt-12 flex items-end justify-between font-mono text-[10px] text-gray-400 mb-2">
-                <span>INITIALIZING</span>
-                <span>{progress}%</span>
-              </div>
-              <div className="h-px w-full bg-black/5 overflow-hidden">
-                <div className="h-full bg-black w-0 intro-progress origin-left scale-x-0" />
+              <div className="absolute top-[65%] left-1/2 -translate-x-1/2 w-full">
+                 <div className="flex flex-col items-center gap-1">
+                    <span className="font-mono text-[9px] text-gray-400 tracking-widest uppercase">Initializing</span>
+                    <span className="font-mono text-[12px] text-black font-bold">{progress}%</span>
+                 </div>
               </div>
             </div>
           </div>
