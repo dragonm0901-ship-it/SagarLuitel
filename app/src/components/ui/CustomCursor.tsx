@@ -21,7 +21,7 @@ export function CustomCursor() {
 
     const handleHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const hoverParent = target.closest('button, a, .cursor-pointer');
+      const hoverParent = target.closest('button, a, .cursor-pointer, input, textarea, select, label');
       if (hoverParent) {
         setIsHovered(true);
         const text = hoverParent.getAttribute('data-cursor-text');
