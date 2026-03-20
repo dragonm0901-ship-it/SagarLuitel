@@ -320,7 +320,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        className="absolute inset-0 pb-24 md:pb-8 flex flex-col justify-center items-center z-0 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-start pt-[14vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-0 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
           <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
@@ -350,7 +350,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
-        className="absolute inset-0 pb-24 md:pb-8 flex flex-col justify-center items-center z-20 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-start pt-[14vh] md:justify-center md:pt-0 pb-24 md:pb-8 items-center z-20 pointer-events-none select-none"
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full">
           <h1 
