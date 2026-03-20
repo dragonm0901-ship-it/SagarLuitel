@@ -181,7 +181,7 @@ export function HeroSection() {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6B9D]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Floating Tech Icons */}
-      <div className="absolute inset-0 z-30 pointer-events-none">
+      <div className="absolute inset-0 z-[50] pointer-events-none">
         {/* Left Side */}
         <TechIcon icon={ReactIcon} color="#61DAFB" x="12%" y="22%" delay={0.2} />
         <TechIcon icon={TailwindIcon} color="#38B2AC" x="8%" y="45%" delay={0.4} />
@@ -244,7 +244,7 @@ export function HeroSection() {
           FRONT END
         </h1>
         <h1 
-          className="text-[11vw] md:text-[7.5vw] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+          className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
           style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
         >
           MAGICIAN
