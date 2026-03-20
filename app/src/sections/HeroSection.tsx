@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Code, Layers } from 'lucide-react';
@@ -6,38 +6,52 @@ import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TechIcon = ({ icon: Icon, color, delay, x, y, size = 22 }: any) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{ 
-      opacity: 1, 
-      scale: 1,
-      y: [0, -10, 0],
-    }}
-    transition={{
-      opacity: { duration: 0.5, delay },
-      scale: { duration: 0.5, delay },
-      y: {
-        duration: 3 + Math.random() * 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: delay
-      }
-    }}
-    whileHover={{ 
-      scale: 1.4,
-      rotate: [0, -10, 10, 0],
-      transition: { duration: 0.3 }
-    }}
-    className="absolute z-[40] cursor-pointer pointer-events-auto group"
-    style={{ left: x, top: y }}
-  >
-    <div className={`relative p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-[0_0_25px_var(--shadow-color)] group-hover:border-transparent group-hover:bg-white`}
-         style={{ '--shadow-color': color } as any}>
-      <Icon className="transition-colors duration-300" style={{ width: size, height: size, color }} />
-    </div>
-  </motion.div>
-);
+const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 18 }: any) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
+        opacity: 1, 
+        scale: 1,
+        y: [0, -10, 0],
+      }}
+      transition={{
+        opacity: { duration: 0.5, delay },
+        scale: { duration: 0.5, delay },
+        y: {
+          duration: 3 + Math.random() * 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: delay
+        }
+      }}
+      whileHover={{ 
+        scale: 1.4,
+        rotate: [0, -10, 10, 0],
+        transition: { duration: 0.3 }
+      }}
+      className="absolute z-[40] cursor-pointer pointer-events-auto group"
+      style={{ 
+        left: isMobile ? (mx ?? x) : x, 
+        top: isMobile ? (my ?? y) : y 
+      }}
+    >
+      <div className={`relative p-1.5 md:p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-[0_0_25px_var(--shadow-color)] group-hover:border-transparent group-hover:bg-white`}
+           style={{ '--shadow-color': color } as any}>
+        <Icon className="transition-colors duration-300" style={{ width: isMobile ? mSize : size, height: isMobile ? mSize : size, color }} />
+      </div>
+    </motion.div>
+  );
+};
 
 // Custom SVG Icons for Brands
 const ReactIcon = (props: any) => (
@@ -182,23 +196,24 @@ export function HeroSection() {
 
       {/* Floating Tech Icons */}
       <div className="absolute inset-0 z-[50] pointer-events-none">
-        {/* Left Side Group */}
-        <TechIcon icon={ReactIcon} color="#61DAFB" x="8%" y="15%" delay={0.2} />
-        <TechIcon icon={TailwindIcon} color="#38B2AC" x="15%" y="45%" delay={0.4} />
-        <TechIcon icon={FramerIcon} color="#1A1A1A" x="6%" y="65%" delay={0.6} />
-        <TechIcon icon={NodeIcon} color="#339933" x="12%" y="82%" delay={0.8} />
-        <TechIcon icon={HtmlIcon} color="#E34F26" x="25%" y="75%" delay={1.0} />
+        {/* All icons stacked below image/text on mobile (y > 60%) */}
+        {/* Left Side (Desktop) */}
+        <TechIcon icon={ReactIcon} color="#61DAFB" x="8%" y="15%" mx="10%" my="60%" delay={0.2} />
+        <TechIcon icon={TailwindIcon} color="#38B2AC" x="15%" y="45%" mx="25%" my="62%" delay={0.4} />
+        <TechIcon icon={FramerIcon} color="#1A1A1A" x="6%" y="65%" mx="15%" my="72%" delay={0.6} />
+        <TechIcon icon={NodeIcon} color="#339933" x="12%" y="82%" mx="35%" my="68%" delay={0.8} />
+        <TechIcon icon={HtmlIcon} color="#E34F26" x="25%" y="75%" mx="5%" my="65%" delay={1.0} />
 
-        {/* Right Side Group */}
-        <TechIcon icon={ViteIcon} color="#F5C518" x="85%" y="12%" delay={0.3} />
-        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="80%" y="35%" delay={0.5} />
-        <TechIcon icon={JsIcon} color="#F7DF1E" x="88%" y="60%" delay={0.7} />
-        <TechIcon icon={GsapIcon} color="#88CE02" x="82%" y="85%" delay={0.9} />
-        <TechIcon icon={CssIcon} color="#1572B6" x="70%" y="78%" delay={1.1} />
-        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="18%" y="10%" delay={1.3} />
+        {/* Right Side (Desktop) */}
+        <TechIcon icon={ViteIcon} color="#F5C518" x="85%" y="12%" mx="80%" my="60%" delay={0.3} />
+        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="80%" y="35%" mx="65%" my="62%" delay={0.5} />
+        <TechIcon icon={JsIcon} color="#F7DF1E" x="88%" y="60%" mx="85%" my="72%" delay={0.7} />
+        <TechIcon icon={GsapIcon} color="#88CE02" x="82%" y="85%" mx="65%" my="68%" delay={0.9} />
+        <TechIcon icon={CssIcon} color="#1572B6" x="70%" y="78%" mx="75%" my="65%" delay={1.1} />
         
-        {/* Extra Center-ish but offset Top/Bottom */}
-        <TechIcon icon={Layers} color="#1A1A1A" x="75%" y="8%" delay={1.7} />
+        {/* Extra Icons */}
+        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="18%" y="10%" mx="50%" my="75%" delay={1.3} />
+        <TechIcon icon={Layers} color="#1A1A1A" x="75%" y="8%" mx="45%" my="60%" delay={1.7} />
       </div>
 
       {/* Background Text Layer (Behind Image) */}
