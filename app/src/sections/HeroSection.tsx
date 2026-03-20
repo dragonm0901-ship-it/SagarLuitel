@@ -1,9 +1,123 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Code } from 'lucide-react';
+import { Code, Zap, Layers } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const TechIcon = ({ icon: Icon, color, delay, x, y, size = 22 }: any) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{ 
+      opacity: 1, 
+      scale: 1,
+      y: [0, -10, 0],
+    }}
+    transition={{
+      opacity: { duration: 0.5, delay },
+      scale: { duration: 0.5, delay },
+      y: {
+        duration: 3 + Math.random() * 2,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: delay
+      }
+    }}
+    whileHover={{ 
+      scale: 1.4,
+      rotate: [0, -10, 10, 0],
+      transition: { duration: 0.3 }
+    }}
+    className="absolute z-[40] cursor-pointer pointer-events-auto group hidden md:block"
+    style={{ left: x, top: y }}
+  >
+    <div className={`relative p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-[0_0_25px_var(--shadow-color)] group-hover:border-transparent group-hover:bg-white`}
+         style={{ '--shadow-color': color } as any}>
+      <Icon className="transition-colors duration-300" style={{ width: size, height: size, color }} />
+    </div>
+  </motion.div>
+);
+
+// Custom SVG Icons for Brands
+const ReactIcon = (props: any) => (
+  <svg viewBox="-11.5 -10.23174 23 20.46348" {...props} fill="none">
+    <circle cx="0" cy="0" r="2.05" fill="currentColor" />
+    <g stroke="currentColor" strokeWidth="1" fill="none">
+      <ellipse rx="11" ry="4.2" />
+      <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+      <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+    </g>
+  </svg>
+);
+
+const ViteIcon = (props: any) => (
+  <svg viewBox="0 0 32 32" {...props} fill="none">
+    <path d="M18 4l-14 16h10l-2 8 14-16h-10l2-8z" fill="currentColor" />
+  </svg>
+);
+
+const TailwindIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="currentColor">
+    <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624C10.337,13.382,8.976,12,6.001,12z"/>
+  </svg>
+);
+
+const FramerIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="currentColor">
+    <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" />
+  </svg>
+);
+
+const FigmaIcon = (props: any) => (
+  <svg viewBox="0 0 38 57" {...props} fill="currentColor">
+    <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" />
+    <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" />
+    <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" />
+    <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" />
+    <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" />
+  </svg>
+);
+
+const NodeIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="currentColor">
+    <path d="M12 2L3.5 7v10l8.5 5 8.5-5V7L12 2zm7 14.2l-7 4.1L5 16.2V7.8l7-4.1 7 4.1v8.4z" />
+    <path d="M12 6.5l-4 2.3v4.4l4 2.3 4-2.3V8.8l-4-2.3z" />
+  </svg>
+);
+
+const JsIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="currentColor">
+    <path d="M3 3h18v18H3V3zm13.3 15.5c1.1 0 2.1-.5 2.1-1.8 0-1-.6-1.5-1.7-1.9l-1.1-.5c-.5-.2-.7-.4-.7-.7 0-.3.3-.5.7-.5.5 0 .8.2 1 .5l1.1-.7c-.3-.6-.9-1-1.8-1-1.1 0-2 .6-2 1.7 0 1 .6 1.5 1.7 1.9l1.1.5c.5.2.7.4.7.7 0 .4-.4.6-.9.6-.6 0-1-.3-1.2-.8l-1.2.7c.4.9 1 .1.3 2.1 1.1 2.1 1.8zM12.2 13.5v5H13.6v-5h-1.4z" />
+  </svg>
+);
+
+const HtmlIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="currentColor">
+    <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
+  </svg>
+);
+
+const CssIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="currentColor">
+    <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" opacity="0.1" />
+    <path d="M12 4.4l-7.23-.01.2 2.3h9.84l-.33 3.42h-6.72l.2 2.3h6.3l-.33 3.42-2.91.81-2.96-.81-.2-2.3H5.5l.33 4.17L12 19.35l5.38-1.44.82-8.59.33-3.04.14-1.88z" />
+  </svg>
+);
+
+const GsapIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+  </svg>
+);
+
+const SmoothLenisIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" {...props} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+    <path d="M4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z" />
+    <path d="M12 4v16M4 12h16" opacity="0.2" />
+    <path d="M7 12c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5-5 2.24-5 5z" />
+  </svg>
+);
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -66,6 +180,28 @@ export function HeroSection() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F5C518]/20 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6B9D]/20 rounded-full blur-[100px] pointer-events-none" />
 
+      {/* Floating Tech Icons */}
+      <div className="absolute inset-0 z-30 pointer-events-none">
+        {/* Left Side */}
+        <TechIcon icon={ReactIcon} color="#61DAFB" x="12%" y="22%" delay={0.2} />
+        <TechIcon icon={TailwindIcon} color="#38B2AC" x="8%" y="45%" delay={0.4} />
+        <TechIcon icon={FramerIcon} color="#000000" x="15%" y="65%" delay={0.6} />
+        <TechIcon icon={NodeIcon} color="#339933" x="5%" y="75%" delay={0.8} />
+        <TechIcon icon={HtmlIcon} color="#E34F26" x="22%" y="80%" delay={1.0} />
+
+        {/* Right Side */}
+        <TechIcon icon={ViteIcon} color="#F5C518" x="82%" y="18%" delay={0.3} />
+        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="88%" y="38%" delay={0.5} />
+        <TechIcon icon={JsIcon} color="#F7DF1E" x="80%" y="60%" delay={0.7} />
+        <TechIcon icon={GsapIcon} color="#88CE02" x="90%" y="78%" delay={0.9} />
+        <TechIcon icon={CssIcon} color="#1572B6" x="72%" y="85%" delay={1.1} />
+        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="18%" y="15%" delay={1.3} />
+        
+        {/* Extra Center-ish but offset */}
+        <TechIcon icon={Zap} color="#FF8C42" x="25%" y="10%" delay={1.5} />
+        <TechIcon icon={Layers} color="#1A1A1A" x="75%" y="12%" delay={1.7} />
+      </div>
+
       {/* Background Text Layer (Behind Image) */}
       <div 
         ref={textBgRef}
@@ -108,7 +244,7 @@ export function HeroSection() {
           FRONT END
         </h1>
         <h1 
-          className="text-[11vw] md:text-[7.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+          className="text-[11vw] md:text-[7.5vw] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
           style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}
         >
           MAGICIAN
