@@ -359,7 +359,7 @@ export function HeroSection() {
       </div>
 
       {/* Bottom Content Layer */}
-      <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-30 px-6">
+      <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[70] px-6">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
           <div className="flex flex-col items-center text-center">
             <CreativeDeveloperBadge />
