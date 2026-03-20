@@ -85,7 +85,7 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
             {/* Centered Content */}
             <div className="z-10 text-center">
               <div className="overflow-hidden mb-1">
-                <h1 className="text-black text-3xl md:text-4xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
+                <h1 className="text-black text-2xl md:text-3xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
                   SAGAR LUITEL
                 </h1>
               </div>
