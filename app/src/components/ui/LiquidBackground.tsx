@@ -57,6 +57,8 @@ export function LiquidBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    if (window.innerWidth < 768) return; // Disable canvas rendering loop entirely on mobile
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

@@ -12,6 +12,8 @@ export function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    if (window.matchMedia('(pointer: coarse)').matches) return; // Disable cursor logic on touch devices
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -38,6 +40,10 @@ export function CustomCursor() {
       window.removeEventListener("mouseover", handleHover);
     };
   }, [cursorX, cursorY]);
+
+  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+    return null;
+  }
 
   return (
     <>
