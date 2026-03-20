@@ -146,11 +146,11 @@ const CreativeDeveloperBadge = () => {
         i++;
         if (i > codeSnippet.length) {
           clearInterval(interval);
-          // Auto-disappear on mobile after 2 seconds
+          // Auto-disappear on mobile after 1 seconds
           if (isMobile) {
             const timeout = setTimeout(() => {
               setIsHovered(false);
-            }, 2000);
+            }, 1000);
             return () => clearTimeout(timeout);
           }
         }
