@@ -83,7 +83,7 @@ export function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="relative flex items-center justify-between bg-white/95 backdrop-blur-3xl rounded-3xl px-6 py-3 border border-gray-200/50 shadow-2xl shadow-black/5 transition-all duration-500">
+        <div className="relative flex items-center justify-between bg-white/40 backdrop-blur-md rounded-3xl px-6 py-3 border border-gray-200/50 shadow-2xl shadow-black/5 transition-all duration-500">
           {/* Logo */}
           <Link to="/" className="group relative flex items-center gap-2" onClick={closeMenu}>
             <div className="relative overflow-hidden rounded-full">
