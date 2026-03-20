@@ -144,13 +144,22 @@ const CreativeDeveloperBadge = () => {
       const interval = setInterval(() => {
         setDisplayText(codeSnippet.slice(0, i));
         i++;
-        if (i > codeSnippet.length) clearInterval(interval);
+        if (i > codeSnippet.length) {
+          clearInterval(interval);
+          // Auto-disappear on mobile after 2 seconds
+          if (isMobile) {
+            const timeout = setTimeout(() => {
+              setIsHovered(false);
+            }, 2000);
+            return () => clearTimeout(timeout);
+          }
+        }
       }, 25);
       return () => clearInterval(interval);
     } else {
       setDisplayText("");
     }
-  }, [isHovered]);
+  }, [isHovered, isMobile]);
 
   return (
     <div className="relative mb-3 flex flex-col items-center group"
