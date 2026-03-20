@@ -161,14 +161,14 @@ const CreativeDeveloperBadge = () => {
       <AnimatePresence mode="wait">
         {isHovered && (
           <motion.div
-            initial={{ opacity: 0, scale: isMobile ? 0.4 : 0.8, x: "-50%", y: 10 }}
+            initial={{ opacity: 0, scale: isMobile ? 0.6 : 0.8, x: "-50%", y: 10 }}
             animate={{ 
               opacity: 1, 
-              scale: isMobile ? 0.6 : 1, 
+              scale: isMobile ? 0.8 : 1, 
               x: "-50%", 
-              y: isMobile ? -65 : -95 
+              y: isMobile ? -130 : -95 
             }}
-            exit={{ opacity: 0, scale: isMobile ? 0.4 : 0.8, x: "-50%", y: 10 }}
+            exit={{ opacity: 0, scale: isMobile ? 0.6 : 0.8, x: "-50%", y: 10 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
             className="absolute left-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-lg p-2.5 shadow-2xl z-[60] backdrop-blur-xl"
             style={{ originY: 1 }}
