@@ -268,7 +268,7 @@ export function HeroSection() {
             <div className="mb-3" ref={badgeRef}>
               <span className="inline-flex items-center gap-2 bg-black text-white px-3 py-1.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest shadow-xl">
                 <Code className="w-3.5 h-3.5 text-[#FF6B9D]" />
-                Developer Architect
+                Creative Developer 
               </span>
             </div>
             <p className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed">
