@@ -152,7 +152,7 @@ export function HeroSection() {
         .fromTo(contentRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.6');
 
       // Parallax effect on scroll
-      gsap.to(textBgRef.current, {
+      gsap.fromTo(textBgRef.current, { y: 0 }, {
         y: -100,
         ease: 'none',
         scrollTrigger: {
@@ -160,9 +160,10 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: true,
+          invalidateOnRefresh: true,
         }
       });
-      gsap.to(textFgRef.current, {
+      gsap.fromTo(textFgRef.current, { y: 0 }, {
         y: -100,
         ease: 'none',
         scrollTrigger: {
@@ -170,9 +171,10 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: true,
+          invalidateOnRefresh: true,
         }
       });
-      gsap.to(imageRef.current, {
+      gsap.fromTo(imageRef.current, { y: 0 }, {
         y: -50,
         ease: 'none',
         scrollTrigger: {
@@ -180,6 +182,7 @@ export function HeroSection() {
           start: 'top top',
           end: 'bottom top',
           scrub: true,
+          invalidateOnRefresh: true,
         }
       });
 
