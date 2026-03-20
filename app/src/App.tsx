@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
@@ -44,6 +44,7 @@ function HomePage({ isIntroDone }: { isIntroDone: boolean }) {
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const handleComplete = useCallback(() => setLoading(false), []);
 
   useEffect(() => {
     // Refresh ScrollTrigger on load
@@ -58,7 +59,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <SmoothScroll>
-        <PremiumIntro onComplete={() => setLoading(false)} />
+        <PremiumIntro onComplete={handleComplete} />
         <CustomCursor />
         <LiquidBackground />
         <GrainOverlay />
