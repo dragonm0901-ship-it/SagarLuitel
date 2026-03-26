@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 
 export function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
-  const [hoverType, setHoverType] = useState<string | null>(null);
+  const [isHidden, setIsHidden] = useState(false);
+  const [cursorText, setCursorText] = useState("");
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
@@ -17,28 +18,25 @@ export function CustomCursor() {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-    };
 
-    const handleHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const hoverParent = target.closest('button, a, .cursor-pointer, input, textarea, select, label');
-      if (hoverParent) {
+      const hoverElement = target.closest('[data-cursor-text]');
+      const hiddenElement = target.closest('[data-cursor-hidden]');
+      
+      setIsHidden(!!hiddenElement);
+
+      if (hoverElement) {
         setIsHovered(true);
-        const text = hoverParent.getAttribute('data-cursor-text');
-        setHoverType(text || 'scale');
+        setCursorText(hoverElement.getAttribute('data-cursor-text') || "");
       } else {
-        setIsHovered(false);
-        setHoverType(null);
+        const isInteractive = target.closest('button, a, input, [role="button"], .cursor-pointer');
+        setIsHovered(!!isInteractive);
+        setCursorText("");
       }
     };
 
     window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleHover);
-
-    return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleHover);
-    };
+    return () => window.removeEventListener("mousemove", moveCursor);
   }, [cursorX, cursorY]);
 
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
@@ -47,7 +45,6 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Liquid Filter Container */}
       <svg className="hidden">
         <defs>
           <filter id="cursor-liquid">
@@ -57,9 +54,9 @@ export function CustomCursor() {
         </defs>
       </svg>
 
-      {/* Main Liquid Glow */}
+      {/* Outer Glow / Liquid Effect */}
       <motion.div
-        className="fixed top-0 left-0 w-16 h-16 bg-[#FF6B9D]/20 rounded-full pointer-events-none z-[9999] hidden md:block"
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:block bg-[#FF6B9D]/20"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -68,14 +65,15 @@ export function CustomCursor() {
           filter: "url(#cursor-liquid)",
         }}
         animate={{
-          scale: isHovered ? (hoverType === 'view' ? 2.5 : 1.5) : 1,
-          opacity: 1,
+          width: 40,
+          height: 40,
+          opacity: isHidden ? 0 : (isHovered ? 0.4 : 0.2),
         }}
       />
-      
-      {/* Core Dot Focus */}
+
+      {/* Main Focus Dot / Label Container */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-[#FF8C42] rounded-full pointer-events-none z-[9999] hidden md:block"
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center overflow-hidden border border-white/20 backdrop-blur-[2px]"
         style={{
           x: cursorX,
           y: cursorY,
@@ -83,26 +81,17 @@ export function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          scale: isHovered ? 0 : 1,
+          width: 8,
+          height: 8,
+          backgroundColor: isHovered ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.3)",
+          opacity: isHidden ? 0 : 1,
+          boxShadow: "none",
         }}
-      />
-
-      {/* Hover Text Label */}
-      {isHovered && hoverType === 'view' && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="fixed top-0 left-0 font-mono text-[10px] uppercase font-bold text-white pointer-events-none z-[9999] text-center"
-          style={{
-            x: cursorX,
-            y: cursorY,
-            translateX: "-50%",
-            translateY: "-50%",
-          }}
-        >
-          View
-        </motion.div>
-      )}
+      >
+        <AnimatePresence>
+          {/* Labels removed to keep size consistent as per user request */}
+        </AnimatePresence>
+      </motion.div>
     </>
   );
 }

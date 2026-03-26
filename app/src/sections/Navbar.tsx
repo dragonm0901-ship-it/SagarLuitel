@@ -20,6 +20,9 @@ export function Navbar() {
   const scrolled = useScrolled();
   const [isOpen, setIsOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const navContainerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -41,6 +44,15 @@ export function Navbar() {
       });
     }
   }, [isOpen]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!navContainerRef.current) return;
+    const rect = navContainerRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
 
   const renderLink = (link: NavLink, className: string) => {
     const isHash = link.href.startsWith('#');
@@ -83,7 +95,25 @@ export function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="relative flex items-center justify-between bg-white/40 backdrop-blur-md rounded-3xl px-6 py-3 border border-gray-200/50 shadow-2xl shadow-black/5 transition-all duration-500">
+        <div 
+          ref={navContainerRef}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="relative flex items-center justify-between bg-white/40 backdrop-blur-xl rounded-3xl px-6 py-3 border border-white/20 shadow-2xl shadow-black/5 transition-all duration-300 overflow-hidden"
+          style={{
+            background: isHovered 
+              ? `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, rgba(245, 197, 24, 0.1), rgba(255, 107, 157, 0.1), transparent 80%)`
+              : 'rgba(255, 255, 255, 0.4)'
+          }}
+        >
+          {/* Subtle Glow Overlay */}
+          <div 
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{
+              background: `radial-gradient(150px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.2), transparent)`
+            }}
+          />
           {/* Logo */}
           <Link to="/" className="group relative flex items-center gap-2" onClick={closeMenu}>
             <div className="relative overflow-hidden rounded-full">

@@ -16,6 +16,7 @@ import { CustomCursor } from '@/components/ui/CustomCursor';
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
 import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import { PremiumIntro } from '@/components/ui/PremiumIntro';
+import MeshGradient from '@/components/ui/MeshGradient';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <Router>
+      <MeshGradient />
       <ScrollToTop />
       <SmoothScroll>
         <PremiumIntro onComplete={handleComplete} />

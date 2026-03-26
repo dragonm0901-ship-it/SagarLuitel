@@ -3,6 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Code, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Magnetic from '@/components/ui/Magnetic';
+import TextReveal from '@/components/ui/TextReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -116,7 +118,7 @@ const HtmlIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const CssIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props} fill="currentColor">
-    <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" opacity="0.1" />
+    <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" opacity="0.4" />
     <path d="M12 4.4l-7.23-.01.2 2.3h9.84l-.33 3.42h-6.72l.2 2.3h6.3l-.33 3.42-2.91.81-2.96-.81-.2-2.3H5.5l.33 4.17L12 19.35l5.38-1.44.82-8.59.33-3.04.14-1.88z" />
   </svg>
 );
@@ -166,8 +168,8 @@ const CreativeDeveloperBadge = ({ isMobile }: { isMobile: boolean }) => {
 
   return (
     <div className="relative mb-3 flex flex-col items-center group"
-         onMouseEnter={() => setIsHovered(true)}
-         onMouseLeave={() => setIsHovered(false)}
+         onMouseEnter={() => !isMobile && setIsHovered(true)}
+         onMouseLeave={() => !isMobile && setIsHovered(false)}
          onClick={() => setIsHovered(!isHovered)}
     >
       <AnimatePresence mode="wait">
@@ -301,6 +303,8 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
     return () => ctx.revert();
   }, [isIntroDone]);
 
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <section ref={sectionRef} className="relative pt-[72px] min-h-[100svh] bg-white overflow-hidden flex flex-col items-center justify-center">
       
@@ -309,7 +313,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6B9D]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Floating Tech Icons */}
-      <div className="absolute inset-0 z-[50] pointer-events-none pb-40 md:pb-24 -translate-y-16 md:translate-y-0">
+      <div className="absolute inset-0 z-[100] pointer-events-none pb-40 md:pb-24 -translate-y-16 md:translate-y-0">
         {/* All icons stacked below image/text on mobile (y > 60%) */}
         {/* Clustered Left Side */}
         <TechIcon icon={ReactIcon} color="#61DAFB" x="32%" y="25%" mx="20%" my="60%" delay={0.2} />
@@ -348,15 +352,31 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div 
         className="absolute inset-0 pb-40 md:pb-24 pointer-events-none flex justify-center items-center z-10"
       >
-        <div ref={imageRef} className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto">
+        <div ref={imageRef} 
+             className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
+             onMouseEnter={() => !isMobile && setIsHovered(true)}
+             onMouseLeave={() => !isMobile && setIsHovered(false)}
+             onClick={() => isMobile && setIsHovered(!isHovered)}
+        >
           {/* Soft Glow Background */}
           <div className="absolute -inset-2 bg-gradient-to-br from-[#F5C518] to-[#FF6B9D] opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
           
-          <img
-            src="/images/hero-portrait.png"
-            alt="Sagar Luitel"
-            className="relative z-10 w-full h-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-700 brightness-95 rounded-[10px]"
-          />
+          {/* Modern Frame */}
+          <div 
+            data-cursor-hidden
+            className="relative z-10 w-full h-auto overflow-hidden rounded-[10px] group/frame cursor-none"
+          >
+            <img
+              src="/images/hero-portrait.png"
+              alt="Sagar Luitel"
+              className={`relative z-10 w-full h-auto object-contain transition-opacity duration-700 brightness-95 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+            />
+            <img
+              src="/images/hero-portrait-wizard.png"
+              alt="Magician Sagar Luitel"
+              className={`absolute inset-0 z-0 w-full h-full object-contain transition-opacity duration-700 brightness-110 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+            />
+          </div>
         </div>
       </div>
 
@@ -381,13 +401,20 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       </div>
 
       {/* Bottom Content Layer */}
-      <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[70] px-6">
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
+      <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[70] px-6 pointer-events-none">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6 pointer-events-auto">
           <div className="flex flex-col items-center text-center">
-            <CreativeDeveloperBadge isMobile={isMobile} />
-            <p className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed">
-              Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP.
-            </p>
+            <Magnetic strength={0.2}>
+              <div className="inline-block">
+                <CreativeDeveloperBadge isMobile={isMobile} />
+              </div>
+            </Magnetic>
+            <div className="mt-4">
+              <TextReveal 
+                text="Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP."
+                className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed justify-center"
+              />
+            </div>
           </div>
         </div>
       </div>

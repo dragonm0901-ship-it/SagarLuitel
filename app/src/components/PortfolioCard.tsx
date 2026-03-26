@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 interface PortfolioCardProps {
@@ -14,9 +15,10 @@ interface PortfolioCardProps {
 export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
   ({ image, title, year, tags, challenge, magic, metrics }, ref) => {
     return (
-      <div
+      <motion.div
         ref={ref}
-        className="group relative bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 will-change-transform hover:shadow-2xl transition-shadow duration-500"
+        layoutId={`card-${title}`}
+        className="group relative bg-white/70 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm border border-white/20 will-change-transform hover:shadow-2xl transition-all duration-500 flex flex-col h-full w-full"
       >
         {/* SVG Filter for Liquid Distortion */}
         <svg className="hidden">
@@ -32,7 +34,8 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
 
         {/* Image */}
         <div className="relative aspect-[4/3] overflow-hidden">
-          <img
+          <motion.img
+            layoutId={`image-${title}`}
             src={image}
             alt={title}
             className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:[filter:url(#liquid-filter)]"
@@ -51,7 +54,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-6 flex flex-col flex-grow">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-2xl font-serif font-bold text-[#1A1A1A] group-hover:text-[#FF6B9D] transition-colors duration-300">
               {title}
@@ -97,7 +100,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 );

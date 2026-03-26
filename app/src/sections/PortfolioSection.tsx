@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import { PortfolioCard } from '@/components/PortfolioCard';
+import Magnetic from '@/components/ui/Magnetic';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,35 +94,37 @@ export function PortfolioSection() {
         {/* Header */}
         <div
           ref={headerRef}
-          className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-16"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16"
         >
-            <h2 className="font-bold text-[#1A1A1A]">
-              Curated collection of most impactful projects
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-[#1A1A1A] mb-4 leading-[0.9] tracking-tighter">
+              Selected <span className="text-[#FF6B9D]">impact</span> projects
             </h2>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <p className="text-gray-600 leading-relaxed max-w-xs">
-              Each one selected to showcase not only the final result, but also the strategic decisions behind it.
+            <p className="text-gray-500 text-lg max-w-lg leading-relaxed">
+              Curated collection showcasing technical depth and strategic design.
             </p>
-            <div className="flex items-center gap-4">
+          </div>
+
+          <div className="flex items-center gap-4 shrink-0 overflow-hidden">
+            <Magnetic strength={0.3}>
               <button 
-                data-cursor-text="view"
-                className="group relative bg-black text-white px-6 py-3 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300 hover:shadow-xl"
+                data-cursor-text="all"
+                className="group relative bg-black text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:shadow-2xl active:scale-95"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  View All
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  View Archive
+                  <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
                 </span>
-                <div className="absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B9D] to-[#F5C518] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </button>
-            </div>
+            </Magnetic>
           </div>
         </div>
 
         {/* Project Cards */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8 snap-x snap-mandatory mx-auto hide-scrollbar scroll-smooth">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-12 snap-x snap-mandatory mx-auto hide-scrollbar scroll-smooth items-stretch">
           {projects.map((project, index) => (
-            <div data-cursor-text="view" key={project.title} className="w-[85vw] flex-shrink-0 md:w-auto snap-center">
+            <div data-cursor-text="view" key={project.title} className="w-[85vw] flex-shrink-0 md:w-auto snap-center flex">
               <PortfolioCard
                 ref={(el) => { cardRefs.current[index] = el; }}
                 {...project}

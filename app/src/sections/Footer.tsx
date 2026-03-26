@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Github, Twitter, Linkedin, Instagram } from 'lucide-react';
+import Magnetic from '@/components/ui/Magnetic';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,14 +54,15 @@ export function Footer() {
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="w-9 h-9 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:bg-[#F5C518] hover:text-black transition-all duration-300"
-                  >
-                    <Icon className="w-4 h-4" />
-                  </a>
+                  <Magnetic key={social.label} strength={0.4}>
+                    <a
+                      href={social.href}
+                      aria-label={social.label}
+                      className="w-9 h-9 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:bg-[#F5C518] hover:text-black transition-all duration-300"
+                    >
+                      <Icon className="w-4 h-4" />
+                    </a>
+                  </Magnetic>
                 );
               })}
             </div>
