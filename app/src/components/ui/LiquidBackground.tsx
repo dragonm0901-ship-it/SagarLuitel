@@ -77,6 +77,7 @@ export function LiquidBackground() {
       particles.push(new Particle(width, height, ctx));
     }
 
+    let animationId: number;
     function animate() {
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
@@ -84,7 +85,7 @@ export function LiquidBackground() {
         p.update();
         p.draw();
       });
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     }
 
     animate();
@@ -97,7 +98,10 @@ export function LiquidBackground() {
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationId);
+    };
   }, []);
 
   return (

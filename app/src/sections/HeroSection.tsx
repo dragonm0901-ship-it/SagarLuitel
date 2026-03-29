@@ -22,6 +22,8 @@ interface TechIconProps {
 
 const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 18 }: TechIconProps) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -30,26 +32,43 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 22, mSize = 1
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Auto-close effect on mobile after clear interaction
+  useEffect(() => {
+    if (!isMobile || !isPressed) return;
+    const timeout = setTimeout(() => setIsPressed(false), 2000);
+    return () => clearTimeout(timeout);
+  }, [isPressed, isMobile]);
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
+      animate={{ 
+        opacity: 1, 
+        scale: isPressed ? 1.4 : 1,
+        zIndex: isPressed ? 50 : 40 
+      }}
       transition={{
         opacity: { duration: 0.8, delay, ease: "easeOut" },
-        scale: { duration: 0.8, delay, type: "spring", stiffness: 120 }
+        scale: { duration: 0.8, delay, type: "spring", stiffness: 120 },
+        zIndex: { duration: 0 }
       }}
-      whileHover={{ 
+      whileHover={!isMobile ? { 
         scale: 1.4,
         rotate: [0, -10, 10, 0],
         transition: { duration: 0.3 }
-      }}
-      className="absolute z-[40] cursor-pointer pointer-events-auto group"
+      } : {}}
+      onMouseEnter={() => !isMobile && setIsHovering(true)}
+      onMouseLeave={() => !isMobile && setIsHovering(false)}
+      onClick={() => isMobile && setIsPressed(!isPressed)}
+      className="absolute cursor-pointer pointer-events-auto group"
       style={{ 
         left: isMobile ? (mx ?? x) : x, 
         top: isMobile ? (my ?? y) : y 
       }}
     >
-      <div className={`relative p-1.5 md:p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 transition-all duration-300 group-hover:shadow-[0_0_25px_var(--shadow-color)] group-hover:border-transparent group-hover:bg-white`}
+      <div className={`relative p-1.5 md:p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 transition-all duration-300 
+        ${(isPressed || isHovering) ? 'shadow-[0_0_25px_var(--shadow-color)] border-transparent bg-white' : ''} 
+        group-hover:shadow-[0_0_25px_var(--shadow-color)] group-hover:border-transparent group-hover:bg-white`}
            style={{ '--shadow-color': color } as React.CSSProperties}>
         <Icon className="transition-colors duration-300" style={{ width: isMobile ? mSize : size, height: isMobile ? mSize : size, color }} />
       </div>
@@ -184,7 +203,7 @@ const CreativeDeveloperBadge = ({ isMobile }: { isMobile: boolean }) => {
             }}
             exit={{ opacity: 0, scale: isMobile ? 0.6 : 0.8, x: "-50%", y: 10 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="absolute left-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-lg p-2.5 shadow-2xl z-[60] backdrop-blur-xl"
+            className="absolute left-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-lg p-2.5 shadow-2xl z-[120] backdrop-blur-xl"
             style={{ originY: 1 }}
           >
             {/* Header / Traffic Lights */}
@@ -401,7 +420,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       </div>
 
       {/* Bottom Content Layer */}
-      <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[70] px-6 pointer-events-none">
+      <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[110] px-6 pointer-events-none">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6 pointer-events-auto">
           <div className="flex flex-col items-center text-center">
             <Magnetic strength={0.2}>

@@ -5,37 +5,9 @@ import { ArrowRight } from 'lucide-react';
 import { PortfolioCard } from '@/components/PortfolioCard';
 import Magnetic from '@/components/ui/Magnetic';
 
-gsap.registerPlugin(ScrollTrigger);
+import { projects } from '@/data/projects';
 
-const projects = [
-  {
-    image: '/images/project-dots.png',
-    title: '3D Bike Configurator',
-    year: '2024',
-    tags: ['Next.js', 'GSAP', 'Framer Motion', 'State'],
-    challenge: 'Developing a high-performance interactive configurator with real-time state management and dynamic UI for a premium brand.',
-    magic: 'Custom state orchestration and GSAP timelines reduced logic overhead by 80%, enabling butter-smooth interaction.',
-    metrics: { label: 'Logic Efficiency', value: '80%' }
-  },
-  {
-    image: '/images/project-ongito.png',
-    title: 'myRestro(SAAS) Manager',
-    year: '2024',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL'],
-    challenge: 'Building a multi-tenant restaurant management system with real-time order tracking and complex analytics dashboards.',
-    magic: 'Implemented a seamless scrollytelling narrative that led to a 45% increase in average session duration.',
-    metrics: { label: 'User Retention', value: '+45%' }
-  },
-  {
-    image: '/images/project-nexus.png',
-    title: 'Project Peak(Travel Agency Website)',
-    year: '2025',
-    tags: ['React', 'GSAP', 'Framer Motion', 'Contentful'],
-    challenge: 'Designing a premium travel booking platform with immersive destination walkthroughs and interactive maps.',
-    magic: 'Developed a proprietary animation system that moved complex UI transitions to hardware-accelerated layers.',
-    metrics: { label: 'Frame Density', value: '99.9%' }
-  },
-];
+gsap.registerPlugin(ScrollTrigger);
 
 export function PortfolioSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -105,7 +77,7 @@ export function PortfolioSection() {
             </p>
           </div>
 
-          <div className="flex items-center gap-4 shrink-0 overflow-hidden">
+          <div className="flex items-center p-4 gap-4 shrink-0">
             <Magnetic strength={0.3}>
               <button 
                 data-cursor-text="all"
@@ -122,7 +94,7 @@ export function PortfolioSection() {
         </div>
 
         {/* Project Cards */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-12 snap-x snap-mandatory mx-auto hide-scrollbar scroll-smooth items-stretch">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-12 snap-x snap-mandatory mx-auto hide-scrollbar scroll-smooth items-start">
           {projects.map((project, index) => (
             <div data-cursor-text="view" key={project.title} className="w-[85vw] flex-shrink-0 md:w-auto snap-center flex">
               <PortfolioCard

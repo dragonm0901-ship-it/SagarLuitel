@@ -86,7 +86,7 @@ export function AboutSection() {
           {/* Right Content */}
           <div ref={contentRef} className="space-y-6">
             <p className="text-gray-600 leading-relaxed text-lg">
-              I'm a Creative Developer obsessed with the intersection of animation, art, and performance. My work revolves around pushing the boundaries of what's possible in the browser, from intricate GSAP timelines to complex React orchestrations.
+              I'm Sagar Luitel, I'm obsessed with the intersection of animation, art, and performance. My work revolves around pushing the boundaries of what's possible in the browser, from intricate GSAP timelines to complex React orchestrations.
             </p>
             <p className="text-gray-600 leading-relaxed">
               By leveraging Framer Motion and GSAP, I build fluid, high-performance interfaces that don't just function—they enchant. Every line of code is a brushstroke in a larger, interactive masterpiece.

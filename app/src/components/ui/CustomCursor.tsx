@@ -4,7 +4,6 @@ import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motio
 export function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
-  const [cursorText, setCursorText] = useState("");
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
@@ -27,11 +26,9 @@ export function CustomCursor() {
 
       if (hoverElement) {
         setIsHovered(true);
-        setCursorText(hoverElement.getAttribute('data-cursor-text') || "");
       } else {
         const isInteractive = target.closest('button, a, input, [role="button"], .cursor-pointer');
         setIsHovered(!!isInteractive);
-        setCursorText("");
       }
     };
 
@@ -60,13 +57,13 @@ export function CustomCursor() {
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
+          marginLeft: "-36px",
+          marginTop: "-36px",
           filter: "url(#cursor-liquid)",
         }}
         animate={{
-          width: 40,
-          height: 40,
+          width: 72,
+          height: 72,
           opacity: isHidden ? 0 : (isHovered ? 0.4 : 0.2),
         }}
       />
@@ -77,12 +74,12 @@ export function CustomCursor() {
         style={{
           x: cursorX,
           y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
+          marginLeft: "-7px",
+          marginTop: "-7px",
         }}
         animate={{
-          width: 8,
-          height: 8,
+          width: 14,
+          height: 14,
           backgroundColor: isHovered ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.3)",
           opacity: isHidden ? 0 : 1,
           boxShadow: "none",
