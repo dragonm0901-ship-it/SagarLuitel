@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Github, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Github, Music2, Linkedin, Instagram } from 'lucide-react';
 import Magnetic from '@/components/ui/Magnetic';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const socialLinks = [
-  { icon: Github, href: '#', label: 'GitHub' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Github, href: 'https://github.com/dragonm0901-ship-it', label: 'GitHub' },
+  { icon: Music2, href: 'https://www.tiktok.com/@sagar.luitel.tech?_r=1&_t=ZS-94UJDvX6T0D', label: 'TikTok' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sagar-luitel-4a510730a/', label: 'LinkedIn' },
   { icon: Instagram, href: '#', label: 'Instagram' },
 ];
 
@@ -99,8 +99,8 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1 text-left">
             <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500 mb-4">Transmission</h4>
             <p className="text-gray-400 font-mono text-xs mb-3">Pokhara, Nepal / Global</p>
-            <a href="mailto:hello@sagar.dev" className="text-lg md:text-2xl font-serif font-bold text-white hover:text-[#F5C518] transition-colors break-words">
-              hello@sagar.dev
+            <a href="mailto:sagar.luitel.0909@gmail.com" className="text-lg md:text-2xl font-serif font-bold text-white hover:text-[#F5C518] transition-colors break-words">
+              sagar.luitel.0909@gmail.com
             </a>
           </div>
         </div>

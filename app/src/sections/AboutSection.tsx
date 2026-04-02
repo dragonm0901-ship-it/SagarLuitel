@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -91,16 +92,16 @@ export function AboutSection() {
             <p className="text-gray-600 leading-relaxed">
               By leveraging Framer Motion and GSAP, I build fluid, high-performance interfaces that don't just function—they enchant. Every line of code is a brushstroke in a larger, interactive masterpiece.
             </p>
-            <button
-              ref={buttonRef}
-              className="group relative bg-gradient-to-r from-[#FF6B9D] to-[#FF8C42] text-white px-8 py-3.5 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-pink-500/25 mt-4"
+            <Link
+              to="/about"
+              className="group relative inline-block bg-gradient-to-r from-[#FF6B9D] to-[#FF8C42] text-white px-8 py-3.5 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-pink-500/25 mt-4"
             >
               <span className="relative z-10 flex items-center gap-2">
                 About Me
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C42] to-[#FF6B9D] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

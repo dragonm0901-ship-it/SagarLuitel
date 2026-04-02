@@ -69,7 +69,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
 
             {/* Senior Narrative - Touch-aware visibility */}
             {(challenge || magic) && (
-              <div className="grid transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] 
+              <div className="grid transition-all duration-500 ease-&lsqb;cubic-bezier(0.16,1,0.3,1)&rsqb; 
                 grid-rows-[1fr] opacity-100 
                 md:grid-rows-[0fr] md:opacity-0 
                 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100"

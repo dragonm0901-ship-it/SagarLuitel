@@ -43,4 +43,34 @@ export const projects: Project[] = [
     magic: 'Developed a proprietary animation system that moved complex UI transitions to hardware-accelerated layers.',
     metrics: { label: 'Frame Density', value: '99.9%' }
   },
+  {
+    id: 'into-pokhara',
+    image: '/images/Into Pokhara.jpeg',
+    title: 'Into Pokhara',
+    year: '2025',
+    tags: ['Next.js', 'GSAP', 'WebGL', 'Editorial'],
+    challenge: 'Transforming a nature-focused story into a cinematic editorial scrollytelling experience with deep atmospheric layers.',
+    magic: 'GSAP ScrollTrigger orchestration for seamless atmospheric transitions and parallax topographic peaks.',
+    metrics: { label: 'Engagement', value: '+45%' }
+  },
+  {
+    id: '3d-museum',
+    image: '/images/3D Museum.jpeg',
+    title: '3D Museum',
+    year: '2024',
+    tags: ['React Three Fiber', 'Three.js', 'GLSL', 'Performance'],
+    challenge: 'Creating a high-fidelity 3D environment for virtual exploration with optimized asset loading for web.',
+    magic: 'Custom GLTF compression pipelines and instance-based rendering achieved buttery 60fps on mobile devices.',
+    metrics: { label: 'Mobile Perf', value: '60 FPS' }
+  },
+  {
+    id: 'ktm-decor',
+    image: '/images/KTM Decor.jpeg',
+    title: 'KTM Decor',
+    year: '2024',
+    tags: ['Next.js', 'PostgreSQL', 'AR-Ready', 'E-commerce'],
+    challenge: 'Developing an e-commerce platform with AR-ready visualization for premium interior design elements.',
+    magic: 'Integrated custom shaders for realistic fabric and light interaction in real-time 3D product previews.',
+    metrics: { label: 'Conversion', value: '+30%' }
+  },
 ];

@@ -87,7 +87,7 @@ export function ContactCTA() {
               </button>
               
               <a
-                href="mailto:hello@sagar.dev"
+                href="mailto:sagar.luitel.0909@gmail.com"
                 className="inline-flex items-center gap-3 px-12 py-5 rounded-full border border-white/20 text-white font-mono text-sm uppercase tracking-widest hover:bg-white/10 transition-colors duration-300"
               >
                 <Mail className="w-5 h-5" />

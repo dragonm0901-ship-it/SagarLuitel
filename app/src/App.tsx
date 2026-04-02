@@ -21,6 +21,7 @@ import MeshGradient from '@/components/ui/MeshGradient';
 import { ProjectDetails } from '@/pages/ProjectDetails';
 import { LabPage } from '@/pages/LabPage';
 import { SnippetsPage } from '@/pages/SnippetsPage';
+import { AboutPage } from '@/pages/AboutPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,10 +41,11 @@ function HomePage({ isIntroDone }: { isIntroDone: boolean }) {
   const { hash } = useLocation();
   
   useEffect(() => {
-    if (hash === '#portfolio') {
+    if (hash === '#portfolio' || hash === '#about') {
+      const elementId = hash.slice(1);
       // Delay strictly zero to jump instantly before browser layout paint
       setTimeout(() => {
-        document.getElementById('portfolio')?.scrollIntoView({ behavior: 'auto' });
+        document.getElementById(elementId)?.scrollIntoView({ behavior: 'auto' });
       }, 0);
     }
   }, [hash]);
@@ -95,6 +97,7 @@ function AppRoutes({ loading }: { loading: boolean }) {
             <Route path="/store" element={<StoreSection />} />
             <Route path="/lab" element={<LabPage />} />
             <Route path="/snippets" element={<SnippetsPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/project/:id" element={<ProjectDetails />} />
           </Routes>
         </AnimatePresence>
