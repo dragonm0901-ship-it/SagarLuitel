@@ -99,7 +99,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1 text-left">
             <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500 mb-4">Transmission</h4>
             <p className="text-gray-400 font-mono text-xs mb-3">Pokhara, Nepal / Global</p>
-            <a href="mailto:sagar.luitel.0909@gmail.com" className="text-lg md:text-2xl font-serif font-bold text-white hover:text-[#F5C518] transition-colors break-words">
+            <a href="mailto:sagar.luitel.0909@gmail.com" className="text-base md:text-xl font-serif font-bold text-white hover:text-[#F5C518] transition-colors whitespace-nowrap">
               sagar.luitel.0909@gmail.com
             </a>
           </div>

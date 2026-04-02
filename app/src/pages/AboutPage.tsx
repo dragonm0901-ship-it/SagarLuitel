@@ -25,40 +25,45 @@ const interests = [
 export function AboutPage() {
   const [isDark, setIsDark] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const marqueeTween = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Grid reveal effect (no staggered vertical parallax to keep alignment)
-      const images = gridRef.current?.querySelectorAll('.grid-img');
-      images?.forEach((img, i) => {
-        gsap.fromTo(img,
-          { opacity: 0, y: 30 },
+      // Marquee animation (Left to Right)
+      const marquee = marqueeRef.current;
+      if (marquee) {
+        const totalWidth = marquee.scrollWidth;
+        const singleSetWidth = totalWidth / 3;
+        
+        marqueeTween.current = gsap.fromTo(marquee, 
+          { x: -singleSetWidth },
           {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: img,
-              start: 'top 90%',
-              toggleActions: 'play none none none',
-            },
-            delay: i * 0.1,
+            x: 0,
+            duration: 30, // Medium speed
+            ease: "none",
+            repeat: -1,
           }
         );
-      });
+      }
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
       // Text reveal animations
       gsap.from('.reveal-text', {
-        y: 60,
+        y: 40,
         opacity: 0,
         duration: 1.2,
-        stagger: 0.2,
+        stagger: 0.15,
         ease: 'power4.out',
+        clearProps: "all",
         scrollTrigger: {
           trigger: '.reveal-text',
-          start: 'top 85%',
+          start: 'top 92%',
+          toggleActions: 'play none none none',
         }
       });
     }, containerRef);
@@ -69,54 +74,63 @@ export function AboutPage() {
     <div ref={containerRef} className={`min-h-screen transition-colors duration-700 pt-40 pb-24 overflow-hidden flex flex-col items-center ${isDark ? 'bg-[#0A0A0A] text-white' : 'bg-white text-[#1A1A1A]'}`}>
       <div className="max-w-6xl w-full mx-auto px-6 lg:px-8">
         {/* 3+2 Image Collage Grid - Clean, balanced layout */}
-        <div ref={gridRef} className="relative mb-24 grid grid-cols-1 md:grid-cols-6 md:grid-rows-2 gap-4 md:gap-8 h-auto md:h-[600px]">
-          {/* Slot 1: Top Left */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className={`grid-img md:col-start-1 md:col-end-3 md:row-start-1 rounded-2xl overflow-hidden shadow-sm border transition-colors ${isDark ? 'border-white/10' : 'border-gray-100'}`}
-          >
-            <img src="/images/about/IMG_7912.jpg" alt="Workspace" className="w-full h-full object-cover transition-all duration-700 hover:scale-105" />
-          </motion.div>
+        {/* Infinite Image Marquee */}
+        <div className="relative w-full mb-32 overflow-hidden py-12">
+          {/* Mask for edge fading */}
+          <div 
+            className="absolute inset-0 z-10 pointer-events-none"
+            style={{
+              background: isDark 
+                ? 'linear-gradient(to right, #0A0A0A 0%, transparent 8%, transparent 92%, #0A0A0A 100%)'
+                : 'linear-gradient(to right, white 0%, transparent 8%, transparent 92%, white 100%)'
+            }}
+          />
           
-          {/* Slot 2: Top Center */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className={`grid-img md:col-start-3 md:col-end-5 md:row-start-1 rounded-2xl overflow-hidden shadow-sm border transition-colors ${isDark ? 'border-white/10' : 'border-gray-100'}`}
+          <div 
+            ref={marqueeRef}
+            className="flex gap-8 px-4 marquee-container"
+            style={{ 
+              width: "fit-content",
+            }}
           >
-            <img src="/images/about/IMG_0489.jpg" alt="Photography" className="w-full h-full object-cover transition-all duration-700 hover:scale-105" />
-          </motion.div>
-          
-          {/* Slot 3: Top Right */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`grid-img md:col-start-5 md:col-end-7 md:row-start-1 rounded-2xl overflow-hidden shadow-sm border transition-colors ${isDark ? 'border-white/10' : 'border-gray-100'}`}
-          >
-            <img src="/images/about/IMG_1176.jpg" alt="Studio Life" className="w-full h-full object-cover transition-all duration-700 hover:scale-105" />
-          </motion.div>
-
-          {/* Slot 4: Bottom Left (Centered row) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className={`grid-img md:col-start-2 md:col-end-4 md:row-start-2 rounded-2xl overflow-hidden shadow-sm border transition-colors ${isDark ? 'border-white/10' : 'border-gray-100'}`}
-          >
-            <img src="/images/about/IMG_1666.jpg" alt="Abstract Vision" className="w-full h-full object-cover transition-all duration-700 hover:scale-105" />
-          </motion.div>
-
-          {/* Slot 5: Bottom Right (Centered row) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className={`grid-img md:col-start-4 md:col-end-6 md:row-start-2 rounded-2xl overflow-hidden shadow-sm border transition-colors ${isDark ? 'border-white/10' : 'border-gray-100'}`}
-          >
-            <img src="/images/about/IMG_5135.jpeg" alt="Creative Session" className="w-full h-full object-cover transition-all duration-700 hover:scale-105" />
-          </motion.div>
-
-
+            {/* Duplicate images multiple times for infinite effect */}
+            {[...Array(3)].map((_, setIndex) => (
+              <div key={setIndex} className="flex gap-8 flex-shrink-0">
+                {[
+                  { src: "/images/about/IMG_7912.jpg", alt: "Workspace" },
+                  { src: "/images/about/IMG_0489.jpg", alt: "Photography" },
+                  { src: "/images/about/IMG_0690.jpg", alt: "Mountain View" },
+                  { src: "/images/about/IMG_1176.jpg", alt: "Studio Life" },
+                  { src: "/images/about/IMG_5412.jpg", alt: "Sunset Horizon" },
+                  { src: "/images/about/IMG_1666.jpg", alt: "Abstract Vision" },
+                  { src: "/images/about/IMG_5135.jpeg", alt: "Creative Session" }
+                ].map((img, i) => (
+                  <motion.div
+                    key={`${setIndex}-${i}`}
+                    whileHover={{ scale: 1.15, zIndex: 20 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    onMouseEnter={() => {
+                      if (marqueeTween.current) {
+                        gsap.to(marqueeTween.current, { timeScale: 0, duration: 0.5, ease: "power2.out" });
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (marqueeTween.current) {
+                        gsap.to(marqueeTween.current, { timeScale: 1, duration: 0.5, ease: "power2.in" });
+                      }
+                    }}
+                    className={`relative flex-shrink-0 w-[250px] md:w-[320px] aspect-[3/5] rounded-2xl overflow-hidden border shadow-2xl transition-colors ${isDark ? 'border-white/10' : 'border-gray-100'}`}
+                  >
+                    <img 
+                      src={img.src} 
+                      alt={img.alt} 
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Story Section */}
@@ -124,7 +138,7 @@ export function AboutPage() {
           <h1 className={`reveal-text text-5xl md:text-8xl font-serif font-black leading-[0.9] tracking-tighter mb-12 transition-colors ${isDark ? 'text-white' : 'text-[#1A1A1A]'}`}>
             Believer of the <span className="text-gray-500 italic">impossible</span>, architect of the <span className="text-[#F5C518]">experience</span>.
           </h1>
-          <p className={`reveal-text text-xl md:text-2xl leading-relaxed font-light mt-8 transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          <div className={`reveal-text text-xl md:text-2xl leading-relaxed font-light mt-8 transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             I thrive in the{' '}
             <span 
               onClick={() => {
@@ -147,7 +161,7 @@ export function AboutPage() {
                 <ChevronDown className="w-6 h-6" strokeWidth={5.5} />
               </motion.div>
             </span>. Not because of gloom, but because that's where the brightest ideas are forged. I'm Sagar Luitel, and I navigate the intersection of logic and magic. Every project is an opportunity to prove that "impossible" is just a lack of imagination.
-          </p>
+          </div>
         </div>
 
         {/* Skills Grid - Moved up */}

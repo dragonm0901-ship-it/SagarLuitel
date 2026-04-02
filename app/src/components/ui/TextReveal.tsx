@@ -13,32 +13,36 @@ export default function TextReveal({ text, className = "", delay = 0 }: TextReve
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+    const ctx = gsap.context(() => {
+      const el = containerRef.current;
+      if (!el) return;
 
-    const words = el.querySelectorAll('.word');
-    
-    gsap.fromTo(words, 
-      { 
-        y: 100, 
-        opacity: 0,
-        rotateX: -30,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        rotateX: 0,
-        duration: 1.2,
-        stagger: 0.05,
-        delay,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none"
+      const words = el.querySelectorAll('.word');
+      
+      gsap.fromTo(words, 
+        { 
+          y: 100, 
+          opacity: 0,
+          rotateX: -30,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1.2,
+          stagger: 0.05,
+          delay,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          }
         }
-      }
-    );
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
   }, [text, delay]);
 
   return (
