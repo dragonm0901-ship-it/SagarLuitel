@@ -10,6 +10,8 @@ export interface Project {
     label: string;
     value: string;
   };
+  github?: string;
+  live?: string;
 }
 
 export const projects: Project[] = [
@@ -21,7 +23,9 @@ export const projects: Project[] = [
     tags: ['Next.js', 'GSAP', 'Framer Motion', 'State'],
     challenge: 'Developing a high-performance interactive configurator with real-time state management and dynamic UI for a premium brand.',
     magic: 'Custom state orchestration and GSAP timelines reduced logic overhead by 80%, enabling butter-smooth interaction.',
-    metrics: { label: 'Logic Efficiency', value: '80%' }
+    metrics: { label: 'Logic Efficiency', value: '80%' },
+    github: 'https://github.com/dragonm0901-ship-it/MTBX1---3D-Bicycle-Website',
+    live: 'https://mtb1x.vercel.app/'
   },
   {
     id: 'myrestro-manager',
@@ -31,7 +35,9 @@ export const projects: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL'],
     challenge: 'Building a multi-tenant restaurant management system with real-time order tracking and complex analytics dashboards.',
     magic: 'Implemented a seamless scrollytelling narrative that led to a 45% increase in average session duration.',
-    metrics: { label: 'User Retention', value: '+45%' }
+    metrics: { label: 'User Retention', value: '+45%' },
+    github: 'https://github.com/dragonm0901-ship-it/my-RestroManager',
+    live: 'https://myrestromanager.vercel.app/'
   },
   {
     id: 'project-peak',
@@ -41,7 +47,9 @@ export const projects: Project[] = [
     tags: ['React', 'GSAP', 'Framer Motion', 'Contentful'],
     challenge: 'Designing a premium travel booking platform with immersive destination walkthroughs and interactive maps.',
     magic: 'Developed a proprietary animation system that moved complex UI transitions to hardware-accelerated layers.',
-    metrics: { label: 'Frame Density', value: '99.9%' }
+    metrics: { label: 'Frame Density', value: '99.9%' },
+    github: 'https://github.com/dragonm0901-ship-it/Project-Peak',
+    live: 'https://projectpeak.vercel.app/'
   },
   {
     id: 'into-pokhara',
@@ -51,7 +59,20 @@ export const projects: Project[] = [
     tags: ['Next.js', 'GSAP', 'WebGL', 'Editorial'],
     challenge: 'Transforming a nature-focused story into a cinematic editorial scrollytelling experience with deep atmospheric layers.',
     magic: 'GSAP ScrollTrigger orchestration for seamless atmospheric transitions and parallax topographic peaks.',
-    metrics: { label: 'Engagement', value: '+45%' }
+    metrics: { label: 'Engagement', value: '+45%' },
+    github: 'https://github.com/dragonm0901-ship-it/Into-Pokhara',
+    live: 'https://intopokhara.vercel.app/'
+  },
+  {
+    id: 'daami-restaurant',
+    image: '/images/KTM Decor.jpeg',
+    title: 'Daami Restaurant',
+    year: '2024',
+    tags: ['Next.js', 'PostgreSQL', 'Tailwind', 'Fullstack'],
+    challenge: 'Building a modern restaurant management and reservation system with a focus on seamless user experience.',
+    magic: 'Real-time booking and interactive menu management with high-performance database interactions.',
+    metrics: { label: 'Efficiency', value: '+40%' },
+    github: 'https://github.com/dragonm0901-ship-it/Dami-Restaurant'
   },
   {
     id: '3d-museum',
@@ -62,15 +83,5 @@ export const projects: Project[] = [
     challenge: 'Creating a high-fidelity 3D environment for virtual exploration with optimized asset loading for web.',
     magic: 'Custom GLTF compression pipelines and instance-based rendering achieved buttery 60fps on mobile devices.',
     metrics: { label: 'Mobile Perf', value: '60 FPS' }
-  },
-  {
-    id: 'ktm-decor',
-    image: '/images/KTM Decor.jpeg',
-    title: 'KTM Decor',
-    year: '2024',
-    tags: ['Next.js', 'PostgreSQL', 'AR-Ready', 'E-commerce'],
-    challenge: 'Developing an e-commerce platform with AR-ready visualization for premium interior design elements.',
-    magic: 'Integrated custom shaders for realistic fabric and light interaction in real-time 3D product previews.',
-    metrics: { label: 'Conversion', value: '+30%' }
   },
 ];

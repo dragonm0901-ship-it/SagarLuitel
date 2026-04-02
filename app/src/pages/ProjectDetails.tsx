@@ -189,6 +189,22 @@ export function ProjectDetails() {
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto"
           >
+            {/* Overview Section - Mandatory narrative for all projects */}
+            <div className="grid md:grid-cols-2 gap-12 mb-20 pb-12 border-b border-gray-100">
+              <div className="space-y-4">
+                <h3 className="text-[10px] font-mono text-gray-400 uppercase tracking-widest leading-none">The Challenge</h3>
+                <p className="text-gray-900 font-serif text-xl md:text-2xl font-bold leading-tight">
+                  {project.challenge}
+                </p>
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-[10px] font-mono text-[#F5C518] uppercase tracking-widest leading-none">The Magic</h3>
+                <p className="text-gray-900 font-serif text-xl md:text-2xl font-bold leading-tight">
+                  {project.magic}
+                </p>
+              </div>
+            </div>
+
             {renderCaseStudyContent()}
           </motion.div>
 

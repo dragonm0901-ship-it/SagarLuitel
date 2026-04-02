@@ -14,8 +14,16 @@ export function PortfolioSection() {
   const headerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [showAll, setShowAll] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const visibleProjects = showAll ? projects : projects.slice(0, 3);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const visibleProjects = showAll ? projects : (isMobile ? projects.slice(0, 6) : projects.slice(0, 3));
 
   // Header animation - only once on mount
   useEffect(() => {
@@ -72,15 +80,15 @@ export function PortfolioSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [showAll]);
+  }, [showAll, isMobile]);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="py-24 lg:py-32 bg-white overflow-hidden">
+    <section ref={sectionRef} id="portfolio" className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
           ref={headerRef}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 md:mb-16"
         >
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-[#1A1A1A] mb-4 leading-[0.9] tracking-tighter">
@@ -91,7 +99,12 @@ export function PortfolioSection() {
             </p>
           </div>
 
-          <div className="flex items-center p-4 gap-4 shrink-0">
+          <div className="flex flex-col items-end gap-4 shrink-0">
+            {isMobile && (
+              <div className="flex items-center gap-2 text-[#FF6B9D] font-mono text-[10px] font-bold uppercase tracking-widest animate-pulse">
+                Swipe to explore <ArrowRight className="w-3 h-3" />
+              </div>
+            )}
             <Magnetic strength={0.3}>
               <button 
                 onClick={() => setShowAll(!showAll)}
@@ -108,13 +121,14 @@ export function PortfolioSection() {
           </div>
         </div>
 
-        {/* Project Cards */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-12 snap-x snap-mandatory mx-auto hide-scrollbar scroll-smooth items-start">
+        {/* Project Cards (Grid layout - 2 rows on mobile) */}
+        <div className={`grid ${isMobile ? 'grid-rows-2 grid-flow-col overflow-x-auto gap-4 pb-8' : 'md:grid-cols-2 lg:grid-cols-3 gap-10 pb-12'} snap-x snap-mandatory scale-100 hide-scrollbar scroll-smooth items-stretch`}>
           {visibleProjects.map((project, index) => (
-            <div data-cursor-text="view" key={project.id} className="w-[85vw] flex-shrink-0 md:w-auto snap-center flex">
+            <div data-cursor-text="view" key={project.id} className={`${isMobile ? 'w-[75vw] h-full' : 'w-auto'} flex-shrink-0 snap-center flex`}>
               <PortfolioCard
                 ref={(el) => { cardRefs.current[index] = el; }}
                 {...project}
+                isMobile={isMobile}
               />
             </div>
           ))}

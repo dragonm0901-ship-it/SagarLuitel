@@ -332,7 +332,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6B9D]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Floating Tech Icons */}
-      <div className="absolute inset-0 z-[100] pointer-events-none pb-40 md:pb-24 -translate-y-16 md:translate-y-0">
+      <div className="absolute inset-0 z-[120] pointer-events-none pb-40 md:pb-24 -translate-y-16 md:translate-y-0">
         {/* All icons stacked below image/text on mobile (y > 60%) */}
         {/* Clustered Left Side */}
         <TechIcon icon={ReactIcon} color="#61DAFB" x="32%" y="25%" mx="20%" my="60%" delay={0.2} />
