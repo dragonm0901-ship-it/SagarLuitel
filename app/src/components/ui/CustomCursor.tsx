@@ -1,18 +1,55 @@
 import { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isDarkBg, setIsDarkBg] = useState(true); // Default to dark background (theme standard)
+  
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 700 };
+  const springConfig = { damping: 40, stiffness: 450 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  // Helper to calculate luminance from RGB/RGBA string
+  const getLuminance = (colorStr: string) => {
+    const rgb = colorStr.match(/\d+/g);
+    if (!rgb || rgb.length < 3) return 1; // Default to Light
+    const [r, g, b] = rgb.map(Number);
+    // Standard relative luminance formula
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  };
+
   useEffect(() => {
-    if (window.matchMedia('(pointer: coarse)').matches) return; // Disable cursor logic on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    let lastCheck = 0;
+    const checkBrightness = () => {
+      const now = Date.now();
+      // Throttle check to every 100ms for performance
+      if (now - lastCheck < 100) return requestAnimationFrame(checkBrightness);
+      lastCheck = now;
+
+      // Detect element under cursor
+      const el = document.elementFromPoint(cursorX.get(), cursorY.get());
+      if (el) {
+        let currentEl: HTMLElement | null = el as HTMLElement;
+        let bg = "transparent";
+        
+        // Walk up the tree to find the nearest non-transparent background
+        while (currentEl && (bg === "transparent" || bg === "rgba(0, 0, 0, 0)")) {
+          bg = window.getComputedStyle(currentEl).backgroundColor;
+          if (currentEl === document.body) break;
+          currentEl = currentEl.parentElement;
+        }
+        
+        const lum = getLuminance(bg);
+        setIsDarkBg(lum < 0.5); // < 0.5 is considered "Dark"
+      }
+      requestAnimationFrame(checkBrightness);
+    };
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -33,7 +70,12 @@ export function CustomCursor() {
     };
 
     window.addEventListener("mousemove", moveCursor);
-    return () => window.removeEventListener("mousemove", moveCursor);
+    const animationId = requestAnimationFrame(checkBrightness);
+
+    return () => {
+      window.removeEventListener("mousemove", moveCursor);
+      cancelAnimationFrame(animationId);
+    };
   }, [cursorX, cursorY]);
 
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
@@ -42,52 +84,48 @@ export function CustomCursor() {
 
   return (
     <>
-      <svg className="hidden">
-        <defs>
-          <filter id="cursor-liquid">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="liquid" />
-          </filter>
-        </defs>
-      </svg>
-
-      {/* Outer Glow / Liquid Effect */}
+      {/* Outer Ring - Adapts color based on detected background luminance */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:block bg-[#FF6B9D]/20"
+        className="fixed top-0 left-0 rounded-full border pointer-events-none z-[9999] hidden md:block"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
-          marginLeft: "-36px",
-          marginTop: "-36px",
-          filter: "url(#cursor-liquid)",
+          translateX: "-50%",
+          translateY: "-50%",
         }}
         animate={{
-          width: 72,
-          height: 72,
-          opacity: isHidden ? 0 : (isHovered ? 0.4 : 0.2),
+          width: isHovered ? 40 : 28,
+          height: isHovered ? 40 : 28,
+          opacity: isHidden ? 0 : 1,
+          borderColor: isDarkBg ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.4)",
+          backgroundColor: isHovered ? (isDarkBg ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)") : "transparent"
+        }}
+        transition={{ 
+          borderColor: { duration: 0.3 },
+          backgroundColor: { duration: 0.3 }
         }}
       />
 
-      {/* Main Focus Dot / Label Container */}
+      {/* Main Focus Dot - Adaptive Color */}
       <motion.div
-        className={`fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center overflow-hidden border border-white/20 dark:border-black/20 backdrop-blur-[2px] transition-colors duration-300 ${isHovered ? 'bg-black/40 dark:bg-white/60' : 'bg-black/30 dark:bg-white/40'}`}
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:flex items-center justify-center overflow-hidden"
         style={{
           x: cursorX,
           y: cursorY,
-          marginLeft: "-7px",
-          marginTop: "-7px",
+          translateX: "-50%",
+          translateY: "-50%",
         }}
         animate={{
-          width: 14,
-          height: 14,
+          width: isHovered ? 20 : 16,
+          height: isHovered ? 20 : 16,
           opacity: isHidden ? 0 : 1,
-          boxShadow: "none",
+          backgroundColor: isDarkBg ? "#FFFFFF" : "#000000",
+          boxShadow: isDarkBg ? "0 0 15px rgba(255, 255, 255, 0.2)" : "0 0 15px rgba(0, 0, 0, 0.1)"
         }}
-      >
-        <AnimatePresence>
-          {/* Labels removed to keep size consistent as per user request */}
-        </AnimatePresence>
-      </motion.div>
+        transition={{ 
+          backgroundColor: { duration: 0.3 }
+        }}
+      />
     </>
   );
 }

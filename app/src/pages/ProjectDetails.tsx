@@ -98,14 +98,13 @@ export function ProjectDetails() {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700"
     >
-      {/* Back Button - Mobile/Tablet (Fixed) */}
-      <div className="lg:hidden fixed top-32 left-6 md:top-8 md:left-8 z-[110]">
+      {/* Back Button - Mobile/Tablet (Fixed) - Lowered to avoid overlap */}
+      <div className="lg:hidden fixed top-32 left-6 z-[110]">
         <button 
-          onClick={() => navigate('/#portfolio')} 
-          className="group flex items-center justify-center bg-white/90 dark:bg-black/60 backdrop-blur-xl w-7 h-7 md:w-auto md:px-4 md:py-2 rounded-full border border-black/5 dark:border-white/10 shadow-xl transition-all duration-300 active:scale-95"
+          onClick={() => navigate('/projects')} 
+          className="group flex items-center justify-center bg-white/90 dark:bg-black/80 backdrop-blur-xl w-10 h-10 rounded-full border border-black/5 dark:border-white/10 shadow-2xl transition-all duration-500 active:scale-95"
         >
-          <ArrowLeft className="w-3.5 h-3.5 md:w-4 md:h-4 text-black dark:text-white transition-transform group-hover:-translate-x-1" />
-          <span className="hidden md:block text-sm font-semibold tracking-wide ml-2 text-black dark:text-white">Back</span>
+          <ArrowLeft className="w-5 h-5 text-black dark:text-white transition-transform group-hover:-translate-x-1" />
         </button>
       </div>
 
@@ -121,14 +120,16 @@ export function ProjectDetails() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="w-full"
               >
-                {/* Desktop Back Button - Strictly Aligned Above Date */}
-                <div className="hidden lg:block mb-8">
+                {/* Desktop Back Button - Strictly Aligned with Header Left Padding */}
+                <div className="hidden lg:block mb-10">
                   <button 
-                    onClick={() => navigate('/#portfolio')} 
-                    className="group flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+                    onClick={() => navigate('/projects')} 
+                    className="group flex items-center gap-3 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300"
                   >
-                    <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                    <span className="text-sm font-bold tracking-tight">Back to Projects</span>
+                    <div className="w-10 h-10 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-black dark:group-hover:border-white transition-all">
+                      <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                    </div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-widest">Back to Projects</span>
                   </button>
                 </div>
 
@@ -139,7 +140,7 @@ export function ProjectDetails() {
                 
                 <motion.h1 
                   layoutId={`title-${project.id}`}
-                  className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[1.1] tracking-tighter mb-8 break-words hyphens-auto"
+                  className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[1.1] tracking-tighter mb-8 break-words hyphens-auto"
                 >
                   {project.title}
                 </motion.h1>

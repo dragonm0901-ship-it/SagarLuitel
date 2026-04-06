@@ -49,12 +49,12 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
     <AnimatePresence>
       {!complete && (
         <motion.div
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-white intro-bg"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-white dark:bg-[#0A0A0A] transition-colors duration-700 intro-bg"
           exit={{ opacity: 0 }}
         >
           <div className="relative flex items-center justify-center w-[300px] h-[300px]">
             {/* Background Circle */}
-            <div className="absolute inset-0 border border-black/[0.03] rounded-full scale-[0.85]" />
+            <div className="absolute inset-0 border border-black/[0.03] dark:border-white/[0.03] rounded-full scale-[0.85]" />
             
             {/* Circular Progress SVG */}
             <svg className="absolute inset-0 w-full h-full -rotate-90">
@@ -65,7 +65,7 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
                 stroke="currentColor"
                 strokeWidth="1"
                 fill="transparent"
-                className="text-black/[0.05]"
+                className="text-black/[0.05] dark:text-white/[0.05]"
               />
               <motion.circle
                 cx="150"
@@ -77,7 +77,7 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
                 strokeDasharray={2 * Math.PI * 135}
                 animate={{ strokeDashoffset: (2 * Math.PI * 135) * (1 - progress / 100) }}
                 transition={{ duration: 0.1, ease: "linear" }}
-                className="text-black"
+                className="text-black dark:text-white"
                 strokeLinecap="round"
               />
             </svg>
@@ -85,7 +85,7 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
             {/* Centered Content */}
             <div className="z-10 text-center">
               <div className="overflow-hidden mb-1">
-                <h1 className="text-black text-2xl md:text-3xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
+                <h1 className="text-black dark:text-white text-2xl md:text-3xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
                   SAGAR LUITEL
                 </h1>
               </div>
@@ -97,8 +97,8 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
               
               <div className="absolute top-[65%] left-1/2 -translate-x-1/2 w-full">
                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-mono text-[9px] text-gray-400 tracking-widest uppercase">Initializing</span>
-                    <span className="font-mono text-[12px] text-black font-bold">{progress}%</span>
+                    <span className="font-mono text-[9px] text-gray-400 dark:text-gray-500 tracking-widest uppercase">Initializing</span>
+                    <span className="font-mono text-[12px] text-black dark:text-white font-bold">{progress}%</span>
                  </div>
               </div>
             </div>

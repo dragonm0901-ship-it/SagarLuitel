@@ -1,37 +1,121 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Terminal, Code2, Cpu, Globe, Rocket, ChevronRight } from 'lucide-react';
+import { snippets } from '@/data/snippets';
 
-const SnippetBlock = ({ title, date, language, code, explanation }: { title: string, date: string, language: string, code: string, explanation: React.ReactNode }) => {
+const CategoryIcon = ({ category }: { category: string }) => {
+  const Icon = ({
+    React: Globe,
+    GSAP: Rocket,
+    WebGL: Cpu,
+    Architecture: Terminal,
+    CSS: Code2
+  }[category as 'React' | 'GSAP' | 'WebGL' | 'Architecture' | 'CSS']) || Code2;
+  return <Icon className="w-4 h-4" />;
+};
+
+const SnippetCard = ({ snippet, index }: { snippet: typeof snippets[0], index: number }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleMouseEnter = () => {
+    timerRef.current = setTimeout(() => {
+      setIsFlipped(true);
+    }, 800);
+  };
+
+  const handleMouseLeave = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setIsFlipped(false);
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-      className="mb-16"
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative"
+      style={{ perspective: "1500px" }}
     >
-      <div className="flex items-center gap-4 mb-4">
-        <h3 className="text-2xl font-serif font-bold text-[#1A1A1A] dark:text-white transition-colors duration-700">{title}</h3>
-        <span className="text-gray-400 font-mono text-sm">{date}</span>
-      </div>
-      <div className="bg-[#0A0A0A] rounded-2xl overflow-hidden shadow-2xl border border-gray-800 mb-6 relative group">
-        <div className="absolute top-0 left-0 w-full h-8 bg-white/5 border-b border-white/5 flex items-center px-4">
-          <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-            <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-          </div>
-          <span className="ml-4 text-[10px] font-mono text-gray-500 uppercase">{language}</span>
+      <motion.div
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformStyle: "preserve-3d" }}
+        className="w-full h-full"
+      >
+        {/* Front Face (Normal Flow defines the card size) */}
+        <div 
+          style={{ backfaceVisibility: "hidden" }}
+          className="w-full h-full pointer-events-auto"
+        >
+          <Link 
+            to={`/snippets/${snippet.id}`}
+            className="group flex flex-col h-full p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/5 bg-[#FAFAFA] dark:bg-white/5 border-gray-200 dark:border-white/10 hover:border-transparent hover:bg-white dark:hover:bg-white/10"
+          >
+            <div className="flex justify-between items-start mb-4 md:mb-6">
+              <div className="flex items-center gap-2 md:gap-3">
+                <div className="p-1.5 md:p-2 rounded-lg bg-black dark:bg-white/10 text-white transition-all duration-500">
+                    <CategoryIcon category={snippet.category} />
+                </div>
+                <span className="text-[8px] md:text-[10px] font-mono text-gray-400 uppercase tracking-widest">{snippet.category}</span>
+              </div>
+              <span className="text-[8px] md:text-[10px] font-mono text-gray-400 opacity-50 uppercase tracking-widest">{snippet.date}</span>
+            </div>
+            
+            <h3 className="text-sm md:text-xl font-serif font-black mb-2 md:mb-4 text-[#1A1A1A] dark:text-white transition-colors leading-tight line-clamp-2">
+              {snippet.title}
+            </h3>
+            
+            <p className="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mb-6 md:mb-8 line-clamp-2 leading-relaxed">
+              {snippet.shortDesc}
+            </p>
+
+            <div className="mt-auto flex items-center gap-2 text-[8px] md:text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-[#1A1A1A] dark:text-white transition-all group-hover:gap-4">
+              <span>Explore</span>
+              <ChevronRight className="w-2.5 h-2.5 md:w-3 md:h-3" />
+            </div>
+          </Link>
         </div>
-        <pre className="p-6 pt-12 overflow-x-auto">
-          <code className="text-sm font-mono leading-relaxed text-[#F8F8F2]">
-            {code}
-          </code>
-        </pre>
-      </div>
-      <div className="prose prose-lg text-gray-600 dark:text-gray-300 transition-colors duration-700">
-        {explanation}
-      </div>
+
+        {/* Back Face (Absolute Inset-0 matches whatever height the Front defines) */}
+        <div 
+          style={{ 
+            backfaceVisibility: "hidden",
+            transform: "rotateY(180deg)"
+          }}
+          className="absolute inset-0 w-full h-full bg-[#0F0F0F] rounded-[2rem] p-8 border border-white/10 shadow-2xl flex flex-col overflow-hidden"
+        >
+          <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-red-500/20" />
+              <div className="w-2 h-2 rounded-full bg-yellow-500/20" />
+              <div className="w-2 h-2 rounded-full bg-green-500/20" />
+            </div>
+            <span className="text-[8px] font-mono text-white uppercase tracking-widest opacity-40">
+              {snippet.language}.log
+            </span>
+          </div>
+          
+          <div className="relative overflow-hidden flex-1 mb-6">
+            <pre className="text-[10px] leading-relaxed text-gray-400 font-mono">
+              {snippet.code.split('\n').filter(line => line.trim().length > 0).slice(0, 10).join('\n')}
+            </pre>
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0F0F0F] to-transparent pointer-events-none" />
+          </div>
+
+          <Link 
+            to={`/snippets/${snippet.id}`}
+            className="mt-auto group/btn flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-xs font-mono uppercase tracking-widest text-white font-bold"
+          >
+            <span>See Full Detail</span>
+            <ChevronRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+          </Link>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -49,44 +133,27 @@ export function SnippetsPage() {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 pt-32 pb-24"
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-20 px-4 md:px-0"
         >
-          <h1 className="text-5xl md:text-7xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[0.9] tracking-tighter mb-4">
-            Code <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22C55E] to-[#38B2AC]">Snippets</span>.
+          <h1 className="text-4xl md:text-8xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[1.1] md:leading-[0.9] tracking-tighter mb-6">
+            Code <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22C55E] to-[#38B2AC] pr-2">Snippets</span>.
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-lg max-w-2xl leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-base md:text-xl max-w-2xl leading-relaxed">
             Dropping knowledge on advanced frontend architecture, GSAP orchestration, and React rendering.
           </p>
         </motion.div>
 
-        <SnippetBlock 
-          title="React 18 + GSAP Cleanup Pattern"
-          date="Mar 2026"
-          language="typescript"
-          code={`import { useEffect, useRef } from 'react';\nimport gsap from 'gsap';\n\nexport const useGsapAnimation = () => {\n  const ref = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    // Context isolates GSAP selections to this component scope\n    const ctx = gsap.context(() => {\n      gsap.to('.child', { opacity: 1, stagger: 0.1 });\n    }, ref);\n    \n    // Critical: Revert on unmount to prevent memory leaks in strict mode\n    return () => ctx.revert();\n  }, []);\n\n  return ref;\n};`}
-          explanation={
-            <p>
-              In React 18 strict mode, <code>useEffect</code> naturally fires twice in development. If you aren't using <code>gsap.context()</code>, you will instantly build up memory leaks and duplicate ScrollTriggers. Always wrap your complex animations in a context and call <code>revert()</code>. This keeps the animation lifecycle perfectly bound to the component.
-            </p>
-          }
-        />
-
-        <SnippetBlock 
-          title="Framer Motion FLIP Transitions"
-          date="Feb 2026"
-          language="tsx"
-          code={`import { motion, AnimatePresence } from 'framer-motion';\nimport { Routes, Route, useLocation } from 'react-router-dom';\n\nexport const AnimatedRoutes = () => {\n  const location = useLocation();\n  \n  return (\n    <AnimatePresence mode="wait">\n      {/* Providing key triggers exit animations correctly */}\n      <Routes location={location} key={location.pathname}>\n        <Route path="/" element={<Home />} />\n        <Route path="/detail/:id" element={<Detail />} />\n      </Routes>\n    </AnimatePresence>\n  );\n};\n\n// In both Home and Detail, use a matching layoutId:\n// <motion.img layoutId={\`image-\${id}\`} src={src} />`}
-          explanation={
-            <p>
-              To achieve native-feeling page transitions on the web, applying the <b>FLIP (First, Last, Invert, Play)</b> technique is required. By leveraging Framer Motion's <code>layoutId</code> alongside a properly keyed <code>AnimatePresence</code> React Router wrapper, elements seamlessly glide from their list thumbnail size into the hero container on the newly loaded page without any imperative coordinate math.
-            </p>
-          }
-        />
+        {/* Snippets Grid - 2x2 on Mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 px-4 md:px-0 auto-rows-fr">
+          {snippets.map((snippet, i) => (
+            <SnippetCard key={snippet.id} snippet={snippet} index={i} />
+          ))}
+        </div>
       </div>
     </motion.div>
   );

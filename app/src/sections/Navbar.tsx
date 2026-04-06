@@ -11,8 +11,8 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { label: 'About', href: '/#about' },
-  { label: 'Projects', href: '/#portfolio' },
+  { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
   { label: 'Lab', href: '/lab' },
   { label: 'Snippets', href: '/snippets' },
   { label: 'Store', href: '/store', isSpecial: true },
@@ -138,7 +138,7 @@ export function Navbar() {
           <div className="flex md:hidden items-center gap-3">
              <button
                 onClick={toggleMenu}
-                className="w-12 h-12 flex items-center justify-center transition-all hover:scale-105 active:scale-95 text-black"
+                className="w-12 h-12 flex items-center justify-center transition-all hover:scale-105 active:scale-95 text-black dark:text-white"
              >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
              </button>
@@ -169,7 +169,7 @@ export function Navbar() {
             <div className="flex justify-end px-6 mb-1">
               <button 
                 onClick={closeMenu}
-                className="p-1.5 bg-gray-50 hover:bg-gray-100 rounded-full text-black transition-colors"
+                className="p-1.5 bg-gray-50 dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 rounded-full text-black dark:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -181,15 +181,15 @@ export function Navbar() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.1 }}
-                  className="flex items-center justify-center pb-4 border-b border-gray-100/50 mb-4"
+                  className="flex items-center justify-center pb-4 border-b border-gray-100/50 dark:border-white/10 mb-4"
                 >
                   <div className="relative">
                     <img
                       src="/images/hero-portrait.png"
                       alt="Sagar Luitel"
-                      className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm"
+                      className="w-16 h-16 rounded-full object-cover border-2 border-white dark:border-white/10 shadow-sm"
                     />
-                    <span className="absolute bottom-0.5 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
+                    <span className="absolute bottom-0.5 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-white/10" />
                   </div>
                 </motion.div>
 
@@ -201,7 +201,7 @@ export function Navbar() {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.4, delay: 0.15 + (i * 0.05) }}
                     >
-                      {renderLink(link, "group flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-gray-50/50 transition-all border border-transparent hover:border-gray-100")}
+                      {renderLink(link, "group flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-gray-50/50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100 dark:hover:border-white/10")}
                     </motion.div>
                   ))}
                 </nav>

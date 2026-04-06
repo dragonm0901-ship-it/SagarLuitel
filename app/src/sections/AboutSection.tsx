@@ -90,7 +90,7 @@ export function AboutSection() {
               I'm Sagar Luitel, I'm obsessed with the intersection of animation, art, and performance. My work revolves around pushing the boundaries of what's possible in the browser, from intricate GSAP timelines to complex React orchestrations.
             </p>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              By leveraging Framer Motion and GSAP, I build fluid, high-performance interfaces that don't just function—they enchant. Every line of code is a brushstroke in a larger, interactive masterpiece.
+              By leveraging Framer Motion and GSAP, I build fluid, high-performance interfaces that don't just function they enchant. Every line of code is a brushstroke in a larger, interactive masterpiece.
             </p>
             <button ref={buttonRef}>
             <Link

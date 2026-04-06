@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { X } from 'lucide-react';
 
 interface DarkModeTerminalProps {
   onSuccess: () => void;
@@ -79,11 +80,13 @@ export function DarkModeTerminal({ onSuccess, onClose, inline = false, isDarkMod
         <div className="flex gap-1.5">
           <div 
             onClick={onClose}
-            className="w-3 h-3 rounded-full bg-[#FF5F56] cursor-pointer hover:opacity-80 transition-opacity" 
+            className="group w-3.5 h-3.5 rounded-full bg-[#FF5F56] cursor-pointer hover:opacity-80 transition-all flex items-center justify-center relative" 
             style={{ cursor: 'pointer' }}
-          />
-          <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-          <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+          >
+            <X className="w-2.5 h-2.5 text-black opacity-0 group-hover:opacity-100 transition-opacity" strokeWidth={3} />
+          </div>
+          <div className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E]" />
+          <div className="w-3.5 h-3.5 rounded-full bg-[#27C93F]" />
         </div>
         <div className="mx-auto text-[10px] font-mono text-gray-400 uppercase tracking-widest">
           {isDarkMode ? 'restore_light.js' : 'inject_darkness.js'}

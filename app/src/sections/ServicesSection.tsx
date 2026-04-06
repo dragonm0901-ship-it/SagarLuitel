@@ -58,7 +58,7 @@ export function ServicesSection() {
           className="flex flex-col lg:flex-row lg:items-start gap-12 mb-20"
         >
           <div className="max-w-3xl">
-            <h2 className="font-bold text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-tight mb-6">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-tight mb-6 tracking-tighter">
               Without impact and creating a legacy that <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#F5C518] to-[#FF6B9D]">transcends time</span>.
             </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">

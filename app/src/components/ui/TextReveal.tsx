@@ -7,9 +7,10 @@ interface TextRevealProps {
   text: string;
   className?: string;
   delay?: number;
+  triggerOnInit?: boolean;
 }
 
-export default function TextReveal({ text, className = "", delay = 0 }: TextRevealProps) {
+export default function TextReveal({ text, className = "", delay = 0, triggerOnInit = false }: TextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function TextReveal({ text, className = "", delay = 0 }: TextReve
           stagger: 0.05,
           delay,
           ease: "expo.out",
-          scrollTrigger: {
+          scrollTrigger: triggerOnInit ? null : {
             trigger: el,
             start: "top 85%",
             toggleActions: "play none none none"
@@ -43,7 +44,7 @@ export default function TextReveal({ text, className = "", delay = 0 }: TextReve
     }, containerRef);
 
     return () => ctx.revert();
-  }, [text, delay]);
+  }, [text, delay, triggerOnInit]);
 
   return (
     <div ref={containerRef} className={`flex flex-wrap ${className}`} style={{ perspective: '1000px' }}>

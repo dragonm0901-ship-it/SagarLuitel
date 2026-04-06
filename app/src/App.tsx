@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,7 +10,6 @@ import { StatsSection } from '@/sections/StatsSection';
 import { AboutSection } from '@/sections/AboutSection';
 import { ServicesSection } from '@/sections/ServicesSection';
 import { PortfolioSection } from '@/sections/PortfolioSection';
-import { StoreSection } from '@/sections/StoreSection';
 import { ContactCTA } from '@/sections/ContactCTA';
 import { Footer } from '@/sections/Footer';
 import { CustomCursor } from '@/components/ui/CustomCursor';
@@ -18,10 +17,17 @@ import { GrainOverlay } from '@/components/ui/GrainOverlay';
 import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import { PremiumIntro } from '@/components/ui/PremiumIntro';
 import MeshGradient from '@/components/ui/MeshGradient';
-import { ProjectDetails } from '@/pages/ProjectDetails';
-import { LabPage } from '@/pages/LabPage';
-import { SnippetsPage } from '@/pages/SnippetsPage';
-import { AboutPage } from '@/pages/AboutPage';
+
+// Lazy Loaded Routes for Performance
+const StoreSection = lazy(() => import('@/sections/StoreSection').then(m => ({ default: m.StoreSection })));
+const StoreProductPage = lazy(() => import('@/pages/StoreProductPage').then(m => ({ default: m.StoreProductPage })));
+const LabPage = lazy(() => import('@/pages/LabPage').then(m => ({ default: m.LabPage })));
+const LabDetailsPage = lazy(() => import('./pages/LabDetailsPage').then(m => ({ default: m.LabDetailsPage })));
+const SnippetsPage = lazy(() => import('@/pages/SnippetsPage').then(m => ({ default: m.SnippetsPage })));
+const SnippetDetailsPage = lazy(() => import('./pages/SnippetDetailsPage').then(m => ({ default: m.SnippetDetailsPage })));
+const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ProjectsPage = lazy(() => import('@/pages/ProjectsPage').then(m => ({ default: m.ProjectsPage })));
+const ProjectDetails = lazy(() => import('@/pages/ProjectDetails').then(m => ({ default: m.ProjectDetails })));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,23 +90,37 @@ const logEasterEgg = () => {
   );
 };
 
+// Professional Suspense Fallback
+const PageLoader = () => (
+  <div className="min-h-[80vh] flex flex-col items-center justify-center bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700">
+    <div className="w-12 h-12 rounded-full border-2 border-[#FF6B9D]/20 border-t-[#FF6B9D] animate-spin" />
+    <span className="mt-4 font-mono text-[9px] uppercase tracking-[0.3em] text-gray-400">Loading Wizardry</span>
+  </div>
+);
+
 function AppRoutes({ loading }: { loading: boolean }) {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700">
       <Navbar />
       <main>
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<HomePage isIntroDone={!loading} />} />
-            <Route path="/store" element={<StoreSection />} />
-            <Route path="/lab" element={<LabPage />} />
-            <Route path="/snippets" element={<SnippetsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/project/:id" element={<ProjectDetails />} />
-          </Routes>
-        </AnimatePresence>
+        <Suspense fallback={<PageLoader />}>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<HomePage isIntroDone={!loading} />} />
+              <Route path="/store" element={<StoreSection />} />
+              <Route path="/store/:id" element={<StoreProductPage />} />
+              <Route path="/lab" element={<LabPage />} />
+              <Route path="/lab/:id" element={<LabDetailsPage />} />
+              <Route path="/snippets" element={<SnippetsPage />} />
+              <Route path="/snippets/:id" element={<SnippetDetailsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/project/:id" element={<ProjectDetails />} />
+            </Routes>
+          </AnimatePresence>
+        </Suspense>
       </main>
       <Footer />
     </div>

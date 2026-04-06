@@ -265,11 +265,12 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const [isMobile, setIsMobile] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [terminalRevealed, setTerminalRevealed] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => document.documentElement.classList.contains('dark'));
 
   const handleDarkModeSuccess = () => {
     const nextMode = !isDarkMode;
     setIsDarkMode(nextMode);
+    localStorage.setItem('theme', nextMode ? 'dark' : 'light');
     document.documentElement.classList.toggle("dark");
     document.body.classList.toggle("dark-mode");
     setTimeout(() => {
@@ -389,7 +390,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         className="absolute inset-0 pb-40 md:pb-24 pointer-events-none flex justify-center items-center z-10"
       >
         <div ref={imageRef} className="relative flex flex-col items-center">
-          {/* Dark Mode Clue (Moved above Hero Image) */}
+          {/* Theme Toggle Button - Desktop (Terminal Trigger) */}
           {!isMobile && (
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
@@ -398,8 +399,47 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
               className="absolute -top-12 md:-top-16 pointer-events-auto cursor-pointer z-[150] px-4 py-2 text-center"
               onClick={() => !terminalRevealed && setShowTerminal(true)}
             >
-              <div className="text-[11px] md:text-[14px] font-mono text-gray-800 dark:text-gray-200 opacity-50 hover:opacity-100 transition-all duration-300 select-none bg-white/30 dark:bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full border border-black/5 dark:border-white/10" style={{ WebkitTextStroke: '0px' }}>
-                {isDarkMode ? 'light was better, right ?' : 'do you like it dark?'}
+              <div 
+                className={`text-[11px] md:text-[13px] font-mono font-bold uppercase tracking-widest select-none px-6 py-2 rounded-full border transition-all duration-500 shadow-xl
+                  ${isDarkMode 
+                    ? 'bg-white text-black border-white hover:shadow-white/20' 
+                    : 'bg-black text-white border-black hover:shadow-black/20'
+                  }`}
+              >
+                {isDarkMode ? 'light was better, right?' : 'do you like it dark?'}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Theme Toggle Button - Mobile (Instant Trigger) */}
+          {isMobile && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              className="absolute -top-16 pointer-events-auto cursor-pointer z-[150] px-4 py-2 text-center"
+              onClick={() => {
+                const nextMode = !isDarkMode;
+                setIsDarkMode(nextMode);
+                localStorage.setItem('theme', nextMode ? 'dark' : 'light');
+                document.documentElement.classList.toggle("dark");
+                document.body.classList.toggle("dark-mode");
+                
+                // Cool smooth feedback animation
+                gsap.fromTo("body", 
+                  { filter: "brightness(1.5)" }, 
+                  { filter: "brightness(1)", duration: 0.5, ease: "power2.out" }
+                );
+              }}
+            >
+              <div 
+                className={`w-[55vw] sm:w-[50vw] text-[9px] font-mono font-bold uppercase tracking-widest select-none px-4 py-3 rounded-full border transition-all duration-500 shadow-xl whitespace-nowrap flex items-center justify-center
+                  ${isDarkMode 
+                    ? 'bg-white text-black border-white' 
+                    : 'bg-black text-white border-black'
+                  }`}
+              >
+                {isDarkMode ? 'light was better, right?' : 'do you like it dark?'}
               </div>
             </motion.div>
           )}
@@ -474,6 +514,8 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                 <div className="mt-4">
                   <TextReveal 
                     text="Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP."
+                    triggerOnInit={isIntroDone}
+                    delay={0.5}
                     className="text-gray-600 dark:text-gray-300 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 dark:bg-black/20 backdrop-blur-md p-3 rounded-xl border border-white/20 dark:border-white/10 shadow-sm leading-relaxed justify-center transition-colors duration-700"
                   />
                 </div>
@@ -490,7 +532,12 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                   inline={true}
                   isDarkMode={isDarkMode}
                   onSuccess={handleDarkModeSuccess} 
-                  onClose={() => setShowTerminal(false)} 
+                  onClose={() => {
+                    setShowTerminal(false);
+                    setIsDarkMode(false);
+                    document.documentElement.classList.remove("dark");
+                    document.body.classList.remove("dark-mode");
+                  }} 
                 />
               </motion.div>
             )}

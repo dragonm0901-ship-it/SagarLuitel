@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { EngagementModal } from '@/components/ui/EngagementModal';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, ArrowRight } from 'lucide-react';
@@ -6,6 +7,7 @@ import { Mail, ArrowRight } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 export function ContactCTA() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -77,12 +79,13 @@ export function ContactCTA() {
             <div className="flex flex-col sm:flex-row gap-6">
               <button
                 ref={buttonRef}
+                onClick={() => setIsModalOpen(true)}
                 data-cursor-text="view"
-                className="group relative bg-white text-black px-12 py-5 rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] active:scale-95"
+                className="group relative bg-white text-black px-8 py-4 md:px-12 md:py-5 rounded-full font-bold text-base md:text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] active:scale-95 flex items-center justify-center"
               >
-                <span className="relative z-10 flex items-center gap-3">
+                <span className="relative z-10 flex items-center gap-2 md:gap-3 whitespace-nowrap">
                   Engagement Models
-                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1 shrink-0" />
                 </span>
               </button>
               
@@ -97,6 +100,7 @@ export function ContactCTA() {
           </div>
         </div>
       </div>
+      <EngagementModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
