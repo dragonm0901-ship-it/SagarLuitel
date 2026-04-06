@@ -11,7 +11,7 @@ const SnippetBlock = ({ title, date, language, code, explanation }: { title: str
       className="mb-16"
     >
       <div className="flex items-center gap-4 mb-4">
-        <h3 className="text-2xl font-serif font-bold text-[#1A1A1A]">{title}</h3>
+        <h3 className="text-2xl font-serif font-bold text-[#1A1A1A] dark:text-white transition-colors duration-700">{title}</h3>
         <span className="text-gray-400 font-mono text-sm">{date}</span>
       </div>
       <div className="bg-[#0A0A0A] rounded-2xl overflow-hidden shadow-2xl border border-gray-800 mb-6 relative group">
@@ -29,7 +29,7 @@ const SnippetBlock = ({ title, date, language, code, explanation }: { title: str
           </code>
         </pre>
       </div>
-      <div className="prose prose-lg text-gray-600">
+      <div className="prose prose-lg text-gray-600 dark:text-gray-300 transition-colors duration-700">
         {explanation}
       </div>
     </motion.div>
@@ -47,7 +47,7 @@ export function SnippetsPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-white pt-32 pb-24"
+      className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 pt-32 pb-24"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
@@ -56,10 +56,10 @@ export function SnippetsPage() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <h1 className="text-5xl md:text-7xl font-serif font-black text-[#1A1A1A] leading-[0.9] tracking-tighter mb-4">
+          <h1 className="text-5xl md:text-7xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[0.9] tracking-tighter mb-4">
             Code <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22C55E] to-[#38B2AC]">Snippets</span>.
           </h1>
-          <p className="text-gray-500 text-lg max-w-2xl leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-lg max-w-2xl leading-relaxed">
             Dropping knowledge on advanced frontend architecture, GSAP orchestration, and React rendering.
           </p>
         </motion.div>

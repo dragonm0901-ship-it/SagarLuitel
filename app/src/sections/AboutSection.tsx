@@ -72,26 +72,27 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 lg:py-32 bg-white overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-24 lg:py-32 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left Content */}
           <h2
             ref={headingRef}
-            className="font-bold text-[#1A1A1A] leading-tight"
+            className="font-bold text-[#1A1A1A] dark:text-white leading-tight"
           >
-            Harmonizing <span className="text-gray-400">technical mastery with</span>{' '}
+            Harmonizing <span className="text-gray-400 dark:text-gray-500">technical mastery with</span>{' '}
             aesthetic vision to conjure digital experiences that feel like magic.
           </h2>
 
           {/* Right Content */}
           <div ref={contentRef} className="space-y-6">
-            <p className="text-gray-600 leading-relaxed text-lg">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
               I'm Sagar Luitel, I'm obsessed with the intersection of animation, art, and performance. My work revolves around pushing the boundaries of what's possible in the browser, from intricate GSAP timelines to complex React orchestrations.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
               By leveraging Framer Motion and GSAP, I build fluid, high-performance interfaces that don't just function—they enchant. Every line of code is a brushstroke in a larger, interactive masterpiece.
             </p>
+            <button ref={buttonRef}>
             <Link
               to="/about"
               className="group relative inline-block bg-gradient-to-r from-[#FF6B9D] to-[#FF8C42] text-white px-8 py-3.5 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-pink-500/25 mt-4"
@@ -102,6 +103,7 @@ export function AboutSection() {
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C42] to-[#FF6B9D] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
+            </button>
           </div>
         </div>
       </div>

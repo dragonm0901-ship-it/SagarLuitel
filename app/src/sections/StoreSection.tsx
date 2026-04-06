@@ -85,12 +85,12 @@ export function StoreSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="store" className="pt-32 pb-24 lg:pt-48 lg:pb-32 bg-white">
+    <section ref={sectionRef} id="store" className="pt-32 pb-24 lg:pt-48 lg:pb-32 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
-            <h2 className="store-title-anim font-bold text-black mb-6">
+            <h2 className="store-title-anim font-bold text-black dark:text-white mb-6 transition-colors duration-700">
               Wizard Store & <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#F5C518] to-[#FF6B9D]">Academy</span>
             </h2>
             <p className="store-title-anim text-gray-500 font-mono text-[10px] uppercase tracking-[0.3em]">
@@ -98,7 +98,7 @@ export function StoreSection() {
             </p>
           </div>
 
-          <div ref={filterRef} className="flex gap-2 bg-gray-50 p-1 rounded-2xl border border-gray-100 overflow-x-auto no-scrollbar max-w-full">
+          <div ref={filterRef} className="flex gap-2 bg-gray-50 dark:bg-white/5 transition-colors duration-700 p-1 rounded-2xl border border-gray-100 dark:border-white/10 overflow-x-auto no-scrollbar max-w-full">
             <div className="flex gap-2 min-w-max">
               {['All', 'Course', 'Template'].map((cat) => (
                 <button
@@ -106,8 +106,8 @@ export function StoreSection() {
                   onClick={() => setActiveCategory(cat as 'All' | 'Course' | 'Template')}
                   className={`px-6 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
                     activeCategory === cat 
-                      ? 'bg-black text-white shadow-lg' 
-                      : 'text-gray-500 hover:text-black hover:bg-white'
+                      ? 'bg-black dark:bg-white text-white dark:text-black shadow-lg shadow-black/10 dark:shadow-white/10' 
+                      : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-white dark:hover:bg-white/10'
                   }`}
                 >
                   {cat}

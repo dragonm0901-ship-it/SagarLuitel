@@ -6,8 +6,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   { label: 'GSAP', detail: 'Complex timelines & SVG magic.', color: '#88CE02' },
-  { label: 'Lenis', detail: 'Next-gen cinematic scrolling.', color: '#F5C518' },
-  { label: 'Framer', detail: 'Declarative physics-based UI.', color: '#FF6B9D' },
+  { label: 'Lenis', detail: 'Next-gen cinematic scrolling.', color: '#FF98A2' }, // Peach color for Lenis
+  { label: 'Framer', detail: 'Declarative physics-based UI.', gradient: 'linear-gradient(135deg, #0a0a0a 0%, #808080 50%, #f4f4f5 100%)' }, // Jet black, grey, off-white
 ];
 
 export function StatsSection() {
@@ -42,25 +42,37 @@ export function StatsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="border-y border-gray-200 bg-white">
+    <section ref={sectionRef} className="border-y border-gray-200 dark:border-white/10 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-white/10">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
               ref={(el) => { statRefs.current[index] = el; }}
-              className="py-16 px-6 text-center group transition-all duration-500 hover:bg-black/[0.02]"
+              className="py-16 px-6 text-center group transition-all duration-500 hover:bg-black/[0.02] dark:hover:bg-white/[0.02]"
             >
               <div 
-                className="text-4xl lg:text-7xl font-serif font-bold text-[#1A1A1A] mb-4 transition-all duration-500 group-hover:scale-110"
-                style={{ '--hover-color': stat.color } as React.CSSProperties}
+                className="relative inline-block text-4xl lg:text-7xl font-serif font-bold mb-4 transition-all duration-500 group-hover:scale-110"
               >
-                <span className="transition-colors duration-500 group-hover:text-[var(--hover-color)]">
+                {/* Default Dark Text */}
+                <span className="text-[#1A1A1A] dark:text-white transition-opacity duration-300 relative z-10 group-hover:opacity-0">
+                    {stat.label}
+                </span>
+
+                {/* Hover Colored / Gradient Text Layer */}
+                <span 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 whitespace-nowrap"
+                    style={{
+                      ...(stat.gradient 
+                        ? { backgroundImage: stat.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', color: 'transparent' }
+                        : { color: stat.color })
+                    }}
+                >
                     {stat.label}
                 </span>
               </div>
-              <p className="text-gray-400 font-mono text-[9px] uppercase tracking-[0.3em] mb-2">{stat.label} Animation</p>
-              <p className="text-gray-600 font-medium text-xs max-w-[200px] mx-auto opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+              <p className="text-gray-400 dark:text-gray-500 font-mono text-[9px] uppercase tracking-[0.3em] mb-2 transition-colors duration-700">{stat.label} Animation</p>
+              <p className="text-gray-600 dark:text-gray-400 font-medium text-xs max-w-[200px] mx-auto opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
                 {stat.detail}
               </p>
             </div>

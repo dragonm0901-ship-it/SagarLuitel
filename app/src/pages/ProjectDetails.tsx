@@ -16,9 +16,9 @@ export function ProjectDetails() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white text-black">
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] dark:bg-[#0A0A0A] text-black dark:text-white transition-colors duration-700">
         <h1 className="text-4xl font-serif">Project not found</h1>
-        <button onClick={() => navigate('/')} className="mt-4 underline">Go back</button>
+        <button onClick={() => navigate('/')} className="mt-4 underline text-gray-500 hover:text-black dark:hover:text-white transition-colors">Go back</button>
       </div>
     );
   }
@@ -36,11 +36,11 @@ export function ProjectDetails() {
           </section>
           
           <section>
-            <h2 className="text-3xl font-serif font-bold mb-4">Performance Profiling</h2>
-            <p className="text-gray-600 leading-relaxed text-lg mb-4">
+            <h2 className="text-3xl font-serif font-bold mb-4 dark:text-white transition-colors duration-700">Performance Profiling</h2>
+            <p className="text-gray-600 dark:text-gray-400 transition-colors duration-700 leading-relaxed text-lg mb-4">
               Our main bottleneck was the initialization of huge HDR environment maps. By compressing textures to KTX2 format and using basis universal, we decreased load times by 70%. Additionally, GSAP was employed not just for DOM animations, but for tweening numeric values inside the React Three Fiber loop, enabling perfectly smooth camera sweeps.
             </p>
-            <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 font-mono text-sm">
+            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
               <span className="text-green-500">✓</span> Total Geometry: 45k poly<br/>
               <span className="text-green-500">✓</span> Initial Load: 1.2s<br/>
               <span className="text-green-500">✓</span> Framerate: Locked 60FPS<br/>
@@ -96,16 +96,16 @@ export function ProjectDetails() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700"
     >
       {/* Back Button - Mobile/Tablet (Fixed) */}
       <div className="lg:hidden fixed top-32 left-6 md:top-8 md:left-8 z-[110]">
         <button 
           onClick={() => navigate('/#portfolio')} 
-          className="group flex items-center justify-center bg-white/90 backdrop-blur-xl w-7 h-7 md:w-auto md:px-4 md:py-2 rounded-full border border-black/5 shadow-xl transition-all duration-300 active:scale-95"
+          className="group flex items-center justify-center bg-white/90 dark:bg-black/60 backdrop-blur-xl w-7 h-7 md:w-auto md:px-4 md:py-2 rounded-full border border-black/5 dark:border-white/10 shadow-xl transition-all duration-300 active:scale-95"
         >
-          <ArrowLeft className="w-3.5 h-3.5 md:w-4 md:h-4 text-black transition-transform group-hover:-translate-x-1" />
-          <span className="hidden md:block text-sm font-semibold tracking-wide ml-2 text-black">Back</span>
+          <ArrowLeft className="w-3.5 h-3.5 md:w-4 md:h-4 text-black dark:text-white transition-transform group-hover:-translate-x-1" />
+          <span className="hidden md:block text-sm font-semibold tracking-wide ml-2 text-black dark:text-white">Back</span>
         </button>
       </div>
 
@@ -125,7 +125,7 @@ export function ProjectDetails() {
                 <div className="hidden lg:block mb-8">
                   <button 
                     onClick={() => navigate('/#portfolio')} 
-                    className="group flex items-center gap-2 text-gray-500 hover:text-black transition-colors"
+                    className="group flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                     <span className="text-sm font-bold tracking-tight">Back to Projects</span>
@@ -139,7 +139,7 @@ export function ProjectDetails() {
                 
                 <motion.h1 
                   layoutId={`title-${project.id}`}
-                  className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] leading-[1.1] tracking-tighter mb-8 break-words hyphens-auto"
+                  className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[1.1] tracking-tighter mb-8 break-words hyphens-auto"
                 >
                   {project.title}
                 </motion.h1>
@@ -148,7 +148,7 @@ export function ProjectDetails() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs font-mono font-bold text-gray-500 bg-gray-50 px-3 py-1.5 rounded-md border border-gray-100 uppercase"
+                      className="text-xs font-mono font-bold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/5 transition-colors duration-700 px-3 py-1.5 rounded-md border border-gray-100 dark:border-white/10 uppercase"
                     >
                       {tag}
                     </span>
@@ -190,16 +190,16 @@ export function ProjectDetails() {
             className="max-w-3xl mx-auto"
           >
             {/* Overview Section - Mandatory narrative for all projects */}
-            <div className="grid md:grid-cols-2 gap-12 mb-20 pb-12 border-b border-gray-100">
+            <div className="grid md:grid-cols-2 gap-12 mb-20 pb-12 border-b border-gray-100 dark:border-white/10 transition-colors duration-700">
               <div className="space-y-4">
-                <h3 className="text-[10px] font-mono text-gray-400 uppercase tracking-widest leading-none">The Challenge</h3>
-                <p className="text-gray-900 font-serif text-xl md:text-2xl font-bold leading-tight">
+                <h3 className="text-[10px] font-mono text-gray-400 dark:text-gray-500 uppercase tracking-widest leading-none">The Challenge</h3>
+                <p className="text-gray-900 dark:text-white transition-colors duration-700 font-serif text-xl md:text-2xl font-bold leading-tight">
                   {project.challenge}
                 </p>
               </div>
               <div className="space-y-4">
                 <h3 className="text-[10px] font-mono text-[#F5C518] uppercase tracking-widest leading-none">The Magic</h3>
-                <p className="text-gray-900 font-serif text-xl md:text-2xl font-bold leading-tight">
+                <p className="text-gray-900 dark:text-white transition-colors duration-700 font-serif text-xl md:text-2xl font-bold leading-tight">
                   {project.magic}
                 </p>
               </div>

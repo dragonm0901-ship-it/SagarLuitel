@@ -192,7 +192,7 @@ export function LabPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-white pt-32 pb-24"
+      className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 pt-32 pb-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
@@ -201,10 +201,10 @@ export function LabPage() {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <h1 className="text-5xl md:text-7xl font-serif font-black text-[#1A1A1A] leading-[0.9] tracking-tighter mb-4">
+          <h1 className="text-5xl md:text-7xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[0.9] tracking-tighter mb-4">
             The <span className="text-[#F5C518]">Lab</span>.
           </h1>
-          <p className="text-gray-500 text-lg max-w-2xl leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-lg max-w-2xl leading-relaxed">
             Raw, unpolished experiments. Exploring the bleeding edge of WebGL, DOM physics, and motion choreography.
           </p>
         </motion.div>

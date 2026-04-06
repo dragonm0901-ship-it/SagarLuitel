@@ -51,21 +51,17 @@ export function ServicesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="py-24 lg:py-32 bg-[#F8F9FA] overflow-hidden">
+    <section ref={sectionRef} id="services" className="py-24 lg:py-32 bg-[#F8F9FA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div
           ref={headerRef}
-          className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-20"
+          className="flex flex-col lg:flex-row lg:items-start gap-12 mb-20"
         >
-          <div className="max-w-xl">
-            <h2 className="font-bold text-[#1A1A1A] leading-tight mb-6">
+          <div className="max-w-3xl">
+            <h2 className="font-bold text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-tight mb-6">
               Without impact and creating a legacy that <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#F5C518] to-[#FF6B9D]">transcends time</span>.
             </h2>
-          </div>
-
-          <div className="max-w-sm">
-            <p className="text-gray-600 font-mono text-xs uppercase tracking-widest leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
               Every decision, every action, and every step forward is rooted in the desire to build something meaningful.
             </p>
           </div>

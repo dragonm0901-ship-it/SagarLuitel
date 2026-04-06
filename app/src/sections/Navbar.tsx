@@ -86,16 +86,18 @@ export function Navbar() {
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="relative flex items-center justify-between bg-white/40 backdrop-blur-xl rounded-3xl px-6 py-3 border border-white/20 shadow-2xl shadow-black/5 transition-all duration-300 overflow-hidden"
+          className="group/header relative flex items-center justify-between bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-3xl px-6 py-3 border border-white/40 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 overflow-hidden"
           style={{
-            background: isHovered 
+            background: isHovered && !document.documentElement.classList.contains('dark')
               ? `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, rgba(245, 197, 24, 0.1), rgba(255, 107, 157, 0.1), transparent 80%)`
-              : 'rgba(255, 255, 255, 0.4)'
+              : isHovered && document.documentElement.classList.contains('dark')
+              ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(245, 197, 24, 0.15), rgba(255, 107, 157, 0.15), rgba(10, 10, 10, 0.4) 80%)`
+              : ''
           }}
         >
           {/* Subtle Glow Overlay */}
           <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            className="absolute inset-0 opacity-0 group-hover/header:opacity-100 transition-opacity duration-500 pointer-events-none"
             style={{
               background: `radial-gradient(150px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.2), transparent)`
             }}
@@ -112,9 +114,8 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation - Centered Links */}
           <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 px-8 py-2.5 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-sm transition-all duration-300">
-            {navLinks.map((link) => renderLink(link, "relative text-gray-700 hover:text-black text-[13px] transition-colors group py-1 font-medium flex items-center gap-1.5 whitespace-nowrap"))}
+            {navLinks.map((link) => renderLink(link, "relative text-gray-700 dark:text-gray-400 group-hover/header:dark:text-white hover:text-black dark:hover:text-white text-[13px] transition-colors group py-1 font-medium flex items-center gap-1.5 whitespace-nowrap"))}
           </div>
 
           {/* Desktop Navigation - Right Side Action */}
@@ -127,7 +128,7 @@ export function Navbar() {
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-black text-white px-6 py-2.5 rounded-full font-bold text-xs hover:scale-105 active:scale-95 transition-all shadow-lg shadow-black/10"
+              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-full font-bold text-xs hover:scale-105 active:scale-95 transition-all shadow-lg shadow-black/10 dark:shadow-white/10"
             >
               Hire Me!
             </button>
@@ -163,7 +164,7 @@ export function Navbar() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: '-100%', opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} // power4.out equivalent
-            className="fixed top-0 left-0 right-0 max-h-[85vh] z-[155] bg-white rounded-b-3xl shadow-2xl pt-4 pb-4 flex flex-col"
+            className="fixed top-0 left-0 right-0 max-h-[85vh] z-[155] bg-[#FAFAFA] dark:bg-[#0A0A0A] rounded-b-3xl shadow-2xl pt-4 pb-4 flex flex-col transition-colors duration-700"
           >
             <div className="flex justify-end px-6 mb-1">
               <button 
@@ -220,7 +221,7 @@ export function Navbar() {
                         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
-                    className="w-full bg-black text-white px-6 py-3.5 rounded-2xl font-bold text-base shadow-lg shadow-black/10 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-black dark:bg-white text-white dark:text-black px-6 py-3.5 rounded-2xl font-bold text-base shadow-lg shadow-black/10 dark:shadow-white/10 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2"
                   >
                     Hire Me Now <ArrowRight className="w-4 h-4" />
                   </button>

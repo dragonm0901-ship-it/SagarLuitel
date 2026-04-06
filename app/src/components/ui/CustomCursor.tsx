@@ -70,7 +70,7 @@ export function CustomCursor() {
 
       {/* Main Focus Dot / Label Container */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center overflow-hidden border border-white/20 backdrop-blur-[2px]"
+        className={`fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center overflow-hidden border border-white/20 dark:border-black/20 backdrop-blur-[2px] transition-colors duration-300 ${isHovered ? 'bg-black/40 dark:bg-white/60' : 'bg-black/30 dark:bg-white/40'}`}
         style={{
           x: cursorX,
           y: cursorY,
@@ -80,7 +80,6 @@ export function CustomCursor() {
         animate={{
           width: 14,
           height: 14,
-          backgroundColor: isHovered ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.3)",
           opacity: isHidden ? 0 : 1,
           boxShadow: "none",
         }}

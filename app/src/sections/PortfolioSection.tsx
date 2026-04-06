@@ -23,7 +23,7 @@ export function PortfolioSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const visibleProjects = showAll ? projects : (isMobile ? projects.slice(0, 6) : projects.slice(0, 3));
+  const visibleProjects = showAll ? projects : (isMobile ? projects.slice(0, 2) : projects.slice(0, 3));
 
   // Header animation - only once on mount
   useEffect(() => {
@@ -83,7 +83,7 @@ export function PortfolioSection() {
   }, [showAll, isMobile]);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-white overflow-hidden">
+    <section ref={sectionRef} id="portfolio" className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
@@ -91,25 +91,20 @@ export function PortfolioSection() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 md:mb-16"
         >
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-[#1A1A1A] mb-4 leading-[0.9] tracking-tighter">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 mb-4 leading-[0.9] tracking-tighter">
               Selected <span className="text-[#FF6B9D]">impact</span> projects
             </h2>
-            <p className="text-gray-500 text-lg max-w-lg leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-lg max-w-lg leading-relaxed">
               Curated collection showcasing technical depth and strategic design.
             </p>
           </div>
 
           <div className="flex flex-col items-end gap-4 shrink-0">
-            {isMobile && (
-              <div className="flex items-center gap-2 text-[#FF6B9D] font-mono text-[10px] font-bold uppercase tracking-widest animate-pulse">
-                Swipe to explore <ArrowRight className="w-3 h-3" />
-              </div>
-            )}
             <Magnetic strength={0.3}>
               <button 
                 onClick={() => setShowAll(!showAll)}
                 data-cursor-text={showAll ? "less" : "all"}
-                className="group relative bg-black text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:shadow-2xl active:scale-95"
+                className="group relative bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:shadow-2xl active:scale-95"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {showAll ? 'Show Less' : 'View All'}
@@ -121,10 +116,10 @@ export function PortfolioSection() {
           </div>
         </div>
 
-        {/* Project Cards (Grid layout - 2 rows on mobile) */}
-        <div className={`grid ${isMobile ? 'grid-rows-2 grid-flow-col overflow-x-auto gap-4 pb-8' : 'md:grid-cols-2 lg:grid-cols-3 gap-10 pb-12'} snap-x snap-mandatory scale-100 hide-scrollbar scroll-smooth items-stretch`}>
+        {/* Project Cards */}
+        <div className={`grid gap-6 md:gap-10 pb-12 items-stretch ${showAll && isMobile ? 'grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
           {visibleProjects.map((project, index) => (
-            <div data-cursor-text="view" key={project.id} className={`${isMobile ? 'w-[75vw] h-full' : 'w-auto'} flex-shrink-0 snap-center flex`}>
+            <div data-cursor-text="view" key={project.id} className="w-full flex">
               <PortfolioCard
                 ref={(el) => { cardRefs.current[index] = el; }}
                 {...project}

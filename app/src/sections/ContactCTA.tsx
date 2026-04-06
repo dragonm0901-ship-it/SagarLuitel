@@ -50,7 +50,7 @@ export function ContactCTA() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="contact" className="pt-12 pb-24 lg:pt-16 lg:pb-32 bg-white overflow-hidden">
+    <section ref={sectionRef} id="contact" className="pt-12 pb-24 lg:pt-16 lg:pb-32 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={cardRef}

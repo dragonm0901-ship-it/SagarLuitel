@@ -23,7 +23,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
       <motion.div
         ref={ref}
         layoutId={`card-${id}`}
-        className="group relative bg-white/70 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm border border-white/20 will-change-transform transition-all duration-500 flex flex-col h-full w-full"
+        className="group relative bg-white/70 dark:bg-[#1A1A1A]/70 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm border border-white/20 dark:border-white/10 will-change-transform transition-all duration-500 flex flex-col h-full w-full"
       >
         {/* Main Project Link (Image & Content) */}
         <Link to={`/project/${id}`} className="flex flex-col h-full w-full">
@@ -50,7 +50,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
 
             {/* View Button */}
             <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-              <div className="w-full bg-white text-black px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors duration-300">
+              <div className="w-full bg-white dark:bg-[#1A1A1A] text-black dark:text-white px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-[#2A2A2A] transition-colors duration-300">
                 View Project Details
                 <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4" />
               </div>
@@ -62,7 +62,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 md:mb-4 gap-1">
               <motion.h3 
                 layoutId={`title-${id}`}
-                className="text-base md:text-2xl font-serif font-bold text-[#1A1A1A] group-hover:text-[#FF6B9D] transition-colors duration-300 leading-tight"
+                className="text-base md:text-2xl font-serif font-bold text-[#1A1A1A] dark:text-white group-hover:text-[#FF6B9D] dark:group-hover:text-[#FF6B9D] transition-colors duration-300 leading-tight"
               >
                 {title}
               </motion.h3>
@@ -75,7 +75,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
                   {tags.slice(0, isMobile ? 3 : tags.length).map((tag) => (
                     <span
                       key={tag}
-                      className="text-[8px] md:text-[10px] font-mono font-bold text-gray-500 bg-gray-50 px-1.5 py-0.5 md:px-2 md:py-1 rounded border border-gray-100 uppercase"
+                      className="text-[8px] md:text-[10px] font-mono font-bold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/5 px-1.5 py-0.5 md:px-2 md:py-1 rounded border border-gray-100 dark:border-white/10 uppercase transition-colors duration-500"
                     >
                       {tag}
                     </span>
@@ -100,7 +100,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
                 href={github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 md:gap-2 text-[8px] md:text-[10px] font-mono font-bold text-gray-400 hover:text-black transition-colors duration-300"
+                className="flex items-center gap-1.5 md:gap-2 text-[8px] md:text-[10px] font-mono font-bold text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Github className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -112,7 +112,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
                 href={live} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 md:gap-2 text-[8px] md:text-[10px] font-mono font-bold text-gray-400 hover:text-[#FF6B9D] transition-colors duration-300"
+                className="flex items-center gap-1.5 md:gap-2 text-[8px] md:text-[10px] font-mono font-bold text-gray-400 dark:text-gray-500 hover:text-[#FF6B9D] dark:hover:text-[#FF6B9D] transition-colors duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Globe className="w-3 h-3 md:w-3.5 md:h-3.5" />

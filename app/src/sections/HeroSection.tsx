@@ -5,6 +5,7 @@ import { Code, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Magnetic from '@/components/ui/Magnetic';
 import TextReveal from '@/components/ui/TextReveal';
+import { DarkModeTerminal } from '@/components/ui/DarkModeTerminal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -262,6 +263,22 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const contentRef = useRef<HTMLDivElement>(null);
   
   const [isMobile, setIsMobile] = useState(false);
+  const [showTerminal, setShowTerminal] = useState(false);
+  const [terminalRevealed, setTerminalRevealed] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const handleDarkModeSuccess = () => {
+    const nextMode = !isDarkMode;
+    setIsDarkMode(nextMode);
+    document.documentElement.classList.toggle("dark");
+    document.body.classList.toggle("dark-mode");
+    setTimeout(() => {
+      setShowTerminal(false);
+      setTerminalRevealed(true);
+      // reset terminalRevealed after a while so they can toggle back again!
+      setTimeout(() => setTerminalRevealed(false), 500);
+    }, 1000);
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -325,7 +342,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section ref={sectionRef} className="relative pt-[72px] min-h-[100svh] bg-white overflow-hidden flex flex-col items-center justify-center">
+    <section ref={sectionRef} className="relative pt-[72px] min-h-[100svh] bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center">
       
       {/* Background Gradient Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F5C518]/20 rounded-full blur-[100px] pointer-events-none" />
@@ -349,7 +366,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         <TechIcon icon={CssIcon} color="#1572B6" x="64%" y="85%" mx="30%" my="75%" delay={1.1} />
         
         {/* Extra Icons close to center bottom/top */}
-        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="42%" y="15%" mx="48%" my="78%" delay={1.3} />
+        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="40%" y="18%" mx="48%" my="78%" delay={1.3} />
         <TechIcon icon={Layers} color="#1A1A1A" x="58%" y="18%" mx="65%" my="75%" delay={1.7} />
       </div>
 
@@ -358,10 +375,10 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         className="absolute inset-0 flex flex-col justify-center pb-40 md:pb-24 items-center z-0 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
-          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
+          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
             FRONT END
           </h1>
-          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] whitespace-nowrap tracking-tighter mix-blend-multiply">
+          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
             MAGICIAN
           </h1>
         </div>
@@ -371,30 +388,47 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div 
         className="absolute inset-0 pb-40 md:pb-24 pointer-events-none flex justify-center items-center z-10"
       >
-        <div ref={imageRef} 
-             className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
-             onMouseEnter={() => !isMobile && setIsHovered(true)}
-             onMouseLeave={() => !isMobile && setIsHovered(false)}
-             onClick={() => isMobile && setIsHovered(!isHovered)}
-        >
-          {/* Soft Glow Background */}
-          <div className="absolute -inset-2 bg-gradient-to-br from-[#F5C518] to-[#FF6B9D] opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
-          
-          {/* Modern Frame */}
-          <div 
-            data-cursor-hidden
-            className="relative z-10 w-full h-auto overflow-hidden rounded-[10px] group/frame cursor-none"
+        <div ref={imageRef} className="relative flex flex-col items-center">
+          {/* Dark Mode Clue (Moved above Hero Image) */}
+          {!isMobile && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              className="absolute -top-12 md:-top-16 pointer-events-auto cursor-pointer z-[150] px-4 py-2 text-center"
+              onClick={() => !terminalRevealed && setShowTerminal(true)}
+            >
+              <div className="text-[11px] md:text-[14px] font-mono text-gray-800 dark:text-gray-200 opacity-50 hover:opacity-100 transition-all duration-300 select-none bg-white/30 dark:bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full border border-black/5 dark:border-white/10" style={{ WebkitTextStroke: '0px' }}>
+                {isDarkMode ? 'light was better, right ?' : 'do you like it dark?'}
+              </div>
+            </motion.div>
+          )}
+
+          <div
+               className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
+               onMouseEnter={() => !isMobile && setIsHovered(true)}
+               onMouseLeave={() => !isMobile && setIsHovered(false)}
+               onClick={() => isMobile && setIsHovered(!isHovered)}
           >
-            <img
-              src="/images/hero-portrait.png"
-              alt="Sagar Luitel"
-              className={`relative z-10 w-full h-auto object-contain transition-opacity duration-700 brightness-95 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
-            />
-            <img
-              src="/images/hero-portrait-wizard.png"
-              alt="Magician Sagar Luitel"
-              className={`absolute inset-0 z-0 w-full h-full object-contain transition-opacity duration-700 brightness-110 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-            />
+            {/* Soft Glow Background */}
+            <div className="absolute -inset-2 bg-gradient-to-br from-[#F5C518] to-[#FF6B9D] opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
+            
+            {/* Modern Frame */}
+            <div 
+              data-cursor-hidden
+              className="relative z-10 w-full h-auto overflow-hidden rounded-[10px] group/frame cursor-none"
+            >
+              <img
+                src="/images/hero-portrait.png"
+                alt="Sagar Luitel"
+                className={`relative z-10 w-full h-auto object-contain transition-opacity duration-700 brightness-95 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+              />
+              <img
+                src="/images/hero-portrait-wizard.png"
+                alt="Magician Sagar Luitel"
+                className={`absolute inset-0 z-0 w-full h-full object-contain transition-opacity duration-700 brightness-110 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -403,9 +437,9 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div 
         className="absolute inset-0 flex flex-col justify-center pb-40 md:pb-24 items-center z-20 pointer-events-none select-none"
       >
-        <div ref={textFgRef} className="flex flex-col justify-center items-center w-full">
-          <h1 
-            className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+        <div ref={textFgRef} className="flex flex-col justify-center items-center w-full relative">
+            <h1 
+            className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter relative"
             style={{ WebkitTextStroke: '1.2px rgba(255,255,255,0.45)' }}
           >
             FRONT END
@@ -421,20 +455,46 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Bottom Content Layer */}
       <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[110] px-6 pointer-events-none">
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6 pointer-events-auto">
-          <div className="flex flex-col items-center text-center">
-            <Magnetic strength={0.2}>
-              <div className="inline-block">
-                <CreativeDeveloperBadge isMobile={isMobile} />
-              </div>
-            </Magnetic>
-            <div className="mt-4">
-              <TextReveal 
-                text="Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP."
-                className="text-gray-600 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-sm leading-relaxed justify-center"
-              />
-            </div>
-          </div>
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center pointer-events-auto min-h-[140px]">
+          <AnimatePresence mode="wait">
+            {(!showTerminal || isMobile) ? (
+              <motion.div 
+                key="creative-content"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col items-center text-center w-full"
+              >
+                <Magnetic strength={0.2}>
+                  <div className="inline-block">
+                    <CreativeDeveloperBadge isMobile={isMobile} />
+                  </div>
+                </Magnetic>
+                <div className="mt-4">
+                  <TextReveal 
+                    text="Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP."
+                    className="text-gray-600 dark:text-gray-300 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 dark:bg-black/20 backdrop-blur-md p-3 rounded-xl border border-white/20 dark:border-white/10 shadow-sm leading-relaxed justify-center transition-colors duration-700"
+                  />
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div 
+                key="terminal-mode"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                className="w-full flex justify-center relative top-2"
+              >
+                <DarkModeTerminal 
+                  inline={true}
+                  isDarkMode={isDarkMode}
+                  onSuccess={handleDarkModeSuccess} 
+                  onClose={() => setShowTerminal(false)} 
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>

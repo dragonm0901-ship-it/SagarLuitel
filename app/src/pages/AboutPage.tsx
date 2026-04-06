@@ -23,7 +23,7 @@ const interests = [
 
 
 export function AboutPage() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const marqueeTween = useRef<gsap.core.Tween | null>(null);
@@ -142,7 +142,15 @@ export function AboutPage() {
             I thrive in the{' '}
             <span 
               onClick={() => {
-                setIsDark(!isDark);
+                const nextTheme = !isDark;
+                setIsDark(nextTheme);
+                if (nextTheme) {
+                  document.documentElement.classList.add('dark');
+                  document.body.classList.add('dark-mode');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                  document.body.classList.remove('dark-mode');
+                }
                 if (!isDark) {
                   const flash = document.createElement('div');
                   flash.className = 'fixed inset-0 bg-white/10 z-[200] pointer-events-none transition-opacity duration-300';
