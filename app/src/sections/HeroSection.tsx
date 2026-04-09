@@ -265,12 +265,17 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const [isMobile, setIsMobile] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [terminalRevealed, setTerminalRevealed] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      setIsDarkMode(isDark);
+      if (isDark) {
+        document.body.classList.add('dark-mode');
+      }
     }
-    return false;
-  });
+  }, []);
 
   const handleDarkModeSuccess = () => {
     const nextMode = !isDarkMode;
@@ -348,7 +353,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section ref={sectionRef} className="relative pt-[72px] min-h-[100dvh] bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center">
+    <section ref={sectionRef} className="relative pt-[72px] min-h-screen min-h-dvh bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center">
       
       {/* Background Gradient Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F5C518]/20 rounded-full blur-[100px] pointer-events-none" />
