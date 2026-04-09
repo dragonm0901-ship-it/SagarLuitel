@@ -273,6 +273,8 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       setIsDarkMode(isDark);
       if (isDark) {
         document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
       }
     }
   }, []);
@@ -363,33 +365,33 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div className="absolute inset-0 z-[120] pointer-events-none pb-32 md:pb-24 -translate-y-16 md:translate-y-0 text-center">
         {/* All icons stacked below image/text on mobile (y > 60%) */}
         {/* Clustered Left Side */}
-        <TechIcon icon={ReactIcon} color="#61DAFB" x="32%" y="25%" mx="20%" my="60%" delay={0.2} />
-        <TechIcon icon={TailwindIcon} color="#38B2AC" x="28%" y="45%" mx="35%" my="62%" delay={0.4} />
-        <TechIcon icon={FramerIcon} color="#1A1A1A" x="34%" y="65%" mx="50%" my="64%" delay={0.6} />
-        <TechIcon icon={NodeIcon} color="#339933" x="26%" y="82%" mx="65%" my="62%" delay={0.8} />
-        <TechIcon icon={HtmlIcon} color="#E34F26" x="36%" y="78%" mx="80%" my="60%" delay={1.0} />
+        <TechIcon icon={ReactIcon} color="#61DAFB" x="28%" y="25%" mx="20%" my="60%" delay={0.2} />
+        <TechIcon icon={TailwindIcon} color="#38B2AC" x="24%" y="45%" mx="35%" my="62%" delay={0.4} />
+        <TechIcon icon={FramerIcon} color="#1A1A1A" x="30%" y="65%" mx="50%" my="64%" delay={0.6} />
+        <TechIcon icon={NodeIcon} color="#339933" x="22%" y="82%" mx="65%" my="62%" delay={0.8} />
+        <TechIcon icon={HtmlIcon} color="#E34F26" x="32%" y="78%" mx="80%" my="60%" delay={1.0} />
 
         {/* Clustered Right Side */}
-        <TechIcon icon={ViteIcon} color="#F5C518" x="68%" y="22%" mx="25%" my="68%" delay={0.3} />
-        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="72%" y="42%" mx="40%" my="70%" delay={0.5} />
-        <TechIcon icon={JsIcon} color="#F7DF1E" x="66%" y="60%" mx="55%" my="68%" delay={0.7} />
-        <TechIcon icon={GsapIcon} color="#88CE02" x="74%" y="76%" mx="70%" my="70%" delay={0.9} />
-        <TechIcon icon={CssIcon} color="#1572B6" x="64%" y="85%" mx="30%" my="75%" delay={1.1} />
+        <TechIcon icon={ViteIcon} color="#F5C518" x="72%" y="22%" mx="25%" my="68%" delay={0.3} />
+        <TechIcon icon={FigmaIcon} color="#FF6B9D" x="76%" y="42%" mx="40%" my="70%" delay={0.5} />
+        <TechIcon icon={JsIcon} color="#F7DF1E" x="70%" y="60%" mx="55%" my="68%" delay={0.7} />
+        <TechIcon icon={GsapIcon} color="#88CE02" x="78%" y="76%" mx="70%" my="70%" delay={0.9} />
+        <TechIcon icon={CssIcon} color="#1572B6" x="68%" y="85%" mx="30%" my="75%" delay={1.1} />
         
         {/* Extra Icons close to center bottom/top */}
-        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="40%" y="18%" mx="48%" my="78%" delay={1.3} />
-        <TechIcon icon={Layers} color="#1A1A1A" x="58%" y="18%" mx="65%" my="75%" delay={1.7} />
+        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="40%" y="12%" mx="48%" my="78%" delay={1.3} />
+        <TechIcon icon={Layers} color="#1A1A1A" x="58%" y="12%" mx="65%" my="75%" delay={1.7} />
       </div>
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        className="absolute inset-0 flex flex-col justify-center pb-32 md:pb-24 items-center z-0 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-center pb-32 md:pb-24 items-center z-10 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
-          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
+          <h1 className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
             FRONT END
           </h1>
-          <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
+          <h1 className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
             MAGICIAN
           </h1>
         </div>
@@ -406,7 +408,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 1 }}
-              className="absolute -top-12 md:-top-16 pointer-events-auto cursor-pointer z-[150] px-4 py-2 text-center"
+              className="absolute -top-12 lg:-top-16 pointer-events-auto cursor-pointer z-[150] px-4 py-2 text-center"
               onClick={() => !terminalRevealed && setShowTerminal(true)}
             >
               <div 
@@ -455,7 +457,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
           )}
 
           <div
-               className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] max-h-[45vh] md:max-h-none relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
+               className="w-[55vw] sm:w-[50vw] md:w-[45vw] lg:w-[35vw] xl:w-[28vw] 2xl:w-[24vw] max-w-[450px] max-h-[42vh] lg:max-h-[48vh] xl:max-h-none relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
                onMouseEnter={() => !isMobile && setIsHovered(true)}
                onMouseLeave={() => !isMobile && setIsHovered(false)}
                onClick={() => isMobile && setIsHovered(!isHovered)}
@@ -489,13 +491,13 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full relative">
             <h1 
-            className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter relative"
+            className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter relative"
             style={{ WebkitTextStroke: '1.2px rgba(255,255,255,0.45)' }}
           >
             FRONT END
           </h1>
           <h1 
-            className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+            className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
             style={{ WebkitTextStroke: '1.2px rgba(255,255,255,0.45)' }}
           >
             MAGICIAN
@@ -504,7 +506,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       </div>
 
       {/* Bottom Content Layer */}
-      <div ref={contentRef} className="absolute bottom-8 left-0 right-0 z-[110] px-6 pointer-events-none">
+      <div ref={contentRef} className="absolute bottom-6 lg:bottom-12 left-0 right-0 z-[130] px-6 pointer-events-none transition-all duration-500">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center pointer-events-auto min-h-[140px]">
           <AnimatePresence mode="wait">
             {(!showTerminal || isMobile) ? (
@@ -536,7 +538,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="w-full flex justify-center relative top-2"
+                className="w-full flex justify-center relative scale-100 lg:scale-[0.85] xl:scale-100 transition-transform duration-500"
               >
                 <DarkModeTerminal 
                   inline={true}

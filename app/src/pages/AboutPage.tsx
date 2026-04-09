@@ -26,7 +26,13 @@ export function AboutPage() {
   const [isDark, setIsDark] = useState(false);
   
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'));
+    const isDarkClass = document.documentElement.classList.contains('dark');
+    setIsDark(isDarkClass);
+    if (isDarkClass) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
   }, []);
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
