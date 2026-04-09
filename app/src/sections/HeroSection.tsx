@@ -265,7 +265,12 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const [isMobile, setIsMobile] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [terminalRevealed, setTerminalRevealed] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => document.documentElement.classList.contains('dark'));
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return document.documentElement.classList.contains('dark');
+    }
+    return false;
+  });
 
   const handleDarkModeSuccess = () => {
     const nextMode = !isDarkMode;
@@ -343,14 +348,14 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section ref={sectionRef} className="relative pt-[72px] min-h-[100svh] bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center">
+    <section ref={sectionRef} className="relative pt-[72px] min-h-[100dvh] bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center">
       
       {/* Background Gradient Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F5C518]/20 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6B9D]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Floating Tech Icons */}
-      <div className="absolute inset-0 z-[120] pointer-events-none pb-40 md:pb-24 -translate-y-16 md:translate-y-0">
+      <div className="absolute inset-0 z-[120] pointer-events-none pb-32 md:pb-24 -translate-y-16 md:translate-y-0 text-center">
         {/* All icons stacked below image/text on mobile (y > 60%) */}
         {/* Clustered Left Side */}
         <TechIcon icon={ReactIcon} color="#61DAFB" x="32%" y="25%" mx="20%" my="60%" delay={0.2} />
@@ -373,7 +378,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Background Text Layer (Behind Image) */}
       <div 
-        className="absolute inset-0 flex flex-col justify-center pb-40 md:pb-24 items-center z-0 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-center pb-32 md:pb-24 items-center z-0 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
           <h1 className="text-[15vw] md:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
@@ -387,7 +392,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Hero Image Layer */}
       <div 
-        className="absolute inset-0 pb-40 md:pb-24 pointer-events-none flex justify-center items-center z-10"
+        className="absolute inset-0 pb-32 md:pb-24 pointer-events-none flex justify-center items-center z-10"
       >
         <div ref={imageRef} className="relative flex flex-col items-center">
           {/* Theme Toggle Button - Desktop (Terminal Trigger) */}
@@ -445,7 +450,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
           )}
 
           <div
-               className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
+               className="w-[55vw] sm:w-[50vw] md:w-[42vw] lg:w-[32vw] max-w-[450px] max-h-[45vh] md:max-h-none relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
                onMouseEnter={() => !isMobile && setIsHovered(true)}
                onMouseLeave={() => !isMobile && setIsHovered(false)}
                onClick={() => isMobile && setIsHovered(!isHovered)}
@@ -475,7 +480,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
 
       {/* Foreground Text Layer (In front of Image, with Stroke) */}
       <div 
-        className="absolute inset-0 flex flex-col justify-center pb-40 md:pb-24 items-center z-20 pointer-events-none select-none"
+        className="absolute inset-0 flex flex-col justify-center pb-32 md:pb-24 items-center z-20 pointer-events-none select-none"
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full relative">
             <h1 
