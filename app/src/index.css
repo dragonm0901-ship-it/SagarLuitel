@@ -82,6 +82,14 @@
     overflow-x: hidden;
     width: 100%;
   }
+  
+  /* Laptop Optimization: Effective 90% zoom for mid-range viewports */
+  @media (min-width: 1024px) and (max-width: 1535px) {
+    html {
+      font-size: 14.5px;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
   }

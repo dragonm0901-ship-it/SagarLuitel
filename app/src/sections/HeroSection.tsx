@@ -388,10 +388,10 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         className="absolute inset-0 flex flex-col justify-center pb-32 md:pb-24 items-center z-10 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
-          <h1 className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
+          <h1 className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
             FRONT END
           </h1>
-          <h1 className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
+          <h1 className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
             MAGICIAN
           </h1>
         </div>
@@ -457,7 +457,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
           )}
 
           <div
-               className="w-[55vw] sm:w-[50vw] md:w-[45vw] lg:w-[35vw] xl:w-[28vw] 2xl:w-[24vw] max-w-[450px] max-h-[42vh] lg:max-h-[48vh] xl:max-h-none relative p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
+               className="w-[50vw] sm:w-[45vw] md:w-[42vw] lg:w-[30vw] xl:w-[27vw] 2xl:w-[24vw] max-w-[450px] max-h-[40vh] lg:max-h-[46vh] xl:max-h-none relative p-1 md:p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
                onMouseEnter={() => !isMobile && setIsHovered(true)}
                onMouseLeave={() => !isMobile && setIsHovered(false)}
                onClick={() => isMobile && setIsHovered(!isHovered)}
@@ -491,13 +491,13 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       >
         <div ref={textFgRef} className="flex flex-col justify-center items-center w-full relative">
             <h1 
-            className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter relative"
+            className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter relative"
             style={{ WebkitTextStroke: '1.2px rgba(255,255,255,0.45)' }}
           >
             FRONT END
           </h1>
           <h1 
-            className="text-[15vw] md:text-[11vw] lg:text-[10vw] xl:text-[11vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
+            className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-transparent whitespace-nowrap tracking-tighter"
             style={{ WebkitTextStroke: '1.2px rgba(255,255,255,0.45)' }}
           >
             MAGICIAN
@@ -506,7 +506,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       </div>
 
       {/* Bottom Content Layer */}
-      <div ref={contentRef} className="absolute bottom-6 lg:bottom-12 left-0 right-0 z-[130] px-6 pointer-events-none transition-all duration-500">
+      <div ref={contentRef} className="absolute bottom-4 lg:bottom-10 left-0 right-0 z-[130] px-6 pointer-events-none transition-all duration-500">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center pointer-events-auto min-h-[140px]">
           <AnimatePresence mode="wait">
             {(!showTerminal || isMobile) ? (
@@ -538,7 +538,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="w-full flex justify-center relative scale-100 lg:scale-[0.85] xl:scale-100 transition-transform duration-500"
+                className="w-full flex justify-center relative scale-[0.9] lg:scale-[0.82] xl:scale-100 transition-transform duration-500 origin-bottom"
               >
                 <DarkModeTerminal 
                   inline={true}
