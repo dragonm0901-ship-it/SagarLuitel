@@ -362,7 +362,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF6B9D]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Floating Tech Icons */}
-      <div className="absolute inset-0 z-[120] pointer-events-none pb-32 md:pb-24 -translate-y-16 md:translate-y-0 text-center">
+      <div className="absolute inset-0 z-[150] pointer-events-none pb-32 md:pb-24 -translate-y-16 md:translate-y-0 text-center">
         {/* All icons stacked below image/text on mobile (y > 60%) */}
         {/* Clustered Left Side */}
         <TechIcon icon={ReactIcon} color="#61DAFB" x="28%" y="25%" mx="20%" my="60%" delay={0.2} />
@@ -506,8 +506,8 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       </div>
 
       {/* Bottom Content Layer */}
-      <div ref={contentRef} className="absolute bottom-4 lg:bottom-10 left-0 right-0 z-[130] px-6 pointer-events-none transition-all duration-500">
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center pointer-events-auto min-h-[140px]">
+      <div ref={contentRef} className="absolute bottom-4 lg:bottom-10 left-0 right-0 z-[155] px-6 pointer-events-none transition-all duration-500">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[140px] pointer-events-none">
           <AnimatePresence mode="wait">
             {(!showTerminal || isMobile) ? (
               <motion.div 
@@ -516,14 +516,14 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
                 transition={{ duration: 0.3 }}
-                className="flex flex-col items-center text-center w-full"
+                className="flex flex-col items-center text-center pointer-events-none"
               >
                 <Magnetic strength={0.2}>
-                  <div className="inline-block">
+                  <div className="inline-block pointer-events-auto">
                     <CreativeDeveloperBadge isMobile={isMobile} />
                   </div>
                 </Magnetic>
-                <div className="mt-4">
+                <div className="mt-4 pointer-events-auto">
                   <TextReveal 
                     text="Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP."
                     triggerOnInit={isIntroDone}
@@ -538,7 +538,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="w-full flex justify-center relative scale-[0.9] lg:scale-[0.82] xl:scale-100 transition-transform duration-500 origin-bottom"
+                className="w-full flex justify-center relative scale-[0.9] lg:scale-[0.82] xl:scale-100 transition-transform duration-500 origin-bottom pointer-events-none"
               >
                 <DarkModeTerminal 
                   inline={true}
