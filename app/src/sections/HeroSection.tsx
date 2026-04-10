@@ -379,8 +379,8 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         <TechIcon icon={CssIcon} color="#1572B6" x="68%" y="85%" mx="30%" my="75%" delay={1.1} />
         
         {/* Extra Icons close to center bottom/top */}
-        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="40%" y="12%" mx="48%" my="78%" delay={1.3} />
-        <TechIcon icon={Layers} color="#1A1A1A" x="58%" y="12%" mx="65%" my="75%" delay={1.7} />
+        <TechIcon icon={SmoothLenisIcon} color="#4A90E2" x="35%" y="17%" mx="48%" my="78%" delay={1.3} />
+        <TechIcon icon={Layers} color="#1A1A1A" x="65%" y="18%" mx="55%" my="75%" delay={1.7} />
       </div>
 
       {/* Background Text Layer (Behind Image) */}
