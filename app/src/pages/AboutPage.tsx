@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Heart, ChevronDown, Mountain, Bike, Music, Trophy, Compass, Megaphone, Terminal, Video } from 'lucide-react';
-
+import { TeamGallery } from '@/components/ui/TeamGallery';
 gsap.registerPlugin(ScrollTrigger);
 
 const skills = [
@@ -18,6 +18,16 @@ const interests = [
   { name: 'The Rider', hobby: 'Biking', icon: Bike, color: '#F5C518', desc: "Chasing horizons on two wheels. There's a unique logic to the road that fuels my creativity." },
   { name: 'The Pitch', hobby: 'Football', icon: Trophy, color: '#FF6B9D', desc: "Resilience, strategy, and teamwork. The lessons I learn on the field are the same ones I apply to the code." },
   { name: 'The Rhythm', hobby: 'Music', icon: Music, color: '#FF8C42', desc: "Architecting sound. Music is the universal language that connects my logical mind to my creative heart." },
+];
+
+const galleryMembers = [
+  { id: 1, image: "/images/about/IMG_7912.jpg", name: "Deep Focus", role: "Where code meets craftsmanship." },
+  { id: 2, image: "/images/about/IMG_0489.jpg", name: "The Perspective", role: "Framing the world through a creative lens." },
+  { id: 3, image: "/images/about/IMG_0690.jpg", name: "Peak Clarity", role: "Finding silence in the heart of the mountains." },
+  { id: 4, image: "/images/about/IMG_1176.jpg", name: "Studio Flow", role: "Architecting digital symphonies." },
+  { id: 5, image: "/images/about/IMG_5412.jpg", name: "Golden Hour", role: "Chasing horizons and new possibilities." },
+  { id: 6, image: "/images/about/IMG_1666.jpg", name: "Abstract Logic", role: "Decoding the beauty in mathematical chaos." },
+  { id: 7, image: "/images/about/IMG_5135.jpeg", name: "Pure Craft", role: "The relentless pursuit of technical excellence." },
 ];
 
 
@@ -35,30 +45,8 @@ export function AboutPage() {
     }
   }, []);
   const containerRef = useRef<HTMLDivElement>(null);
-  const marqueeRef = useRef<HTMLDivElement>(null);
-  const marqueeTween = useRef<gsap.core.Tween | null>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Marquee animation (Left to Right)
-      const marquee = marqueeRef.current;
-      if (marquee) {
-        const totalWidth = marquee.scrollWidth;
-        const singleSetWidth = totalWidth / 3;
-        
-        marqueeTween.current = gsap.fromTo(marquee, 
-          { x: -singleSetWidth },
-          {
-            x: 0,
-            duration: 30, // Medium speed
-            ease: "none",
-            repeat: -1,
-          }
-        );
-      }
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -83,64 +71,9 @@ export function AboutPage() {
   return (
     <div ref={containerRef} className={`min-h-screen transition-colors duration-700 pt-32 md:pt-40 pb-12 md:pb-24 overflow-hidden flex flex-col items-center ${isDark ? 'bg-[#0A0A0A] text-white' : 'bg-white text-[#1A1A1A]'}`}>
       <div className="max-w-6xl w-full mx-auto px-6 lg:px-8">
-        {/* 3+2 Image Collage Grid - Clean, balanced layout */}
-        {/* Infinite Image Marquee */}
-        <div className="relative w-full mb-32 overflow-hidden py-12">
-          {/* Mask for edge fading */}
-          <div 
-            className="absolute inset-0 z-10 pointer-events-none"
-            style={{
-              background: isDark 
-                ? 'linear-gradient(to right, #0A0A0A 0%, transparent 8%, transparent 92%, #0A0A0A 100%)'
-                : 'linear-gradient(to right, white 0%, transparent 8%, transparent 92%, white 100%)'
-            }}
-          />
-          
-          <div 
-            ref={marqueeRef}
-            className="flex gap-8 px-4 marquee-container"
-            style={{ 
-              width: "fit-content",
-            }}
-          >
-            {/* Duplicate images multiple times for infinite effect */}
-            {[...Array(3)].map((_, setIndex) => (
-              <div key={setIndex} className="flex gap-8 flex-shrink-0">
-                {[
-                  { src: "/images/about/IMG_7912.jpg", alt: "Workspace" },
-                  { src: "/images/about/IMG_0489.jpg", alt: "Photography" },
-                  { src: "/images/about/IMG_0690.jpg", alt: "Mountain View" },
-                  { src: "/images/about/IMG_1176.jpg", alt: "Studio Life" },
-                  { src: "/images/about/IMG_5412.jpg", alt: "Sunset Horizon" },
-                  { src: "/images/about/IMG_1666.jpg", alt: "Abstract Vision" },
-                  { src: "/images/about/IMG_5135.jpeg", alt: "Creative Session" }
-                ].map((img, i) => (
-                  <motion.div
-                    key={`${setIndex}-${i}`}
-                    whileHover={{ scale: 1.15, zIndex: 20 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    onMouseEnter={() => {
-                      if (marqueeTween.current) {
-                        gsap.to(marqueeTween.current, { timeScale: 0, duration: 0.5, ease: "power2.out" });
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (marqueeTween.current) {
-                        gsap.to(marqueeTween.current, { timeScale: 1, duration: 0.5, ease: "power2.in" });
-                      }
-                    }}
-                    className={`relative flex-shrink-0 w-[250px] md:w-[320px] aspect-[3/5] rounded-2xl overflow-hidden border shadow-2xl transition-colors ${isDark ? 'border-white/10' : 'border-gray-100'}`}
-                  >
-                    <img 
-                      src={img.src} 
-                      alt={img.alt} 
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            ))}
-          </div>
+        {/* Interactive Vision Gallery */}
+        <div className="w-full mb-16 md:mb-28">
+          <TeamGallery members={galleryMembers} isDark={isDark} />
         </div>
 
         {/* Story Section - Tightened for Mobile */}
