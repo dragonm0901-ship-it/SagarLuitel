@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Github, Linkedin } from 'lucide-react';
 import Magnetic from '@/components/ui/Magnetic';
 
@@ -57,7 +57,16 @@ const socialLinks = [
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
+  const location = useLocation();
   const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Refresh ScrollTrigger when location changes to account for dynamic content height
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [location]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {

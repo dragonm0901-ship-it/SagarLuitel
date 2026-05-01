@@ -52,7 +52,7 @@ export const projects: Project[] = [
     magic: 'Integrated complex multi-layered scroll animations and dynamic data visualization that increased user engagement by 60%.',
     metrics: { label: 'Awareness', value: '+60%' },
     github: 'https://github.com/dragonm0901-ship-it/Save-Wildlife',
-    live: 'https://intopokhara.vercel.app/',
+    live: 'https://savewildlife.vercel.app/',
     status: 'ready'
   },
   {
@@ -95,6 +95,30 @@ export const projects: Project[] = [
     status: 'ready'
   },
   {
+    id: 'dobby-haircare',
+    image: '/images/project mockups/Dobby Haircare Mockup.jpeg',
+    title: 'Dobby- Haircare',
+    year: '2026',
+    tags: ['Vite', 'React', 'TypeScript', 'GSAP', 'Lenis', 'Tailwind CSS'],
+    challenge: 'Engineering a high-conversion luxury e-commerce platform with fluid motion and seamless product storytelling.',
+    magic: 'Custom smooth-scrolling architecture and layout-stable transitions that increased check-out intent by 35%.',
+    metrics: { label: 'Checkout Intent', value: '+35%' },
+    github: 'https://github.com/dragonm0901-ship-it/Dobby-Haircare',
+    live: 'https://dobby-indol.vercel.app/',
+    status: 'ready'
+  },
+  {
+    id: 'digital-voting',
+    image: '/images/project mockups/Digital Voting Mockup.jpeg',
+    title: 'Digital Voting Portal',
+    year: '2026',
+    tags: ['Next.js', 'TypeScript', 'React', 'Prisma', 'Tailwind CSS'],
+    challenge: 'Architecting a tamper-proof, decentralised voting system with military-grade security and anonymous verification.',
+    magic: 'Zero-knowledge proof implementation and real-time ledger synchronization for absolute trust.',
+    github: 'https://github.com/dragonm0901-ship-it/Digital-Voting',
+    status: 'ready'
+  },
+  {
     id: 'everest-adventures',
     image: 'gradient-1',
     title: 'Everest Adventures',
@@ -112,16 +136,6 @@ export const projects: Project[] = [
     tags: ['Three.js', 'WebGL', 'GSAP', 'React'],
     challenge: 'Developing a virtual museum space with real-time physics and high-fidelity artifact preservation.',
     magic: 'Spatial audio integration and multi-layered light probes for hyper-realistic gallery navigation.',
-    status: 'development'
-  },
-  {
-    id: 'digital-voting-prototype',
-    image: 'gradient-3',
-    title: 'Digital Voting Prototype',
-    year: '2026',
-    tags: ['Solidity', 'Web3', 'React', 'Cryptography'],
-    challenge: 'Architecting a tamper-proof, decentralised voting system with military-grade security and anonymous verification.',
-    magic: 'Zero-knowledge proof implementation and real-time ledger synchronization for absolute trust.',
     status: 'development'
   }
 ];

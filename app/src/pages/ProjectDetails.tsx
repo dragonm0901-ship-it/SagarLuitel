@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Github, Globe } from 'lucide-react';
 import { projects } from '@/data/projects';
 import { SmoothScroll } from '@/components/SmoothScroll';
 
@@ -65,6 +65,56 @@ export function ProjectDetails() {
             <p className="text-gray-600 leading-relaxed text-lg">
               To onboard new restaurant owners, we built a landing page that didn't just explain the product—it demonstrated it. Using Lenis and ScrollTrigger, we pinned a live SVG dashboard that populated with simulated data as the user scrolled, visually proving the software's capability without requiring a login.
             </p>
+          </section>
+        </div>
+      );
+    }
+
+    if (project.id === 'dobby-haircare') {
+      return (
+        <div className="space-y-12">
+          <section>
+            <h2 className="text-3xl font-serif font-bold mb-4">Luxury UX Architecture</h2>
+            <p className="text-gray-600 leading-relaxed text-lg">
+              The goal for Dobby- Haircare was to translate the tactile feel of premium haircare into a digital experience. We focused on "soft" interactions—gentle fades, staggered entrance animations using GSAP, and a custom cursor that reacts to the product's visual weight. The navigation was architected to be invisible yet intuitive, keeping the focus entirely on the aesthetic of the brand.
+            </p>
+          </section>
+          
+          <section>
+            <h2 className="text-3xl font-serif font-bold mb-4 dark:text-white transition-colors duration-700">Motion Engineering</h2>
+            <p className="text-gray-600 dark:text-gray-400 transition-colors duration-700 leading-relaxed text-lg mb-4">
+              Beyond aesthetics, the platform is built for extreme fluidity. By utilizing Vite for ultra-fast development and Lenis for perfectly smooth inertial scrolling, we achieved a level of polish that rivals native applications. The motion system is synchronized across the entire viewport, creating a cohesive narrative as the user explores the product lineup.
+            </p>
+            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
+              <span className="text-green-500">✓</span> Build Tool: Vite<br/>
+              <span className="text-green-500">✓</span> Animation: GSAP & Lenis<br/>
+              <span className="text-green-500">✓</span> Visuals: 4K Product Assets<br/>
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    if (project.id === 'digital-voting') {
+      return (
+        <div className="space-y-12">
+          <section>
+            <h2 className="text-3xl font-serif font-bold mb-4">The Digital Infrastructure</h2>
+            <p className="text-gray-600 leading-relaxed text-lg">
+              The Digital Voting Portal is a high-fidelity demonstration of secure, accessible democratic participation. Built with Next.js and TypeScript, the platform focuses on providing a seamless, transparent experience. We utilized Prisma for robust data modeling and ensuring that every interaction is backed by a type-safe, high-performance database layer.
+            </p>
+          </section>
+          
+          <section>
+            <h2 className="text-3xl font-serif font-bold mb-4 dark:text-white transition-colors duration-700">Security & Integrity</h2>
+            <p className="text-gray-600 dark:text-gray-400 transition-colors duration-700 leading-relaxed text-lg mb-4">
+              We implemented a rigorous validation pipeline for all voting actions, ensuring that user identity and ballot integrity are maintained throughout the session. The UI was crafted using Tailwind CSS to provide a clean, authoritative aesthetic that builds trust, while React's state management ensures real-time feedback for the voter.
+            </p>
+            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
+              <span className="text-green-500">✓</span> Framework: Next.js 14<br/>
+              <span className="text-green-500">✓</span> Database: Prisma ORM<br/>
+              <span className="text-green-500">✓</span> Styling: Tailwind CSS<br/>
+            </div>
           </section>
         </div>
       );
@@ -157,9 +207,41 @@ export function ProjectDetails() {
                 </div>
 
                 {project.metrics && (
-                  <div className="bg-[#FF6B9D]/10 text-[#FF6B9D] px-6 py-4 rounded-xl border border-[#FF6B9D]/20 inline-flex flex-col">
+                  <div className="bg-[#FF6B9D]/10 text-[#FF6B9D] px-6 py-4 rounded-xl border border-[#FF6B9D]/20 inline-flex flex-col mb-8">
                     <span className="text-xs font-mono font-bold uppercase mb-1">{project.metrics.label}</span>
                     <span className="text-3xl font-serif font-black">{project.metrics.value}</span>
+                  </div>
+                )}
+
+                {/* Project Links */}
+                {(project.github || project.live) && (
+                  <div className="flex flex-wrap gap-6 mt-2">
+                    {project.github && (
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 hover:text-black dark:hover:text-white transition-all duration-300 group"
+                      >
+                        <div className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-black dark:group-hover:border-white transition-all">
+                          <Github className="w-4 h-4" />
+                        </div>
+                        GITHUB REPOSITORY
+                      </a>
+                    )}
+                    {project.live && (
+                      <a 
+                        href={project.live} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 hover:text-[#FF6B9D] dark:hover:text-[#FF6B9D] transition-all duration-300 group"
+                      >
+                        <div className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-[#FF6B9D] transition-all">
+                          <Globe className="w-4 h-4" />
+                        </div>
+                        VIEW LIVE SITE
+                      </a>
+                    )}
                   </div>
                 )}
               </motion.div>

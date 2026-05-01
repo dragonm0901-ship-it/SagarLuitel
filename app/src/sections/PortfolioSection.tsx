@@ -23,7 +23,17 @@ export function PortfolioSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const visibleProjects = isMobile ? projects.slice(0, 4) : projects.slice(0, 3);
+  const featuredIds = [
+    '3d-bike-configurator',
+    'myrestro-manager',
+    'save-wildlife',
+    'into-pokhara',
+    'dobby-haircare',
+    'digital-voting'
+  ];
+
+  const visibleProjects = projects.filter(p => featuredIds.includes(p.id))
+    .sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
 
   // Header animation - only once on mount
   useEffect(() => {

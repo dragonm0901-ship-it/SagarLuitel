@@ -38,7 +38,11 @@ function ScrollToTop() {
     if (!hash) {
       window.scrollTo(0, 0);
     }
-    ScrollTrigger.refresh();
+    // Small delay to allow lazy-loaded components to mount and report their height
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+    return () => clearTimeout(timer);
   }, [pathname, hash]);
   return null;
 }
