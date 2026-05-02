@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { useScrolled } from '@/hooks/useScrolled';
@@ -20,6 +20,7 @@ const navLinks: NavLink[] = [
 
 export function Navbar() {
   const scrolled = useScrolled();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const navContainerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -41,6 +42,22 @@ export function Navbar() {
 
   const renderLink = (link: NavLink, className: string) => {
     const isHash = link.href.startsWith('#');
+    const isActive = location.pathname === link.href;
+    
+    const content = (
+      <>
+        <span className="relative inline-block">
+          {link.label}
+          {isActive && (
+            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-[#FF6B9D] to-[#FF8C42] rounded-full" />
+          )}
+        </span>
+        {link.isSpecial && (
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B9D] shadow-[0_0_8px_#FF6B9D]" />
+        )}
+      </>
+    );
+
     if (isHash) {
       return (
         <a 
@@ -49,11 +66,7 @@ export function Navbar() {
           className={className}
           onClick={closeMenu}
         >
-          {link.label}
-          {link.isSpecial && (
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B9D] shadow-[0_0_8px_#FF6B9D]" />
-          )}
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF6B9D] to-[#FF8C42] transition-all duration-300 group-hover:w-full" />
+          {content}
         </a>
       );
     }
@@ -64,11 +77,7 @@ export function Navbar() {
         className={className}
         onClick={closeMenu}
       >
-        {link.label}
-        {link.isSpecial && (
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B9D] shadow-[0_0_8px_#FF6B9D]" />
-        )}
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF6B9D] to-[#FF8C42] transition-all duration-300 group-hover:w-full" />
+        {content}
       </Link>
     );
   };
@@ -86,9 +95,9 @@ export function Navbar() {
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="group/header relative flex items-center justify-between bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-3xl px-6 py-3 border border-white/40 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 overflow-hidden"
+          className="group/header relative flex items-center justify-between bg-white dark:bg-[#0A0A0A] rounded-3xl px-6 py-3 border border-border shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 overflow-hidden"
           style={{
-            background: isHovered && !document.documentElement.classList.contains('dark')
+            backgroundImage: isHovered && !document.documentElement.classList.contains('dark')
               ? `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, rgba(245, 197, 24, 0.1), rgba(255, 107, 157, 0.1), transparent 80%)`
               : isHovered && document.documentElement.classList.contains('dark')
               ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(245, 197, 24, 0.15), rgba(255, 107, 157, 0.15), rgba(10, 10, 10, 0.4) 80%)`
@@ -104,13 +113,13 @@ export function Navbar() {
           />
           {/* Logo */}
           <Link to="/" className="group relative flex items-center gap-2 z-10" onClick={closeMenu}>
-            <div className="relative overflow-hidden rounded-full">
+            <div className="relative overflow-hidden rounded-full header-logo">
               <img
                 src="/images/hero-portrait.png"
                 alt="Sagar Luitel"
-                className="w-10 h-10 rounded-full object-cover transition-transform duration-300 group-hover:scale-110"
+                className="header-logo w-10 h-10 rounded-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-[#F5C518]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+              <div className="absolute inset-0 bg-[#F5C518]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full header-logo" />
             </div>
           </Link>
 
@@ -144,93 +153,75 @@ export function Navbar() {
              </button>
           </div>
         </div>
+
+
+        {/* Mobile Navigation Overlay */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm -z-10 md:hidden"
+              onClick={closeMenu}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Mobile Navigation Dropdown */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ y: -20, opacity: 0, scale: 0.95 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -20, opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute top-full left-6 right-6 mt-1 md:hidden bg-white dark:bg-[#0A0A0A] rounded-3xl shadow-2xl p-4 border border-border z-10"
+            >
+              <div className="flex-1 overflow-y-auto hide-scrollbar max-h-[60vh]">
+                <div className="flex flex-col">
+
+
+                  <nav className="space-y-0.5 mb-4">
+                    {navLinks.map((link, i) => (
+                      <motion.div 
+                        key={link.label}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.4, delay: 0.15 + (i * 0.05) }}
+                      >
+                        {renderLink(link, "relative flex items-center justify-between py-2 px-3 text-lg font-medium transition-colors text-black dark:text-white")}
+                      </motion.div>
+                    ))}
+                  </nav>
+
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.4 }}
+                  >
+                    <button 
+                      onClick={() => {
+                        closeMenu();
+                        if (window.location.pathname !== '/') {
+                            window.location.href = '/#contact';
+                        } else {
+                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="w-full bg-black dark:bg-white text-white dark:text-black px-6 py-3.5 rounded-2xl font-bold text-base shadow-lg hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2"
+                    >
+                      Hire Me Now <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
     </nav>
-
-    {/* Mobile Navigation Menu - Rendered via Portal/Outside of Nav container to escape overflow-hidden */}
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[1000]"
-            onClick={closeMenu}
-          />
-          <motion.div
-            initial={{ y: '-100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '-100%', opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} // power4.out equivalent
-            className="fixed top-0 left-0 right-0 max-h-[85vh] z-[1001] bg-[#FAFAFA] dark:bg-[#0A0A0A] rounded-b-3xl shadow-2xl pt-4 pb-4 flex flex-col transition-colors duration-700"
-          >
-            <div className="flex justify-end px-6 mb-1">
-              <button 
-                onClick={closeMenu}
-                className="p-1.5 bg-gray-50 dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 rounded-full text-black dark:text-white transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto hide-scrollbar">
-              <div className="max-w-7xl mx-auto px-6">
-                <motion.div 
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                  className="flex items-center justify-center pb-4 border-b border-gray-100/50 dark:border-white/10 mb-4"
-                >
-                  <div className="relative">
-                    <img
-                      src="/images/hero-portrait.png"
-                      alt="Sagar Luitel"
-                      className="w-16 h-16 rounded-full object-cover border-2 border-white dark:border-white/10 shadow-sm"
-                    />
-                    <span className="absolute bottom-0.5 right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-white/10" />
-                  </div>
-                </motion.div>
-
-                <nav className="space-y-1 mb-6">
-                  {navLinks.map((link, i) => (
-                    <motion.div 
-                      key={link.label}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.4, delay: 0.15 + (i * 0.05) }}
-                    >
-                      {renderLink(link, "group flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-gray-50/50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100 dark:hover:border-white/10")}
-                    </motion.div>
-                  ))}
-                </nav>
-
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.4 }}
-                  className="mb-4"
-                >
-                  <button 
-                    onClick={() => {
-                      closeMenu();
-                      if (window.location.pathname !== '/') {
-                          window.location.href = '/#contact';
-                      } else {
-                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className="w-full bg-black dark:bg-white text-white dark:text-black px-6 py-3.5 rounded-2xl font-bold text-base shadow-lg shadow-black/10 dark:shadow-white/10 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2"
-                  >
-                    Hire Me Now <ArrowRight className="w-4 h-4" />
-                  </button>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
   </>);
 }

@@ -26,6 +26,7 @@ export function DarkModeTerminal({ onSuccess, onClose, inline = false, isDarkMod
   const [code, setCode] = useState('');
   const [attempts, setAttempts] = useState(0);
   const [isError, setIsError] = useState(false);
+  const [isRevealing, setIsRevealing] = useState(false);
 
   const CORRECT_ANSWER = isDarkMode ? CORRECT_ANSWER_LIGHT : CORRECT_ANSWER_DARK;
 
@@ -38,18 +39,22 @@ export function DarkModeTerminal({ onSuccess, onClose, inline = false, isDarkMod
   };
 
   const validateCode = () => {
+    if (isRevealing) return;
+
     if (normalize(code) === normalize(CORRECT_ANSWER)) {
       // Success!
       setIsError(false);
       onSuccess();
     } else {
       // Failure
-      setAttempts(prev => prev + 1);
+      const newAttempts = Math.min(attempts + 1, 3);
+      setAttempts(newAttempts);
       setIsError(true);
       setTimeout(() => setIsError(false), 800);
       
       // Auto-reveal after 3 failures
-      if (attempts >= 2) {
+      if (newAttempts >= 3) {
+        setIsRevealing(true);
         let i = 0;
         setCode('');
         const interval = setInterval(() => {
@@ -127,8 +132,8 @@ export function DarkModeTerminal({ onSuccess, onClose, inline = false, isDarkMod
         </div>
         <button
           onClick={validateCode}
-          className="text-xs font-mono font-bold text-[#FF6B9D] px-3 py-1 hover:bg-white/5 rounded transition-colors pointer-events-auto"
-          style={{ cursor: 'pointer' }}
+          disabled={isRevealing}
+          className={`text-xs font-mono font-bold px-3 py-1 rounded transition-colors pointer-events-auto ${isRevealing ? 'text-gray-600 cursor-not-allowed' : 'text-[#FF6B9D] hover:bg-white/5 cursor-pointer'}`}
         >
           Execute
         </button>

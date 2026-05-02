@@ -28,13 +28,29 @@ const services = [
   },
 ];
 
+// Flying directions for each card
+const flyDirections = {
+  desktop: [
+    { x: 200, y: -150, rotation: 12 },   // Card 1: from top right
+    { x: -200, y: 150, rotation: -12 },   // Card 2: from bottom left
+    { x: 0, y: 200, rotation: 0 },        // Card 3: from bottom
+  ],
+  mobile: [
+    { x: 150, y: -200, rotation: 8 },     // Card 1: from top right
+    { x: -150, y: 200, rotation: -8 },    // Card 2: from bottom left
+    { x: 0, y: 250, rotation: 0 },        // Card 3: from bottom
+  ],
+};
+
 export function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Entrance animation for header
+      // Header entrance animation
       gsap.from(headerRef.current, {
         opacity: 0,
         y: 40,
@@ -44,6 +60,75 @@ export function ServicesSection() {
           trigger: sectionRef.current,
           start: 'top 80%',
         },
+      });
+
+      const mm = gsap.matchMedia();
+
+      // ── Desktop: fly-in with stagger, grid layout stays ──
+      mm.add('(min-width: 768px)', () => {
+        cardRefs.current.forEach((card, i) => {
+          if (!card) return;
+          const dir = flyDirections.desktop[i];
+
+          gsap.fromTo(card,
+            {
+              x: dir.x,
+              y: dir.y,
+              rotation: dir.rotation,
+              opacity: 0,
+              scale: 0.85,
+            },
+            {
+              x: 0,
+              y: 0,
+              rotation: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 1.2,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: cardsContainerRef.current,
+                start: 'top 85%',
+                end: 'top 40%',
+                toggleActions: 'play none none reverse',
+              },
+              delay: i * 0.15,
+            }
+          );
+        });
+      });
+
+      // ── Mobile: fly-in + sticky folder stacking ──
+      mm.add('(max-width: 767px)', () => {
+        cardRefs.current.forEach((card, i) => {
+          if (!card) return;
+          const dir = flyDirections.mobile[i];
+
+          gsap.fromTo(card,
+            {
+              x: dir.x,
+              y: dir.y,
+              rotation: dir.rotation,
+              opacity: 0,
+              scale: 0.9,
+            },
+            {
+              x: 0,
+              y: 0,
+              rotation: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 90%',
+                end: 'top 50%',
+                toggleActions: 'play none none reverse',
+              },
+            }
+          );
+        });
       });
     }, sectionRef);
 
@@ -67,10 +152,26 @@ export function ServicesSection() {
           </div>
         </div>
 
-        {/* Service Cards - Swipeable on Mobile, Grid on Desktop */}
-        <div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory hide-scrollbar gap-6 md:gap-8 pb-8 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
-          {services.map((service) => (
-            <div key={service.title} className="min-w-[85vw] sm:min-w-[380px] md:min-w-0 snap-center">
+        {/* Service Cards */}
+        <div
+          ref={cardsContainerRef}
+          className="
+            flex flex-col
+            md:grid md:grid-cols-3 md:gap-8
+            pb-8
+          "
+        >
+          {services.map((service, i) => (
+            <div
+              key={service.title}
+              ref={(el) => { cardRefs.current[i] = el; }}
+              className="sticky md:static md:min-w-0 will-change-transform"
+              style={{
+                top: `${100 + i * 8}px`,
+                zIndex: i + 1,
+                marginBottom: i < services.length - 1 ? '8px' : '0',
+              }}
+            >
               <ServiceCard {...service} />
             </div>
           ))}

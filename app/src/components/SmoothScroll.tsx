@@ -13,16 +13,14 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Disable smooth scrolling on mobile for better native touch performance
-    if (window.innerWidth < 768) return;
-
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 2,
+      syncTouch: false,
+      touchMultiplier: 1.5,
     });
 
     lenisRef.current = lenis;
@@ -30,15 +28,17 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     // Integrate Lenis with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    // Store the callback reference so we can properly clean it up
+    const tickerCallback = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(tickerCallback);
       lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
     };
   }, []);
 

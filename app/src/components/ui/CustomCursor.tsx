@@ -86,7 +86,7 @@ export function CustomCursor() {
     <>
       {/* Outer Ring - Adapts color based on detected background luminance */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border pointer-events-none z-[9999] hidden md:block"
+        className="custom-cursor fixed top-0 left-0 rounded-full border pointer-events-none z-[100000] hidden md:block"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -108,7 +108,7 @@ export function CustomCursor() {
 
       {/* Main Focus Dot - Adaptive Color */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:flex items-center justify-center overflow-hidden"
+        className="custom-cursor fixed top-0 left-0 rounded-full pointer-events-none z-[100000] hidden md:flex items-center justify-center overflow-hidden"
         style={{
           x: cursorX,
           y: cursorY,

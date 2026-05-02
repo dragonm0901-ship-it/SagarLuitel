@@ -5,9 +5,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['"Josefin Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
+        white: '#FEF9EF',
         'brand-yellow': '#F5C518',
         'brand-pink': '#FF6B9D',
         'brand-orange': '#FF8C42',
@@ -56,11 +57,14 @@ module.exports = {
         },
       },
       borderRadius: {
-        xl: "calc(var(--radius) + 4px)",
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-        xs: "calc(var(--radius) - 6px)",
+        xl: "4px",
+        lg: "4px",
+        md: "4px",
+        sm: "4px",
+        xs: "4px",
+        none: "0",
+        DEFAULT: "4px",
+        full: "4px",
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",

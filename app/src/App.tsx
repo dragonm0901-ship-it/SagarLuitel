@@ -17,6 +17,7 @@ import { GrainOverlay } from '@/components/ui/GrainOverlay';
 import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import { PremiumIntro } from '@/components/ui/PremiumIntro';
 import MeshGradient from '@/components/ui/MeshGradient';
+import { ChessMiniGame } from '@/components/ui/ChessMiniGame';
 
 // Lazy Loaded Routes for Performance
 const StoreSection = lazy(() => import('@/sections/StoreSection').then(m => ({ default: m.StoreSection })));
@@ -154,6 +155,7 @@ function App() {
         <CustomCursor />
         <LiquidBackground />
         <GrainOverlay />
+        <ChessMiniGame />
         <AppRoutes loading={loading} />
       </SmoothScroll>
     </Router>
