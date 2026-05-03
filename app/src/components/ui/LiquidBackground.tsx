@@ -19,9 +19,9 @@ class Particle {
     this.y = Math.random() * height;
     this.radius = Math.random() * 200 + 100;
     const colors = [
-      'rgba(255, 107, 157, 0.05)',
-      'rgba(245, 197, 24, 0.05)',
-      'rgba(255, 140, 66, 0.05)',
+      'rgba(15, 123, 255, 0.05)',
+      'rgba(255, 147, 15, 0.05)',
+      'rgba(43, 45, 66, 0.05)',
     ];
     this.color = colors[Math.floor(Math.random() * colors.length)];
     this.vx = (Math.random() - 0.5) * 0.5;

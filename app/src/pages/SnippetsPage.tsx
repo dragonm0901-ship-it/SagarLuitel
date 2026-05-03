@@ -54,11 +54,11 @@ const SnippetCard = ({ snippet, index }: { snippet: typeof snippets[0], index: n
         >
           <Link 
             to={`/snippets/${snippet.id}`}
-            className="group flex flex-col h-full p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/5 bg-[#FAFAFA] dark:bg-white/5 border-gray-200 dark:border-white/10 hover:border-transparent hover:bg-white dark:hover:bg-white/10"
+            className="group flex flex-col h-full p-4 md:p-8 rounded-[4px] md:rounded-[4px] border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/5 bg-[#FAFAFA] dark:bg-white/5 border-gray-200 dark:border-white/10 hover:border-transparent hover:bg-white dark:hover:bg-white/10"
           >
             <div className="flex justify-between items-start mb-4 md:mb-6">
               <div className="flex items-center gap-2 md:gap-3">
-                <div className="p-1.5 md:p-2 rounded-lg bg-black dark:bg-white/10 text-white transition-all duration-500">
+                <div className="p-1.5 md:p-2 rounded-[4px] bg-brand-secondary dark:bg-brand-primary text-white dark:text-brand-secondary transition-all duration-500 shadow-sm">
                     <CategoryIcon category={snippet.category} />
                 </div>
                 <span className="text-[8px] md:text-[10px] font-mono text-gray-400 uppercase tracking-widest">{snippet.category}</span>
@@ -66,7 +66,7 @@ const SnippetCard = ({ snippet, index }: { snippet: typeof snippets[0], index: n
               <span className="text-[8px] md:text-[10px] font-mono text-gray-400 opacity-50 uppercase tracking-widest">{snippet.date}</span>
             </div>
             
-            <h3 className="text-sm md:text-xl font-serif font-black mb-2 md:mb-4 text-[#1A1A1A] dark:text-white transition-colors leading-tight line-clamp-2">
+            <h3 className="text-sm md:text-xl font-serif font-black mb-2 md:mb-4 text-brand-secondary dark:text-white transition-colors leading-tight line-clamp-2">
               {snippet.title}
             </h3>
             
@@ -74,7 +74,7 @@ const SnippetCard = ({ snippet, index }: { snippet: typeof snippets[0], index: n
               {snippet.shortDesc}
             </p>
 
-            <div className="mt-auto flex items-center gap-2 text-[8px] md:text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-[#1A1A1A] dark:text-white transition-all group-hover:gap-4">
+            <div className="mt-auto flex items-center gap-2 text-[8px] md:text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-brand-third dark:text-brand-primary transition-all group-hover:gap-4">
               <span>Explore</span>
               <ChevronRight className="w-2.5 h-2.5 md:w-3 md:h-3" />
             </div>
@@ -87,7 +87,7 @@ const SnippetCard = ({ snippet, index }: { snippet: typeof snippets[0], index: n
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)"
           }}
-          className="absolute inset-0 w-full h-full bg-[#0F0F0F] rounded-[2rem] p-8 border border-white/10 shadow-2xl flex flex-col overflow-hidden"
+          className="absolute inset-0 w-full h-full bg-[#0F0F0F] rounded-[4px] p-8 border border-white/10 shadow-2xl flex flex-col overflow-hidden"
         >
           <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3">
             <div className="flex items-center gap-2">
@@ -109,7 +109,7 @@ const SnippetCard = ({ snippet, index }: { snippet: typeof snippets[0], index: n
 
           <Link 
             to={`/snippets/${snippet.id}`}
-            className="mt-auto group/btn flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-xs font-mono uppercase tracking-widest text-white font-bold"
+            className="mt-auto group/btn flex items-center justify-between p-4 rounded-[4px] bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-xs font-mono uppercase tracking-widest text-white font-bold"
           >
             <span>See Full Detail</span>
             <ChevronRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
@@ -131,7 +131,7 @@ export function SnippetsPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 pt-32 pb-24"
+      className="min-h-screen bg-white dark:bg-brand-secondary transition-colors duration-0 md:duration-700 pt-32 pb-24"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div 
@@ -140,8 +140,8 @@ export function SnippetsPage() {
           transition={{ duration: 0.8 }}
           className="mb-20 px-4 md:px-0"
         >
-          <h1 className="text-4xl md:text-8xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[1.1] md:leading-[0.9] tracking-tighter mb-6">
-            Code <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22C55E] to-[#38B2AC] pr-2">Snippets</span>.
+          <h1 className="text-4xl md:text-8xl font-serif font-black text-brand-secondary dark:text-white transition-colors duration-700 leading-[1.1] md:leading-[0.9] tracking-tighter mb-6">
+            Code <span className="text-brand-third dark:text-brand-primary pr-2">Snippets</span>.
           </h1>
           <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-base md:text-xl max-w-2xl leading-relaxed">
             Dropping knowledge on advanced frontend architecture, GSAP orchestration, and React rendering.

@@ -136,15 +136,15 @@ export function ServicesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="py-24 lg:py-32 bg-[#F8F9FA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden">
+    <section ref={sectionRef} id="services" className="py-24 lg:py-32 bg-white dark:bg-brand-secondary transition-colors duration-700 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={headerRef}
           className="flex flex-col lg:flex-row lg:items-start gap-12 mb-20"
         >
           <div className="max-w-3xl">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-tight mb-6 tracking-tighter">
-              Without impact and creating a legacy that <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#F5C518] to-[#FF6B9D]">transcends time</span>.
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-brand-secondary dark:text-white transition-colors duration-700 leading-tight mb-6 tracking-tighter">
+              Without impact and creating a legacy that <span className="italic text-brand-third dark:text-brand-primary transition-colors duration-700">transcends time</span>.
             </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
               Every decision, every action, and every step forward is rooted in the desire to build something meaningful.
@@ -156,7 +156,7 @@ export function ServicesSection() {
         <div
           ref={cardsContainerRef}
           className="
-            flex flex-col
+            flex flex-col gap-12 md:gap-0
             md:grid md:grid-cols-3 md:gap-8
             pb-8
           "
@@ -165,11 +165,9 @@ export function ServicesSection() {
             <div
               key={service.title}
               ref={(el) => { cardRefs.current[i] = el; }}
-              className="sticky md:static md:min-w-0 will-change-transform"
+              className="md:sticky md:static md:min-w-0 will-change-transform"
               style={{
-                top: `${100 + i * 8}px`,
                 zIndex: i + 1,
-                marginBottom: i < services.length - 1 ? '8px' : '0',
               }}
             >
               <ServiceCard {...service} />

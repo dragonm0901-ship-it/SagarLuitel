@@ -77,7 +77,7 @@ export function DarkModeTerminal({ onSuccess, onClose, inline = false, isDarkMod
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className={`${inline ? 'relative' : 'absolute bottom-12 left-12'} w-[340px] md:w-[400px] bg-[#0A0A0A]/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-[200] pointer-events-auto`}
+      className={`${inline ? 'relative' : 'absolute bottom-12 left-12'} w-[340px] md:w-[400px] bg-[#0A0A0A]/90 backdrop-blur-xl border border-white/10 rounded-[4px] shadow-2xl overflow-hidden z-[200] pointer-events-auto`}
       style={{ pointerEvents: 'auto' }}
     >
       {/* Header */}
@@ -133,7 +133,7 @@ export function DarkModeTerminal({ onSuccess, onClose, inline = false, isDarkMod
         <button
           onClick={validateCode}
           disabled={isRevealing}
-          className={`text-xs font-mono font-bold px-3 py-1 rounded transition-colors pointer-events-auto ${isRevealing ? 'text-gray-600 cursor-not-allowed' : 'text-[#FF6B9D] hover:bg-white/5 cursor-pointer'}`}
+          className={`text-xs font-mono font-bold px-3 py-1 rounded transition-colors pointer-events-auto ${isRevealing ? 'text-gray-600 cursor-not-allowed' : 'text-white hover:bg-white/5 cursor-pointer'}`}
         >
           Execute
         </button>

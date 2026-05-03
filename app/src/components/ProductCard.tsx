@@ -86,7 +86,7 @@ export function ProductCard({
       ref={cardRef}
       onClick={() => navigate(`/store/${id}`)}
       style={{ '--hover-accent': color } as React.CSSProperties}
-      className="group relative bg-white dark:bg-white/5 rounded-[2rem] p-5 border border-gray-100 dark:border-white/10 hover:border-gray-200 dark:hover:border-white/20 transition-all duration-150 ease-in-out flex flex-col h-full overflow-hidden cursor-pointer"
+      className="group relative bg-white dark:bg-white/5 rounded-[4px] p-5 border border-gray-100 dark:border-white/10 hover:border-gray-200 dark:hover:border-white/20 transition-all duration-150 ease-in-out flex flex-col h-full overflow-hidden cursor-pointer"
     >
       {/* Dynamic Glow Overlay */}
       <div 
@@ -100,7 +100,7 @@ export function ProductCard({
       <div className="relative z-10 flex flex-col h-full">
         {/* Top Meta */}
         <div className="flex items-center justify-between mb-4">
-          <span className="px-3 py-1 rounded-full bg-gray-50 dark:bg-black/30 border border-gray-100 dark:border-white/5 text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
+          <span className="px-3 py-1 rounded-[4px] bg-gray-50 dark:bg-black/30 border border-gray-100 dark:border-white/5 text-[9px] font-mono font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
             {category}
           </span>
         </div>
@@ -108,7 +108,7 @@ export function ProductCard({
         {/* Product Icon (Magnetic - Standardized for All) */}
         <div 
           ref={iconRef}
-          className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-150 ease-in-out group-hover:shadow-xl"
+          className="w-12 h-12 rounded-[4px] flex items-center justify-center mb-5 transition-all duration-150 ease-in-out group-hover:shadow-xl"
           style={{ backgroundColor: color }}
         >
           <Icon className="w-6 h-6" style={{ color: 'white' }} />
@@ -154,7 +154,7 @@ export function ProductCard({
             <p className="text-xl font-serif font-bold text-black dark:text-white transition-colors duration-150 ease-in-out tracking-tighter">{price}</p>
           </div>
           
-          <button className="w-10 h-10 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 shadow-lg shadow-black/10 dark:shadow-white/10 group-hover:bg-[var(--hover-accent)] dark:group-hover:bg-[var(--hover-accent)] dark:group-hover:text-white">
+          <button className="w-10 h-10 bg-black dark:bg-white text-white dark:text-black rounded-[4px] flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 shadow-lg shadow-black/10 dark:shadow-white/10 group-hover:bg-[var(--hover-accent)] dark:group-hover:bg-[var(--hover-accent)] dark:group-hover:text-white">
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

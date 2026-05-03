@@ -23,9 +23,9 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
     const isDev = status === 'development';
 
     const gradients: Record<string, string> = {
-      'gradient-1': 'linear-gradient(135deg, #FF6B9D 0%, #F5C518 100%)',
-      'gradient-2': 'linear-gradient(135deg, #3B82F6 0%, #22C55E 100%)',
-      'gradient-3': 'linear-gradient(135deg, #A855F7 0%, #EC4899 100%)',
+      'gradient-1': 'linear-gradient(135deg, #0f7bff 0%, #ff930f 100%)',
+      'gradient-2': 'linear-gradient(135deg, #2B2D42 0%, #ff930f 100%)',
+      'gradient-3': 'linear-gradient(135deg, #0f7bff 0%, #2B2D42 100%)',
     };
 
     const cardContent = (
@@ -73,7 +73,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
           {/* View Button (Only for Ready Projects) */}
           {!isDev && (
             <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-              <div className="w-full bg-white dark:bg-[#1A1A1A] text-black dark:text-white px-4 py-2 md:py-3 rounded-xl text-xs md:text-sm font-semibold flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-[#2A2A2A] transition-colors duration-300">
+              <div className="w-full bg-brand-secondary dark:bg-brand-primary text-white px-4 py-2 md:py-3 rounded-[4px] text-xs md:text-sm font-bold flex items-center justify-center gap-2 hover:bg-black dark:hover:bg-brand-primary/90 transition-colors duration-300 shadow-xl">
                 View Project Details
                 <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4" />
               </div>
@@ -82,7 +82,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
           
           {isDev && (
             <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-               <span className="px-4 py-2 rounded-full border border-white/30 bg-white/10 text-white text-[10px] font-mono uppercase tracking-widest font-black">Coming 2026</span>
+               <span className="px-4 py-2 rounded-[4px] border border-white/30 bg-white/10 text-white text-[10px] font-mono uppercase tracking-widest font-black">Coming 2026</span>
             </div>
           )}
         </div>
@@ -92,7 +92,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 md:mb-4 gap-1">
             <motion.h3 
               layoutId={`title-${id}`}
-              className="text-[11px] md:text-2xl font-serif font-bold text-[#1A1A1A] dark:text-white transition-colors duration-300 leading-tight"
+              className="text-[11px] md:text-2xl font-serif font-bold text-brand-secondary dark:text-white transition-colors duration-300 leading-tight"
             >
               {title}
             </motion.h3>
@@ -113,8 +113,8 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
               </div>
               {metrics && !isDev && (
                 <div className="text-right shrink-0">
-                  <p className="text-[7px] md:text-[10px] font-mono text-gray-400 uppercase leading-none mb-0.5">{metrics.label}</p>
-                  <p className="text-[10px] md:text-lg font-serif font-bold text-[#FF6B9D] leading-none">{metrics.value}</p>
+                  <p className="text-[7px] md:text-[10px] font-mono text-brand-secondary/40 dark:text-gray-400 uppercase leading-none mb-0.5">{metrics.label}</p>
+                  <p className="text-[10px] md:text-lg font-serif font-bold text-brand-third dark:text-brand-primary transition-colors duration-300 leading-none">{metrics.value}</p>
                 </div>
               )}
             </div>
@@ -127,7 +127,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
       <motion.div
         ref={ref}
         layoutId={`card-${id}`}
-        className="group relative bg-white/70 dark:bg-[#1A1A1A]/70 backdrop-blur-xl rounded-xl md:rounded-2xl overflow-hidden shadow-sm border border-white/20 dark:border-white/10 will-change-transform transition-all duration-500 flex flex-col h-full w-full"
+        className="group relative bg-[#FAFAFA] dark:bg-white/5 rounded-[4px] md:rounded-[4px] overflow-hidden shadow-sm border border-gray-200 dark:border-white/10 hover:shadow-2xl hover:shadow-black/5 hover:bg-white dark:hover:bg-white/10 transition-all duration-500 flex flex-col h-full w-full"
       >
         {isDev ? (
           <div className="flex flex-col h-full w-full cursor-default">
@@ -159,7 +159,7 @@ export const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
                 href={live} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 md:gap-2 text-[8px] md:text-[10px] font-mono font-bold text-gray-400 dark:text-gray-500 hover:text-[#FF6B9D] dark:hover:text-[#FF6B9D] transition-colors duration-300"
+                className="flex items-center gap-1.5 md:gap-2 text-[8px] md:text-[10px] font-mono font-bold text-brand-secondary/40 dark:text-gray-500 hover:text-brand-third dark:hover:text-brand-third transition-colors duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Globe className="w-3 h-3 md:w-3.5 md:h-3.5" />

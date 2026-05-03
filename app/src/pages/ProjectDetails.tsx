@@ -16,9 +16,9 @@ export function ProjectDetails() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] dark:bg-[#0A0A0A] text-black dark:text-white transition-colors duration-700">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-brand-secondary text-black dark:text-white transition-colors duration-700">
         <h1 className="text-4xl font-serif">Project not found</h1>
-        <button onClick={() => navigate('/')} className="mt-4 underline text-gray-500 hover:text-black dark:hover:text-white transition-colors">Go back</button>
+        <button onClick={() => navigate('/')} className="mt-4 underline text-gray-500 hover:text-brand-primary dark:hover:text-white transition-colors">Go back</button>
       </div>
     );
   }
@@ -40,7 +40,7 @@ export function ProjectDetails() {
             <p className="text-gray-600 dark:text-gray-400 transition-colors duration-700 leading-relaxed text-lg mb-4">
               Our main bottleneck was the initialization of huge HDR environment maps. By compressing textures to KTX2 format and using basis universal, we decreased load times by 70%. Additionally, GSAP was employed not just for DOM animations, but for tweening numeric values inside the React Three Fiber loop, enabling perfectly smooth camera sweeps.
             </p>
-            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
+            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-[4px] border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
               <span className="text-green-500">✓</span> Total Geometry: 45k poly<br/>
               <span className="text-green-500">✓</span> Initial Load: 1.2s<br/>
               <span className="text-green-500">✓</span> Framerate: Locked 60FPS<br/>
@@ -85,7 +85,7 @@ export function ProjectDetails() {
             <p className="text-gray-600 dark:text-gray-400 transition-colors duration-700 leading-relaxed text-lg mb-4">
               Beyond aesthetics, the platform is built for extreme fluidity. By utilizing Vite for ultra-fast development and Lenis for perfectly smooth inertial scrolling, we achieved a level of polish that rivals native applications. The motion system is synchronized across the entire viewport, creating a cohesive narrative as the user explores the product lineup.
             </p>
-            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
+            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-[4px] border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
               <span className="text-green-500">✓</span> Build Tool: Vite<br/>
               <span className="text-green-500">✓</span> Animation: GSAP & Lenis<br/>
               <span className="text-green-500">✓</span> Visuals: 4K Product Assets<br/>
@@ -110,7 +110,7 @@ export function ProjectDetails() {
             <p className="text-gray-600 dark:text-gray-400 transition-colors duration-700 leading-relaxed text-lg mb-4">
               We implemented a rigorous validation pipeline for all voting actions, ensuring that user identity and ballot integrity are maintained throughout the session. The UI was crafted using Tailwind CSS to provide a clean, authoritative aesthetic that builds trust, while React's state management ensures real-time feedback for the voter.
             </p>
-            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
+            <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-[4px] border border-gray-100 dark:border-white/10 transition-colors duration-700 font-mono text-sm dark:text-gray-300">
               <span className="text-green-500">✓</span> Framework: Next.js 14<br/>
               <span className="text-green-500">✓</span> Database: Prisma ORM<br/>
               <span className="text-green-500">✓</span> Styling: Tailwind CSS<br/>
@@ -146,13 +146,13 @@ export function ProjectDetails() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700"
+      className="min-h-screen bg-white dark:bg-brand-secondary transition-colors duration-700"
     >
       {/* Back Button - Mobile/Tablet (Fixed) - Lowered to avoid overlap */}
       <div className="lg:hidden fixed top-32 left-6 z-[110]">
         <button 
           onClick={() => navigate('/projects')} 
-          className="group flex items-center justify-center bg-white/90 dark:bg-black/80 backdrop-blur-xl w-10 h-10 rounded-full border border-black/5 dark:border-white/10 shadow-2xl transition-all duration-500 active:scale-95"
+          className="group flex items-center justify-center bg-white/90 dark:bg-brand-secondary/80 backdrop-blur-xl w-10 h-10 rounded-full border border-black/5 dark:border-white/10 shadow-2xl transition-all duration-500 active:scale-95"
         >
           <ArrowLeft className="w-5 h-5 text-black dark:text-white transition-transform group-hover:-translate-x-1" />
         </button>
@@ -174,9 +174,9 @@ export function ProjectDetails() {
                 <div className="hidden lg:block mb-10">
                   <button 
                     onClick={() => navigate('/projects')} 
-                    className="group flex items-center gap-3 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300"
+                    className="group flex items-center gap-3 text-gray-500 dark:text-gray-400 hover:text-brand-primary dark:hover:text-white transition-all duration-300"
                   >
-                    <div className="w-10 h-10 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-black dark:group-hover:border-white transition-all">
+                    <div className="w-10 h-10 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-brand-primary dark:group-hover:border-white transition-all">
                       <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                     </div>
                     <span className="text-xs font-mono font-bold uppercase tracking-widest">Back to Projects</span>
@@ -190,7 +190,7 @@ export function ProjectDetails() {
                 
                 <motion.h1 
                   layoutId={`title-${project.id}`}
-                  className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[1.1] tracking-tighter mb-8 break-words hyphens-auto"
+                  className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-brand-secondary dark:text-white transition-colors duration-700 leading-[1.1] tracking-tighter mb-8 break-words hyphens-auto"
                 >
                   {project.title}
                 </motion.h1>
@@ -199,7 +199,7 @@ export function ProjectDetails() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs font-mono font-bold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/5 transition-colors duration-700 px-3 py-1.5 rounded-md border border-gray-100 dark:border-white/10 uppercase"
+                      className="text-xs font-mono font-bold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/5 transition-colors duration-700 px-3 py-1.5 rounded-[4px] border border-gray-100 dark:border-white/10 uppercase"
                     >
                       {tag}
                     </span>
@@ -207,7 +207,7 @@ export function ProjectDetails() {
                 </div>
 
                 {project.metrics && (
-                  <div className="bg-[#FF6B9D]/10 text-[#FF6B9D] px-6 py-4 rounded-xl border border-[#FF6B9D]/20 inline-flex flex-col mb-8">
+                  <div className="bg-brand-third/10 text-brand-third px-6 py-4 rounded-[4px] border border-brand-third/20 inline-flex flex-col mb-8">
                     <span className="text-xs font-mono font-bold uppercase mb-1">{project.metrics.label}</span>
                     <span className="text-3xl font-serif font-black">{project.metrics.value}</span>
                   </div>
@@ -234,9 +234,9 @@ export function ProjectDetails() {
                         href={project.live} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 hover:text-[#FF6B9D] dark:hover:text-[#FF6B9D] transition-all duration-300 group"
+                        className="flex items-center gap-2 text-xs font-mono font-bold text-gray-500 hover:text-brand-third dark:hover:text-brand-third transition-all duration-300 group"
                       >
-                        <div className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-[#FF6B9D] transition-all">
+                        <div className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-brand-third transition-all">
                           <Globe className="w-4 h-4" />
                         </div>
                         VIEW LIVE SITE
@@ -251,7 +251,7 @@ export function ProjectDetails() {
             <div className="lg:col-span-7">
               <motion.div 
                 layoutId={`card-${project.id}`}
-                className="w-full aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden shadow-2xl"
+                className="w-full aspect-[4/3] lg:aspect-square rounded-[4px] overflow-hidden shadow-2xl"
               >
                 <motion.img 
                   layoutId={`image-${project.id}`}
@@ -281,7 +281,7 @@ export function ProjectDetails() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h3 className="text-[10px] font-mono text-[#F5C518] uppercase tracking-widest leading-none">The Magic</h3>
+                <h3 className="text-[10px] font-mono text-brand-primary uppercase tracking-widest leading-none">The Magic</h3>
                 <p className="text-gray-900 dark:text-white transition-colors duration-700 font-serif text-xl md:text-2xl font-bold leading-tight">
                   {project.magic}
                 </p>

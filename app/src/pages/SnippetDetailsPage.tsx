@@ -3,23 +3,19 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, Copy, Check, Terminal, Code2, Cpu, Globe, Rocket } from 'lucide-react';
 import { snippets } from '@/data/snippets';
-import type { Snippet } from '@/data/snippets';
 
 export function SnippetDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [snippet, setSnippet] = useState<Snippet | null>(null);
+  const snippet = snippets.find(s => s.id === id);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const found = snippets.find(s => s.id === id);
-    if (found) {
-      setSnippet(found);
-    } else {
+    if (!snippet && id) {
       navigate('/snippets');
     }
     window.scrollTo(0, 0);
-  }, [id, navigate]);
+  }, [id, navigate, snippet]);
 
   const copyToClipboard = () => {
     if (snippet) {
@@ -44,13 +40,13 @@ export function SnippetDetailsPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] pt-32 pb-24 transition-colors duration-700"
+      className="min-h-screen bg-white dark:bg-brand-secondary pt-32 pb-24 transition-colors duration-700"
     >
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         {/* Back Navigation */}
         <Link 
           to="/snippets"
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors mb-12 group"
+          className="inline-flex items-center gap-2 text-gray-500 hover:text-brand-third dark:text-gray-400 dark:hover:text-brand-primary transition-colors mb-12 group"
         >
           <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           <span className="font-mono text-xs uppercase tracking-widest">Back to Hub</span>
@@ -59,12 +55,12 @@ export function SnippetDetailsPage() {
         {/* Header */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-6">
-             <div className="p-3 rounded-xl bg-black dark:bg-white/10 text-white">
+             <div className="p-3 rounded-[4px] bg-brand-third dark:bg-brand-primary text-white">
                 <CategoryIcon className="w-5 h-5" />
              </div>
              <span className="text-sm font-mono text-gray-400 uppercase tracking-widest">{snippet.category}</span>
           </div>
-          <h1 className="text-4xl md:text-7xl font-serif font-black text-[#1A1A1A] dark:text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-6">
+          <h1 className="text-4xl md:text-7xl font-serif font-black text-brand-secondary dark:text-white leading-[1.1] md:leading-[0.9] tracking-tighter mb-6">
             {snippet.title}
           </h1>
           <p className="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl leading-relaxed">
@@ -77,7 +73,7 @@ export function SnippetDetailsPage() {
           <div className="absolute top-4 right-4 z-20">
             <button 
               onClick={copyToClipboard}
-              className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-white hover:bg-white/20 transition-all active:scale-95"
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-[4px] text-white hover:bg-white/20 transition-all active:scale-95"
             >
               <AnimatePresence mode="wait">
                 {copied ? (
@@ -103,7 +99,7 @@ export function SnippetDetailsPage() {
             </button>
           </div>
 
-          <div className="bg-[#0A0A0A] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-brand-secondary rounded-[4px] overflow-hidden border border-white/10 shadow-2xl">
             <div className="flex items-center justify-between px-6 md:px-8 py-4 border-b border-white/5 bg-white/5">
                <div className="flex gap-2">
                   <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-500/20" />
@@ -122,7 +118,7 @@ export function SnippetDetailsPage() {
 
         {/* Explanation */}
         <div className="max-w-3xl">
-          <h3 className="text-2xl font-serif font-bold text-[#1A1A1A] dark:text-white mb-6">Execution Strategy</h3>
+          <h3 className="text-2xl font-serif font-bold text-brand-secondary dark:text-white mb-6">Execution Strategy</h3>
           <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-12">
             {snippet.explanation}
           </p>

@@ -67,7 +67,7 @@ const TechIcon = ({ icon: Icon, color, delay, x, y, mx, my, size = 33, mSize = 1
         top: isMobile ? (my ?? y) : y 
       }}
     >
-      <div className={`relative p-1.5 md:p-2 rounded-xl bg-black dark:bg-white text-white dark:text-black shadow-sm transition-all duration-300 
+      <div className={`relative p-1.5 md:p-2 rounded-[4px] bg-[#383838] dark:bg-[#E2E2E2] text-white dark:text-[#212121] shadow-sm transition-all duration-300 
         ${(isPressed || isHovering) ? 'shadow-[0_0_25px_var(--shadow-color)]' : ''} 
         group-hover:shadow-[0_0_25px_var(--shadow-color)]`}
            style={{ '--shadow-color': color } as React.CSSProperties}>
@@ -119,8 +119,9 @@ const NodeIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const JsIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 24 24" {...props} fill="currentColor">
-    <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+  <svg viewBox="0 0 24 24" {...props}>
+    <path d="M0 0h24v24H0V0z" fill="currentColor" />
+    <path d="M22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#212121" />
   </svg>
 );
 
@@ -204,7 +205,7 @@ const CreativeDeveloperBadge = ({ isMobile }: { isMobile: boolean }) => {
             }}
             exit={{ opacity: 0, scale: isMobile ? 0.6 : 0.8, x: "-50%", y: 10 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="absolute left-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-lg p-2.5 shadow-2xl z-[120] backdrop-blur-xl"
+            className="absolute left-1/2 w-[220px] sm:w-[260px] bg-[#0A0A0A] border border-white/10 rounded-[4px] p-2.5 shadow-2xl z-[120] backdrop-blur-xl"
             style={{ originY: 1 }}
           >
             {/* Header / Traffic Lights */}
@@ -247,13 +248,15 @@ const CreativeDeveloperBadge = ({ isMobile }: { isMobile: boolean }) => {
         )}
       </AnimatePresence>
 
-      <span className="inline-flex items-center gap-2 bg-black text-white px-3 py-1.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest shadow-xl transition-all duration-300 hover:bg-gray-900 cursor-pointer active:scale-95 group-hover:scale-110">
-        <Code className="w-3.5 h-3.5 text-[#FF6B9D]" />
+      <span className="inline-flex items-center gap-2 bg-brand-secondary text-white px-3 py-1.5 rounded-[4px] text-[9px] font-mono font-bold uppercase tracking-widest shadow-xl transition-all duration-300 hover:bg-black cursor-pointer active:scale-95 group-hover:scale-110">
+        <Code className="w-3.5 h-3.5 text-brand-third dark:text-brand-primary" />
         Creative Developer
       </span>
     </div>
   );
 };
+
+const colors = ['#0f7bff', '#ff930f', '#151517'];
 
 export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -265,19 +268,22 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
   const [isMobile, setIsMobile] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [terminalRevealed, setTerminalRevealed] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return document.documentElement.classList.contains('dark');
+    }
+    return false;
+  });
+  const [isHovered, setIsHovered] = useState(false);
+  const isHoveringRef = useRef(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isDark = document.documentElement.classList.contains('dark');
-      setIsDarkMode(isDark);
-      if (isDark) {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
     }
-  }, []);
+  }, [isDarkMode]);
 
   const handleDarkModeSuccess = () => {
     const nextMode = !isDarkMode;
@@ -383,26 +389,97 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
       );
 
     }, sectionRef);
+
+    // Cloudy background animation
+    gsap.utils.toArray<HTMLElement>('.hero-cloud-blob').forEach((blob, i) => {
+      gsap.to(blob, {
+        x: 'random(-20%, 20%)',
+        y: 'random(-20%, 20%)',
+        scale: 'random(0.8, 1.4)',
+        rotation: 'random(-20, 20)',
+        duration: 20 + i * 5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: i * -2,
+      });
+    });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!sectionRef.current) return;
+      const { clientX, clientY } = e;
+      const x = (clientX / window.innerWidth) - 0.5;
+      const y = (clientY / window.innerHeight) - 0.5;
+
+      gsap.to('.hero-cloud-blob', {
+        xPercent: x * 30,
+        yPercent: y * 30,
+        duration: 1.2,
+        ease: 'power2.out',
+        stagger: 0.08
+      });
+    };
+
+    const animateBlobColor = (blob: HTMLElement) => {
+      if (!isHoveringRef.current) return;
+      const nextColor = colors[Math.floor(Math.random() * colors.length)] + '44';
+      gsap.to(blob, {
+        backgroundColor: nextColor,
+        duration: gsap.utils.random(3, 5),
+        ease: 'sine.inOut',
+        onComplete: () => animateBlobColor(blob)
+      });
+    };
+
+    const handleMouseEnter = () => {
+      isHoveringRef.current = true;
+      gsap.utils.toArray<HTMLElement>('.hero-cloud-blob').forEach((blob) => {
+        animateBlobColor(blob);
+      });
+    };
+
+    const handleMouseLeave = () => {
+      isHoveringRef.current = false;
+      gsap.to('.hero-cloud-blob', {
+        backgroundColor: (i: number) => (i % 2 === 0 ? '#0f7bff' : '#ff930f') + '33',
+        duration: 2,
+        ease: 'power2.out'
+      });
+    };
+
+    const section = sectionRef.current;
+    if (section) {
+      section.addEventListener('mousemove', handleMouseMove);
+      section.addEventListener('mouseenter', handleMouseEnter);
+      section.addEventListener('mouseleave', handleMouseLeave);
+    }
+
     return () => {
       ctx.revert();
-      // Clean up will-change on unmount to free GPU memory
+      if (section) {
+        section.removeEventListener('mousemove', handleMouseMove);
+        section.removeEventListener('mouseenter', handleMouseEnter);
+        section.removeEventListener('mouseleave', handleMouseLeave);
+      }
       refs.forEach(ref => {
         if (ref.current) ref.current.style.willChange = '';
       });
     };
   }, [isIntroDone]);
 
-  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <section ref={sectionRef} className="relative pt-[72px] min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center">
       
-      {/* Background Gradient Orbs */}
-      <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] bg-[#F5C518]/25 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[15%] right-[10%] w-[550px] h-[550px] bg-[#FF6B9D]/25 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-[40%] right-[25%] w-[400px] h-[400px] bg-[#38B2AC]/15 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[30%] left-[20%] w-[450px] h-[450px] bg-[#FF8C42]/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-[60%] left-[50%] -translate-x-1/2 w-[600px] h-[350px] bg-[#BD93F9]/10 rounded-full blur-[160px] pointer-events-none" />
+      {/* Dynamic Cloudy Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40 dark:opacity-50 blur-[100px]">
+        <div className="hero-cloud-blob absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-brand-primary/20 rounded-full" />
+        <div className="hero-cloud-blob absolute bottom-[-10%] right-[-10%] w-[65%] h-[65%] bg-brand-third/20 rounded-full" />
+        <div className="hero-cloud-blob absolute top-[20%] right-[10%] w-[55%] h-[55%] bg-brand-primary/15 rounded-full" />
+        <div className="hero-cloud-blob absolute bottom-[10%] left-[20%] w-[60%] h-[60%] bg-brand-third/15 rounded-full" />
+        <div className="hero-cloud-blob absolute top-[40%] left-[40%] w-[50%] h-[50%] bg-brand-secondary/10 rounded-full" />
+        <div className="hero-cloud-blob absolute top-[10%] right-[30%] w-[45%] h-[45%] bg-brand-primary/10 rounded-full" />
+      </div>
 
       {/* Floating Tech Icons */}
       <div className="absolute inset-0 z-[150] pointer-events-none pb-32 md:pb-24 -translate-y-16 md:translate-y-0 text-center">
@@ -423,7 +500,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         
         {/* Extra Icons close to center bottom/top */}
         <TechIcon icon={NextJsIcon} color="currentColor" x="35%" y="15%" mx="48%" my="78%" delay={1.3} />
-        <TechIcon icon={LenisIcon} color="#FF98A3" x="65%" y="15%" mx="55%" my="75%" delay={1.7} />
+        <TechIcon icon={LenisIcon} color="#FF98A3" x="65%" y="15%" mx="65%" my="75%" delay={1.7} />
       </div>
 
       {/* Background Text Layer (Behind Image) */}
@@ -431,10 +508,10 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
         className="absolute inset-0 flex flex-col justify-center pb-32 md:pb-24 items-center z-10 pointer-events-none select-none"
       >
         <div ref={textBgRef} className="flex flex-col justify-center items-center w-full">
-          <h1 className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
+          <h1 className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-brand-secondary dark:text-gray-300 transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal uppercase">
             FRONT END
           </h1>
-          <h1 className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal">
+          <h1 className="text-[14vw] md:text-[11vw] lg:text-[9vw] xl:text-[10.5vw] leading-[0.85] font-serif font-black text-brand-secondary dark:text-gray-300 transition-colors duration-700 whitespace-nowrap tracking-tighter mix-blend-multiply dark:mix-blend-normal uppercase">
             MAGICIAN
           </h1>
         </div>
@@ -455,10 +532,10 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
               onClick={() => !terminalRevealed && setShowTerminal(true)}
             >
               <div 
-                className={`text-[11px] md:text-[13px] font-mono font-bold uppercase tracking-widest select-none px-6 py-2 rounded-full border transition-all duration-500 shadow-xl
+                className={`text-[11px] md:text-[13px] font-mono font-bold uppercase tracking-widest select-none px-6 py-2 rounded-[4px] border transition-all duration-500 shadow-xl
                   ${isDarkMode 
-                    ? 'bg-white text-black border-white hover:shadow-white/20' 
-                    : 'bg-black text-white border-black hover:shadow-black/20'
+                    ? 'bg-brand-primary text-white border-brand-primary hover:shadow-brand-primary/20' 
+                    : 'bg-brand-third text-black border-brand-third hover:shadow-brand-third/20'
                   }`}
               >
                 {isDarkMode ? 'light was better, right?' : 'do you like it dark?'}
@@ -479,19 +556,13 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                 localStorage.setItem('theme', nextMode ? 'dark' : 'light');
                 document.documentElement.classList.toggle("dark");
                 document.body.classList.toggle("dark-mode");
-                
-                // Cool smooth feedback animation
-                gsap.fromTo("body", 
-                  { filter: "brightness(1.5)" }, 
-                  { filter: "brightness(1)", duration: 0.5, ease: "power2.out" }
-                );
               }}
             >
               <div 
-                className={`w-[55vw] sm:w-[50vw] text-[9px] font-mono font-bold uppercase tracking-widest select-none px-4 py-3 rounded-full border transition-all duration-500 shadow-xl whitespace-nowrap flex items-center justify-center
+                className={`w-[55vw] sm:w-[50vw] text-[9px] font-mono font-bold uppercase tracking-widest select-none px-4 py-3 rounded-[4px] border transition-all duration-500 shadow-xl whitespace-nowrap flex items-center justify-center
                   ${isDarkMode 
-                    ? 'bg-white text-black border-white' 
-                    : 'bg-black text-white border-black'
+                    ? 'bg-brand-primary text-white border-brand-primary' 
+                    : 'bg-brand-third text-black border-brand-third'
                   }`}
               >
                 {isDarkMode ? 'light was better, right?' : 'do you like it dark?'}
@@ -500,18 +571,18 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
           )}
 
           <div
-               className="w-[50vw] sm:w-[45vw] md:w-[42vw] lg:w-[30vw] xl:w-[27vw] 2xl:w-[24vw] max-w-[450px] max-h-[40vh] lg:max-h-[46vh] xl:max-h-none relative p-1 md:p-1.5 bg-white/10 backdrop-blur-md rounded-[12px] border border-white/20 shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer"
+               className="w-[60vw] sm:w-[54vw] md:w-[42vw] lg:w-[30vw] xl:w-[27vw] 2xl:w-[24vw] max-w-[450px] max-h-[40vh] lg:max-h-[46vh] xl:max-h-none relative p-1 md:p-1.5 rounded-[4px] shadow-2xl overflow-hidden group/frame pointer-events-auto h-auto cursor-pointer transition-all duration-500 bg-brand-secondary"
                onMouseEnter={() => !isMobile && setIsHovered(true)}
                onMouseLeave={() => !isMobile && setIsHovered(false)}
                onClick={() => isMobile && setIsHovered(!isHovered)}
           >
             {/* Soft Glow Background */}
-            <div className="absolute -inset-2 bg-gradient-to-br from-[#F5C518] to-[#FF6B9D] opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
+            <div className="absolute -inset-2 bg-brand-primary opacity-30 blur-2xl group-hover/frame:opacity-50 transition-opacity duration-700" />
             
             {/* Modern Frame */}
             <div 
               data-cursor-hidden
-              className="relative z-10 w-full h-auto overflow-hidden rounded-[10px] group/frame cursor-none"
+              className="relative z-10 w-full h-auto overflow-hidden rounded-[4px] group/frame cursor-none"
             >
               <img
                 src="/images/hero-portrait.png"
@@ -571,7 +642,7 @@ export function HeroSection({ isIntroDone }: { isIntroDone: boolean }) {
                     text="Crafting immersive digital experiences that blur the line between code and art using cutting-edge React & GSAP."
                     triggerOnInit={isIntroDone}
                     delay={0.5}
-                    className="text-gray-600 dark:text-gray-300 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 dark:bg-black/20 backdrop-blur-md p-3 rounded-xl border border-white/20 dark:border-white/10 shadow-sm leading-relaxed justify-center transition-colors duration-700"
+                    className="text-gray-600 dark:text-gray-300 font-medium text-[11px] md:text-xs max-w-[240px] md:max-w-xs bg-white/40 dark:bg-black/20 backdrop-blur-md p-3 rounded-[4px] border border-white/20 dark:border-white/10 shadow-sm leading-relaxed justify-center transition-colors duration-700"
                   />
                 </div>
               </motion.div>

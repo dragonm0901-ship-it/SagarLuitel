@@ -8,10 +8,10 @@ module.exports = {
         sans: ['"Josefin Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
-        white: '#FEF9EF',
-        'brand-yellow': '#F5C518',
-        'brand-pink': '#FF6B9D',
-        'brand-orange': '#FF8C42',
+        white: '#F7F7F9',
+        'brand-primary': '#0f7bff',
+        'brand-secondary': '#151517',
+        'brand-third': '#ff930f',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -68,6 +68,11 @@ module.exports = {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {

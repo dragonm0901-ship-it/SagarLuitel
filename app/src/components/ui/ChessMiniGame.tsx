@@ -273,7 +273,7 @@ export function ChessMiniGame() {
           }}
           className="relative z-10 w-9 h-9 md:w-14 md:h-14 bg-black dark:bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-300 border border-white/10 dark:border-black/10 group overflow-hidden flex-shrink-0"
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B9D]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-brand-third/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <KnightHorseIcon className="w-4 h-4 md:w-6 md:h-6 text-white dark:text-black relative z-10" />
         </button>
 
@@ -298,7 +298,7 @@ export function ChessMiniGame() {
       {/* Game Modal */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
+          <div className="fixed inset-0 z-[20000] flex items-center justify-center px-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -311,13 +311,13 @@ export function ChessMiniGame() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-2xl bg-[#0A0A0A] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+              className="relative w-full max-w-2xl bg-[#0A0A0A] border border-white/10 rounded-[4px] overflow-hidden shadow-2xl"
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
                   <div>
                     <h3 className="text-xl font-bold text-white">Play vs AI</h3>
-                    <p className="text-sm text-[#FF6B9D] font-medium">
+                    <p className="text-sm text-brand-third dark:text-brand-primary font-medium">
                       {isAiThinking ? "AI is plotting..." : (selectedPieceId ? "Now click an empty square to move" : "Your turn: Click a White piece to select")}
                     </p>
                   </div>
@@ -329,7 +329,7 @@ export function ChessMiniGame() {
                   </button>
                 </div>
 
-                <div className="relative aspect-square w-full rounded-xl overflow-hidden border border-white/10 select-none">
+                <div className="relative aspect-square w-full rounded-[4px] overflow-hidden border border-white/10 select-none">
                   {/* Grid */}
                   <div className="absolute inset-0 grid grid-cols-8 grid-rows-8">
                     {Array.from({ length: 64 }).map((_, i) => {
@@ -378,8 +378,8 @@ export function ChessMiniGame() {
                         transition={{ type: "spring", stiffness: 200, damping: 25 }}
                         className={cn(
                           "absolute w-[12.5%] h-[12.5%] flex items-center justify-center pointer-events-none",
-                          piece.color === 'white' ? "text-white" : "text-[#FF6B9D]",
-                          selectedPieceId === piece.id ? "drop-shadow-[0_0_15px_rgba(255,255,255,1)] z-10" : "z-0"
+                          piece.color === 'white' ? "text-brand-primary" : "text-brand-third",
+                          selectedPieceId === piece.id ? (piece.color === 'white' ? "drop-shadow-[0_0_15px_rgba(15,123,255,1)] z-10" : "drop-shadow-[0_0_15px_rgba(255,147,15,1)] z-10") : "z-0"
                         )}
                       >
                         <PieceIcon type={piece.type} className="w-3/5 h-3/5 drop-shadow-md" />
@@ -401,9 +401,9 @@ export function ChessMiniGame() {
                     <motion.div 
                       initial={{ scale: 0.9, y: 20 }}
                       animate={{ scale: 1, y: 0 }}
-                      className="bg-[#1A1A1A] border border-[#FF6B9D]/30 p-8 rounded-2xl text-center max-w-sm w-full shadow-[0_0_50px_rgba(255,107,157,0.1)]"
+                      className="bg-[#1A1A1A] border border-brand-third/30 p-8 rounded-[4px] text-center max-w-sm w-full shadow-[0_0_50px_rgba(255,147,15,0.1)]"
                     >
-                      <KnightHorseIcon className="w-12 h-12 text-[#FF6B9D] mx-auto mb-4" />
+                      <KnightHorseIcon className="w-12 h-12 text-brand-third mx-auto mb-4" />
                       <h4 className="text-2xl font-bold text-white mb-2">Checkmate.</h4>
                       <p className="text-gray-400 mb-6 leading-relaxed">
                         You lost because it's my game. Better luck next time.

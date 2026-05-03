@@ -12,12 +12,14 @@ import { ServicesSection } from '@/sections/ServicesSection';
 import { PortfolioSection } from '@/sections/PortfolioSection';
 import { ContactCTA } from '@/sections/ContactCTA';
 import { Footer } from '@/sections/Footer';
-import { CustomCursor } from '@/components/ui/CustomCursor';
+import { SmoothCursor } from '@/components/ui/smooth-cursor';
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
 import { LiquidBackground } from '@/components/ui/LiquidBackground';
 import { PremiumIntro } from '@/components/ui/PremiumIntro';
+import { Loader } from '@/components/ui/Loader';
 import MeshGradient from '@/components/ui/MeshGradient';
 import { ChessMiniGame } from '@/components/ui/ChessMiniGame';
+import { ScrollToTopButton } from '@/components/ui/ScrollToTopButton';
 
 // Lazy Loaded Routes for Performance
 const StoreSection = lazy(() => import('@/sections/StoreSection').then(m => ({ default: m.StoreSection })));
@@ -77,28 +79,28 @@ function HomePage({ isIntroDone }: { isIntroDone: boolean }) {
 const logEasterEgg = () => {
   console.log(
     '%c100  %c100  %c100  %c100',
-    'color: #22C55E; font-size: 32px; font-weight: bold; background: #000; padding: 10px; border-radius: 8px 0 0 8px;',
-    'color: #22C55E; font-size: 32px; font-weight: bold; background: #000; padding: 10px;',
-    'color: #22C55E; font-size: 32px; font-weight: bold; background: #000; padding: 10px;',
-    'color: #22C55E; font-size: 32px; font-weight: bold; background: #000; padding: 10px; border-radius: 0 8px 8px 0;'
+    'color: #ff930f; font-size: 32px; font-weight: bold; background: #2B2D42; padding: 10px; border-radius: 8px 0 0 8px;',
+    'color: #ff930f; font-size: 32px; font-weight: bold; background: #2B2D42; padding: 10px;',
+    'color: #ff930f; font-size: 32px; font-weight: bold; background: #2B2D42; padding: 10px;',
+    'color: #ff930f; font-size: 32px; font-weight: bold; background: #2B2D42; padding: 10px; border-radius: 0 8px 8px 0;'
   );
   console.log(
     '%cPERFORMANCE  %cACCESSIBILITY  %cBEST PRACTICES  %cSEO',
-    'color: white; font-size: 10px; font-weight: bold; background: #000; padding: 4px; margin-top: -10px',
-    'color: white; font-size: 10px; font-weight: bold; background: #000; padding: 4px; margin-top: -10px',
-    'color: white; font-size: 10px; font-weight: bold; background: #000; padding: 4px; margin-top: -10px',
-    'color: white; font-size: 10px; font-weight: bold; background: #000; padding: 4px; margin-top: -10px'
+    'color: white; font-size: 10px; font-weight: bold; background: #2B2D42; padding: 4px; margin-top: -10px',
+    'color: white; font-size: 10px; font-weight: bold; background: #2B2D42; padding: 4px; margin-top: -10px',
+    'color: white; font-size: 10px; font-weight: bold; background: #2B2D42; padding: 4px; margin-top: -10px',
+    'color: white; font-size: 10px; font-weight: bold; background: #2B2D42; padding: 4px; margin-top: -10px'
   );
   console.log(
     '%cHey there, Inspector! \nWe take performance seriously. Welcome to the console.',
-    'color: #FF6B9D; font-size: 14px; font-weight: bold;'
+    'color: #0f7bff; font-size: 14px; font-weight: bold;'
   );
 };
 
 // Professional Suspense Fallback
 const PageLoader = () => (
-  <div className="min-h-[80vh] flex flex-col items-center justify-center bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700">
-    <div className="w-12 h-12 rounded-full border-2 border-[#FF6B9D]/20 border-t-[#FF6B9D] animate-spin" />
+  <div className="min-h-[80vh] flex flex-col items-center justify-center bg-white dark:bg-brand-secondary transition-colors duration-700">
+    <Loader size="80px" />
     <span className="mt-4 font-mono text-[9px] uppercase tracking-[0.3em] text-gray-400">Loading Wizardry</span>
   </div>
 );
@@ -107,7 +109,7 @@ function AppRoutes({ loading }: { loading: boolean }) {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700">
+    <div className="min-h-screen bg-white dark:bg-brand-secondary transition-colors duration-300 md:duration-700">
       <Navbar />
       <main>
         <Suspense fallback={<PageLoader />}>
@@ -152,10 +154,11 @@ function App() {
       <ScrollToTop />
       <SmoothScroll>
         <PremiumIntro onComplete={handleComplete} />
-        <CustomCursor />
+        <SmoothCursor />
         <LiquidBackground />
         <GrainOverlay />
         <ChessMiniGame />
+        <ScrollToTopButton />
         <AppRoutes loading={loading} />
       </SmoothScroll>
     </Router>

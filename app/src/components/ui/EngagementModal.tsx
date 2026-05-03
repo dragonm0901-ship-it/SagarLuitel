@@ -65,7 +65,7 @@ export function EngagementModal({ isOpen, onClose }: EngagementModalProps) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-5xl bg-[#0A0A0A]/95 border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 overflow-y-auto max-h-[90vh] shadow-[0_0_50px_rgba(0,0,0,0.5)] scrollbar-hide"
+            className="relative w-full max-w-5xl bg-[#0A0A0A]/95 border border-white/10 rounded-[4px] md:rounded-[4px] p-6 md:p-12 overflow-y-auto max-h-[90vh] shadow-[0_0_50px_rgba(0,0,0,0.5)] scrollbar-hide"
           >
             {/* Background Decorative Gradients */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#F5C518]/10 blur-[100px] -z-10 rounded-full hidden md:block" />
@@ -93,10 +93,10 @@ export function EngagementModal({ isOpen, onClose }: EngagementModalProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="group relative p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-500"
+                  className="group relative p-6 md:p-8 rounded-[4px] md:rounded-[4px] bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-500"
                 >
                   <div 
-                    className="p-3 md:p-4 w-fit rounded-xl md:rounded-2xl mb-4 md:mb-6 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg"
+                    className="p-3 md:p-4 w-fit rounded-[4px] md:rounded-[4px] mb-4 md:mb-6 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg"
                     style={{ backgroundColor: model.color }}
                   >
                     <model.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />

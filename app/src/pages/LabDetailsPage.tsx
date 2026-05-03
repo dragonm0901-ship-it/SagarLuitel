@@ -2,11 +2,10 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  ChevronLeft, Info, Cpu, Activity, MousePointer2, Layers, Rocket, ArrowRight,
+  ChevronLeft, ChevronRight, Info, Cpu, Activity, MousePointer2, Layers, Rocket,
   Compass, Zap, Magnet, Infinity as InfinityIcon, Variable, Type as TypeIcon, Move, Waves
 } from 'lucide-react';
 import { experiments } from '@/data/experiments';
-import type { Experiment } from '@/data/experiments';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -27,7 +26,7 @@ gsap.registerPlugin(ScrollTrigger);
 const GsapScrollDemo = ({ progress = 0 }) => {
   const innerRef = useRef<HTMLDivElement>(null);
   const cards = [
-    { title: "Dynamic Architecture", icon: Layers, color: "#F5C518" },
+    { title: "Dynamic Architecture", icon: Layers, color: "#0f7bff" },
     { title: "Liquid Motion", icon: Activity, color: "#FF6B9D" },
     { title: "Quantum Physics", icon: Cpu, color: "#22C55E" },
     { title: "Orchestrated GSAP", icon: Rocket, color: "#3B82F6" },
@@ -65,7 +64,7 @@ const GsapScrollDemo = ({ progress = 0 }) => {
       <div ref={innerRef} className="flex gap-4 md:gap-12 px-6 md:px-20 items-center">
         <div className="flex flex-col gap-1 md:gap-4 min-w-[180px] md:min-w-[400px]">
           <h2 className="text-xl md:text-8xl font-serif font-black text-white leading-none tracking-tighter transition-transform duration-500">
-            SCROLL <br/> <span className="text-[#F5C518]">TECH</span>.
+            SCROLL <br/> <span className="text-brand-third dark:text-brand-primary">TECH</span>.
           </h2>
           <p className="text-gray-500 font-mono text-[7px] md:text-xs uppercase tracking-widest leading-relaxed">
              Sequential Orchestration. <br/> Senior Grade UI.
@@ -75,17 +74,17 @@ const GsapScrollDemo = ({ progress = 0 }) => {
         {cards.map((card, i) => (
           <div 
             key={i} 
-            className="scroll-card min-w-[200px] md:min-w-[350px] aspect-[4/5] bg-white/5 border border-white/10 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 flex flex-col justify-between group hover:border-[#F5C518]/30 transition-all duration-500"
+            className="scroll-card min-w-[200px] md:min-w-[350px] aspect-[4/5] bg-white/5 border border-white/10 rounded-[4px] md:rounded-[4px] p-6 md:p-10 flex flex-col justify-between group hover:border-brand-primary/30 transition-all duration-500"
           >
             <div 
-              className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-500"
+              className="w-16 h-16 rounded-[4px] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-500"
               style={{ backgroundColor: card.color + '22', color: card.color }}
             >
               <card.icon className="w-8 h-8" />
             </div>
             <div>
               <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 block font-bold">Experiment 0{i+1}</span>
-              <h3 className="text-2xl font-bold text-white group-hover:text-[#F5C518] transition-colors">{card.title}</h3>
+              <h3 className="text-2xl font-bold text-white group-hover:text-brand-primary transition-colors">{card.title}</h3>
             </div>
           </div>
         ))}
@@ -234,10 +233,7 @@ const LenisDynamics = () => {
 }
 
 const SyncMarquee = ({ progress = 0 }) => {
-   const [speed, setSpeed] = useState(1);
-   useEffect(() => {
-      setSpeed(1 + (progress > 0 && progress < 1 ? 5 : 0));
-   }, [progress]);
+   const speed = 1 + (progress > 0 && progress < 1 ? 5 : 0);
 
    const renderLine = (text: string, direction: 1 | -1) => (
       <div className="flex whitespace-nowrap overflow-hidden py-12 border-y border-white/5 hover:bg-white/5 transition-colors group">
@@ -275,15 +271,15 @@ const GlassHoverEngine = () => {
    };
 
    return (
-      <div ref={containerRef} onMouseMove={handleMouseMove} className="h-full w-full bg-[#0A0A0A] grid grid-cols-2 md:grid-cols-3 p-8 md:p-16 gap-4">
+      <div ref={containerRef} onMouseMove={handleMouseMove} className="h-full w-full bg-brand-secondary grid grid-cols-2 md:grid-cols-3 p-8 md:p-16 gap-4">
          {[...Array(9)].map((_, i) => (
-            <div key={i} className="relative rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md overflow-hidden group">
+            <div key={i} className="relative rounded-[4px] border border-white/5 bg-white/[0.02] backdrop-blur-md overflow-hidden group">
                <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{ background: `radial-gradient(200px circle at ${mousePos.x - (i % 3) * 300}px ${mousePos.y - Math.floor(i / 3) * 300}px, rgba(245, 197, 24, 0.15), transparent 80%)` }}
                />
                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-mono text-white">
+                  <div className="w-12 h-12 rounded-[4px] bg-white/5 border border-white/10 flex items-center justify-center font-mono text-white">
                      {i + 1}
                   </div>
                </div>
@@ -363,11 +359,11 @@ const SvgMorphLab = () => {
          </div>
 
          {/* Navigation Suite */}
-         <div className="z-20 mt-12 flex gap-4 p-2 bg-white/5 rounded-2xl backdrop-blur-3xl border border-white/10 shadow-2xl">
+         <div className="z-20 mt-12 flex gap-4 p-2 bg-white/5 rounded-[4px] backdrop-blur-3xl border border-white/10 shadow-2xl">
             {(["AQUATIC", "CRYSTALLINE", "VOLATILE"] as const).map(m => (
                <button 
                   key={m} onClick={() => setMode(m)}
-                  className={`px-8 py-3 rounded-xl text-[10px] font-mono uppercase tracking-[0.3em] font-black transition-all ${
+                  className={`px-8 py-3 rounded-[4px] text-[10px] font-mono uppercase tracking-[0.3em] font-black transition-all ${
                      mode === m ? 'bg-[#F5C518] text-black shadow-[0_0_20px_rgba(245,197,24,0.4)]' : 'text-white/40 hover:text-white'
                   }`}
                >
@@ -428,10 +424,10 @@ const DraggablePhysicsLab = () => {
          {items.map((item) => (
             <motion.div 
                key={item.id} drag dragConstraints={containerRef} dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }} whileDrag={{ scale: 1.1, cursor: "grabbing" }}
-               className="absolute w-24 h-24 md:w-48 md:h-48 rounded-[2rem] md:rounded-[2.5rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-2 md:gap-4 cursor-grab backdrop-blur-xl shadow-2xl transition-colors hover:border-white/20"
+               className="absolute w-24 h-24 md:w-48 md:h-48 rounded-[4px] md:rounded-[4px] bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-2 md:gap-4 cursor-grab backdrop-blur-xl shadow-2xl transition-colors hover:border-white/20"
                style={{ left: `${15 + item.id * 15}%`, top: `${20 + (item.id % 2) * 20}%` }}
             >
-               <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: item.color + '22', color: item.color }}>
+               <div className="w-12 h-12 rounded-[4px] flex items-center justify-center" style={{ backgroundColor: item.color + '22', color: item.color }}>
                   <Layers className="w-6 h-6" />
                </div>
                <span className="text-[10px] font-mono uppercase tracking-widest text-white font-black">{item.label}</span>
@@ -451,10 +447,10 @@ const CanvasLiquidDistortion = () => {
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
-      let width = canvas.width = canvas.offsetWidth;
-      let height = canvas.height = canvas.offsetHeight;
-      let mouse = { x: width / 2, y: height / 2 };
-      let particles: {x: number, y: number, ox: number, oy: number}[] = [];
+      const width = canvas.width = canvas.offsetWidth;
+      const height = canvas.height = canvas.offsetHeight;
+      const mouse = { x: width / 2, y: height / 2 };
+      const particles: {x: number, y: number, ox: number, oy: number}[] = [];
       const spacing = 30;
       for(let y = 0; y < height; y += spacing) {
          for(let x = 0; x < width; x += spacing) {
@@ -507,7 +503,7 @@ const CanvasLiquidDistortion = () => {
 const DefaultPlaceholder = ({ title }: { title: string }) => (
    <div className="h-full w-full flex flex-col items-center justify-center bg-[#0A0A0A] text-white p-12 text-center">
       <div className="w-16 h-16 rounded-full border-4 border-white/5 border-t-[#F5C518] animate-spin mb-8" />
-      <h2 className="text-2xl md:text-3xl font-serif mb-2">{title}</h2>
+            <h2 className="text-3xl md:text-5xl font-serif mb-2">{title}</h2>
       <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest italic opacity-50">Demo In Development</p>
    </div>
 );
@@ -517,17 +513,14 @@ const DefaultPlaceholder = ({ title }: { title: string }) => (
 export function LabDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [experiment, setExperiment] = useState<Experiment | null>(null);
+  const experiment = experiments.find(e => e.id === id);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const found = experiments.find(e => e.id === id);
-    if (found) {
-      setExperiment(found);
-    } else {
+    if (!experiment && id) {
       navigate('/lab');
     }
-  }, [id, navigate]);
+  }, [id, navigate, experiment]);
 
   useEffect(() => {
     if (!experiment) return;
@@ -576,7 +569,7 @@ export function LabDetailsPage() {
       <div className="hidden lg:block fixed top-24 left-12 z-[999] pointer-events-auto">
          <button 
             onClick={(e) => { e.stopPropagation(); navigate('/lab'); }}
-            className="flex items-center justify-center bg-[#F5C518] text-black px-6 py-3 rounded-full hover:text-white transition-all group shadow-2xl active:scale-95"
+            className="flex items-center justify-center bg-brand-third dark:bg-brand-primary text-black dark:text-white px-6 py-3 rounded-[4px] transition-all group shadow-2xl active:scale-95"
          >
             <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span className="ml-2 text-[10px] font-mono uppercase tracking-[0.2em] font-black">Back to Hub</span>
@@ -597,14 +590,14 @@ export function LabDetailsPage() {
                <div className="lg:hidden mb-10">
                   <button 
                     onClick={() => navigate('/lab')}
-                    className="flex items-center justify-center bg-[#F5C518] text-black w-7 h-7 rounded-full shadow-lg active:scale-90 transition-transform"
+                    className="flex items-center justify-center bg-brand-third dark:bg-brand-primary text-black dark:text-white w-7 h-7 rounded-[4px] shadow-lg active:scale-90 transition-transform"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                </div>
 
                <div className="flex items-center gap-3 mb-6 md:mb-8">
-                  <div className="p-2 rounded-xl md:p-2.5 bg-[#F5C518] text-black shadow-lg">
+                  <div className="p-2 rounded-[4px] md:p-2.5 bg-brand-third dark:bg-brand-primary text-white shadow-lg transition-colors duration-700">
                      <ExperimentIcon name={experiment.icon} />
                   </div>
                   <span className="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-widest font-bold">{experiment.category}</span>
@@ -615,10 +608,10 @@ export function LabDetailsPage() {
                   </div>
                </div>
                
-               <h1 className="text-4xl md:text-8xl font-serif font-black text-[#1A1A1A] dark:text-white leading-[1.1] md:leading-[0.85] tracking-tighter mb-8">
+               <h1 className="text-4xl md:text-8xl font-serif font-black text-brand-secondary dark:text-white leading-[1.1] md:leading-[0.85] tracking-tighter mb-8">
                   {experiment.title}
                </h1>
-               <p className="text-lg md:text-2xl text-gray-400 dark:text-gray-500 leading-relaxed italic border-l-4 border-[#F5C518]/30 pl-6">
+               <p className="text-lg md:text-2xl text-gray-400 dark:text-gray-500 leading-relaxed italic border-l-4 border-brand-third/30 dark:border-brand-primary/30 pl-6">
                   "{experiment.description}"
                </p>
                
@@ -648,10 +641,10 @@ export function LabDetailsPage() {
             <div className="lg:col-span-8 space-y-16">
                <div className="prose prose-2xl dark:prose-invert max-w-none">
                   <h3 className="text-3xl md:text-5xl font-serif font-bold dark:text-white mb-10 inline-flex items-center gap-4">
-                     <Info className="w-10 h-10 text-[#F5C518]" />
+                     <Info className="w-10 h-10 text-brand-third dark:text-brand-primary transition-colors duration-700" />
                      Technical Briefing
                   </h3>
-                  <div className="h-px w-20 bg-[#F5C518] mb-10" />
+                  <div className="h-px w-20 bg-brand-third dark:bg-brand-primary transition-colors duration-700 mb-10" />
                   <p className="text-gray-600 dark:text-gray-400 leading-[1.6] text-xl md:text-2xl">
                      {experiment.explanation}
                   </p>
@@ -660,30 +653,30 @@ export function LabDetailsPage() {
 
             {/* Sidebar Metrics */}
             <div className="lg:col-span-4 space-y-10">
-               <div className="p-10 rounded-[3rem] bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-2xl transition-all hover:scale-[1.02]">
+               <div className="p-10 rounded-[4px] bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-2xl transition-all hover:scale-[1.02]">
                   <h4 className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.3em] text-gray-400 mb-8 font-black">
-                     <Cpu className="w-4 h-4 text-[#F5C518]" />
+                     <Cpu className="w-4 h-4 text-brand-third dark:text-brand-primary transition-colors duration-700" />
                      Engineering Stack
                   </h4>
                   <div className="flex flex-wrap gap-2">
                      {experiment.tech.map(t => (
-                        <span key={t} className="px-4 py-2 rounded-xl bg-gray-50 dark:bg-white/10 text-gray-700 dark:text-white text-[11px] font-mono uppercase font-black transition-colors">
+                        <span key={t} className="px-4 py-2 rounded-[4px] bg-gray-50 dark:bg-white/10 text-gray-700 dark:text-white text-[11px] font-mono uppercase font-black transition-colors">
                            {t}
                         </span>
                      ))}
                   </div>
                </div>
 
-               <div className="p-10 rounded-[3rem] bg-black text-white shadow-[0_30px_60px_rgba(0,0,0,0.4)] relative overflow-hidden transition-all hover:scale-[1.02]">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#F5C518] to-transparent opacity-10 rounded-full blur-3xl" />
+               <div className="p-10 rounded-[4px] bg-black text-white shadow-[0_30px_60px_rgba(0,0,0,0.4)] relative overflow-hidden transition-all hover:scale-[1.02]">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-primary to-transparent opacity-10 rounded-full blur-3xl" />
                   <h4 className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.3em] text-gray-400 mb-8 font-black">
-                     <Rocket className="w-4 h-4 text-[#F5C518]" />
+                     <Rocket className="w-4 h-4 text-brand-third dark:text-brand-primary transition-colors duration-700" />
                      Vitals & Analytics
                   </h4>
                   <ul className="space-y-5">
                      {['60 FPS Sustained', 'Zero Layout Thrashing', 'GPU Bound Rendering'].map(metric => (
                         <li key={metric} className="flex items-center gap-3 text-xs text-gray-300 font-bold">
-                           <div className="w-1.5 h-1.5 rounded-full bg-[#F5C518] shadow-[0_0_10px_#F5C518]" />
+                           <div className="w-1.5 h-1.5 rounded-full bg-brand-third dark:bg-brand-primary shadow-[0_0_10px_rgba(245,197,24,0.4)] dark:shadow-[0_0_10px_#0f7bff]" />
                            {metric}
                         </li>
                      ))}
@@ -710,7 +703,7 @@ export function LabDetailsPage() {
                            navigate(`/lab/${experiments[prevIdx].id}`);
                            window.scrollTo(0, 0);
                         }}
-                        className="group px-6 py-4 bg-white text-black rounded-full text-[10px] font-mono uppercase font-black tracking-[0.3em] hover:bg-[#F5C518] hover:scale-105 active:scale-95 transition-all shadow-2xl flex items-center gap-3"
+                        className="group px-6 py-4 bg-white dark:bg-white/5 text-black dark:text-white rounded-[4px] text-[10px] font-mono uppercase font-black tracking-[0.3em] hover:bg-brand-third dark:hover:bg-brand-primary hover:text-black dark:hover:text-white hover:scale-105 active:scale-95 transition-all shadow-2xl flex items-center gap-3"
                      >
                         <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                         PREV
@@ -723,10 +716,10 @@ export function LabDetailsPage() {
                            navigate(`/lab/${experiments[nextIdx].id}`);
                            window.scrollTo(0, 0);
                         }}
-                        className="group px-6 py-4 bg-white text-black rounded-full text-[10px] font-mono uppercase font-black tracking-[0.3em] hover:bg-[#F5C518] hover:scale-105 active:scale-95 transition-all shadow-2xl flex items-center gap-3"
+                        className="group px-6 py-4 bg-white dark:bg-white/5 text-black dark:text-white rounded-[4px] text-[10px] font-mono uppercase font-black tracking-[0.3em] hover:bg-brand-third dark:hover:bg-brand-primary hover:text-black dark:hover:text-white hover:scale-105 active:scale-95 transition-all shadow-2xl flex items-center gap-3"
                      >
                         NEXT
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                      </button>
                   </div>
                </div>

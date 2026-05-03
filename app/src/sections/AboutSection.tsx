@@ -72,15 +72,15 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 lg:py-32 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-24 lg:py-32 bg-white dark:bg-brand-secondary transition-colors duration-700 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left Content */}
           <h2
             ref={headingRef}
-            className="font-bold text-[#1A1A1A] dark:text-white leading-tight"
+            className="font-bold text-brand-secondary dark:text-white leading-tight"
           >
-            Harmonizing <span className="text-gray-400 dark:text-gray-500">technical mastery with</span>{' '}
+            Harmonizing <span className="text-brand-third dark:text-brand-primary transition-colors duration-700">technical mastery with</span>{' '}
             aesthetic vision to conjure digital experiences that feel like magic.
           </h2>
 
@@ -95,13 +95,13 @@ export function AboutSection() {
             <button ref={buttonRef}>
             <Link
               to="/about"
-              className="group relative inline-block bg-gradient-to-r from-[#FF6B9D] to-[#FF8C42] text-white px-8 py-3.5 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-pink-500/25 mt-4"
+              className="group relative inline-block bg-brand-secondary dark:bg-brand-primary text-white px-8 py-3.5 rounded-[4px] font-bold text-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-brand-primary/25 mt-4"
             >
               <span className="relative z-10 flex items-center gap-2">
                 About Me
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C42] to-[#FF6B9D] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-black dark:bg-brand-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
             </button>
           </div>

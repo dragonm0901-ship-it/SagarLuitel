@@ -20,7 +20,7 @@ export function ProjectsPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 pt-32 pb-24"
+      className="min-h-screen bg-white dark:bg-brand-secondary transition-colors duration-0 md:duration-700 pt-32 pb-24"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
@@ -30,8 +30,8 @@ export function ProjectsPage() {
           transition={{ duration: 0.8 }}
           className="mb-16 md:mb-24"
         >
-          <h1 className="text-4xl md:text-8xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 leading-[1.1] md:leading-[0.85] tracking-tighter mb-6">
-            The Full <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B9D] to-[#F5C518] pr-2">Impact Collection</span>
+          <h1 className="text-4xl md:text-8xl font-serif font-black text-brand-secondary dark:text-white transition-colors duration-700 leading-[1.1] md:leading-[0.85] tracking-tighter mb-6">
+            The Full <span className="text-brand-third pr-2">Impact Collection</span>
           </h1>
           <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-base md:text-xl max-w-2xl leading-relaxed">
             A comprehensive showcase of strategy, technical orchestration, and high-performance engineering.
@@ -59,7 +59,7 @@ export function ProjectsPage() {
            whileInView={{ opacity: 1 }}
            className="mt-32 pt-24 border-t border-gray-100 dark:border-white/5 text-center"
         >
-           <h2 className="text-2xl md:text-4xl font-serif font-black text-[#1A1A1A] dark:text-white mb-6">Want to see more logic?</h2>
+           <h2 className="text-2xl md:text-4xl font-serif font-black text-brand-secondary dark:text-white mb-6">Want to see more logic?</h2>
            <p className="text-gray-500 dark:text-gray-400 mb-12 max-w-lg mx-auto">
               Check out the Lab for experiments or buy templates in the Store.
            </p>

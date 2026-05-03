@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -8,22 +8,20 @@ import {
   CheckCircle2,
   Info
 } from 'lucide-react';
-import { storeProducts, type StoreProduct } from '@/data/storeProducts';
+import { storeProducts } from '@/data/storeProducts';
 
 export function StoreProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState<StoreProduct | null>(null);
+  const product = storeProducts.find(p => p.id === id);
 
   useEffect(() => {
-    const found = storeProducts.find(p => p.id === id);
-    if (found) {
-      setProduct(found);
-      window.scrollTo(0, 0);
-    } else {
+    if (!product && id) {
       navigate('/');
+    } else {
+      window.scrollTo(0, 0);
     }
-  }, [id, navigate]);
+  }, [id, navigate, product]);
 
   if (!product) return null;
 
@@ -34,13 +32,13 @@ export function StoreProductPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-32 pb-24 transition-colors duration-700"
+      className="min-h-screen bg-white dark:bg-brand-secondary pt-32 pb-24 transition-colors duration-700"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Navigation */}
         <button 
           onClick={() => navigate('/store')}
-          className="group flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-black dark:hover:text-white transition-all mb-12"
+          className="group flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-brand-third dark:hover:text-white transition-all mb-12"
         >
           <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Back to Store
@@ -53,7 +51,7 @@ export function StoreProductPage() {
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-2xl"
+                className="w-20 h-20 rounded-[4px] flex items-center justify-center mb-8 shadow-2xl"
                 style={{ backgroundColor: product.color }}
               >
                 <Icon className="w-10 h-10 text-white" />
@@ -104,7 +102,7 @@ export function StoreProductPage() {
             {product.features && (
               <div className="grid md:grid-cols-2 gap-6 mb-16">
                 {product.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-4 p-6 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
+                  <div key={i} className="flex items-start gap-4 p-6 rounded-[4px] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
                     <CheckCircle2 className="w-5 h-5 mt-0.5" style={{ color: product.color }} />
                     <span className="text-sm font-medium text-black dark:text-white">{feature}</span>
                   </div>
@@ -117,7 +115,7 @@ export function StoreProductPage() {
           <div className="lg:col-span-5">
             <div className="sticky top-40 space-y-8">
               {/* Package Details Box */}
-              <div className="p-8 md:p-10 rounded-[2.5rem] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-xl">
+              <div className="p-8 md:p-10 rounded-[4px] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-xl">
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-8">
                     <Package className="w-5 h-5" style={{ color: product.color }} />
@@ -141,7 +139,7 @@ export function StoreProductPage() {
                       <span className="text-3xl md:text-4xl font-serif font-bold text-black dark:text-white">{product.price}</span>
                     </div>
                     <button 
-                      className="w-full sm:w-auto px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-xl"
+                      className="w-full sm:w-auto px-8 py-4 bg-brand-secondary dark:bg-white text-white dark:text-brand-secondary rounded-full font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-xl"
                       style={{ backgroundColor: product.color, color: 'white' }}
                     >
                       Acquire Now
@@ -151,7 +149,7 @@ export function StoreProductPage() {
               </div>
 
               {/* Sagar Contact CTA */}
-              <div className="p-8 md:p-10 rounded-[2.5rem] bg-black text-white shadow-[0_30px_60px_rgba(0,0,0,0.3)] relative overflow-hidden group">
+              <div className="p-8 md:p-10 rounded-[4px] bg-black text-white shadow-[0_30px_60px_rgba(0,0,0,0.3)] relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
                 
                 <h4 className="text-xl font-serif font-black mb-4 relative z-10">
@@ -160,7 +158,7 @@ export function StoreProductPage() {
                 <p className="text-gray-400 text-sm mb-8 leading-relaxed relative z-10">
                   Want to view all? <button 
                     onClick={() => window.open('https://wa.me/#', '_blank')}
-                    className="text-[#FF6B9D] hover:text-[#F5C518] font-bold underline underline-offset-4 transition-colors"
+                    className="text-brand-third hover:text-brand-primary font-bold underline underline-offset-4 transition-colors"
                   >
                     Contact Sagar
                   </button>

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
+import { Loader } from './Loader';
+import { DiaTextReveal } from './DiaTextReveal';
+import { NumberTicker } from './NumberTicker';
 
 export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
   const [complete, setComplete] = useState(false);
@@ -49,58 +52,35 @@ export function PremiumIntro({ onComplete }: { onComplete: () => void }) {
     <AnimatePresence>
       {!complete && (
         <motion.div
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-white dark:bg-[#0A0A0A] transition-colors duration-700 intro-bg"
+          className="fixed inset-0 z-[10005] flex items-center justify-center bg-white dark:bg-brand-secondary transition-colors duration-700 intro-bg"
           exit={{ opacity: 0 }}
         >
-          <div className="relative flex items-center justify-center w-[300px] h-[300px]">
-            {/* Background Circle */}
-            <div className="absolute inset-0 border border-black/[0.03] dark:border-white/[0.03] rounded-full scale-[0.85]" />
-            
-            {/* Circular Progress SVG */}
-            <svg className="absolute inset-0 w-full h-full -rotate-90">
-              <circle
-                cx="150"
-                cy="150"
-                r="135"
-                stroke="currentColor"
-                strokeWidth="1"
-                fill="transparent"
-                className="text-black/[0.05] dark:text-white/[0.05]"
-              />
-              <motion.circle
-                cx="150"
-                cy="150"
-                r="135"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                fill="transparent"
-                strokeDasharray={2 * Math.PI * 135}
-                animate={{ strokeDashoffset: (2 * Math.PI * 135) * (1 - progress / 100) }}
-                transition={{ duration: 0.1, ease: "linear" }}
-                className="text-black dark:text-white"
-                strokeLinecap="round"
-              />
-            </svg>
+          <div className="flex flex-col items-center justify-center gap-8 w-full max-w-md px-6">
+            {/* Loader at the Top */}
+            <div className="relative flex items-center justify-center border-none">
+               <Loader size="120px" />
+            </div>
 
             {/* Centered Content */}
-            <div className="z-10 text-center">
-              <div className="overflow-hidden mb-1">
-                <h1 className="text-black dark:text-white text-2xl md:text-3xl font-bold tracking-tighter intro-text opacity-0 translate-y-20">
-                  SAGAR LUITEL
-                </h1>
+            <div className="text-center">
+              <div className="overflow-hidden intro-text opacity-0 translate-y-20">
+                <DiaTextReveal
+                  className="text-brand-secondary dark:text-white text-5xl md:text-8xl font-bold tracking-tighter"
+                  text="SAGAR"
+                  colors={["#0f7bff", "#ff930f", "#0f7bff"]}
+                  duration={2}
+                  textColor="currentColor"
+                />
               </div>
-              <div className="overflow-hidden">
-                <p className="text-[#FF6B9D] text-[8px] tracking-[0.5em] font-mono uppercase intro-text opacity-0 translate-y-20">
-                  Front-End Magician
-                </p>
-              </div>
-              
-              <div className="absolute top-[65%] left-1/2 -translate-x-1/2 w-full">
-                 <div className="flex flex-col items-center gap-1">
-                    <span className="font-mono text-[9px] text-gray-400 dark:text-gray-500 tracking-widest uppercase">Initializing</span>
-                    <span className="font-mono text-[12px] text-black dark:text-white font-bold">{progress}%</span>
-                 </div>
-              </div>
+            </div>
+
+            {/* Number Ticker at the Bottom */}
+            <div className="flex items-baseline gap-1 intro-text opacity-0 translate-y-10">
+               <NumberTicker
+                 value={progress}
+                 className="text-3xl md:text-4xl font-bold tracking-tighter text-brand-primary"
+               />
+               <span className="text-2xl md:text-3xl font-bold text-brand-primary">%</span>
             </div>
           </div>
         </motion.div>

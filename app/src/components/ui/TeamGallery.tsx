@@ -83,7 +83,11 @@ export const TeamGallery: React.FC<TeamGalleryProps> = ({ members, isDark }) => 
     if (touchStart === null) return;
     const diff = touchStart - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) {
-      diff > 0 ? handleNext() : handlePrev();
+      if (diff > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
     }
     setTouchStart(null);
     setIsPaused(false);
@@ -158,7 +162,7 @@ export const TeamGallery: React.FC<TeamGalleryProps> = ({ members, isDark }) => 
                   damping: 24,
                   mass: 0.8,
                 }}
-                className={`absolute rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer ${
+                className={`absolute rounded-[4px] md:rounded-[4px] overflow-hidden cursor-pointer ${
                   isActive
                     ? 'shadow-[0_25px_60px_rgba(0,0,0,0.35)]'
                     : 'shadow-[0_10px_30px_rgba(0,0,0,0.15)]'
@@ -208,14 +212,14 @@ export const TeamGallery: React.FC<TeamGalleryProps> = ({ members, isDark }) => 
           >
             <h3
               className={`text-xl md:text-2xl font-serif font-black tracking-tight transition-colors duration-500 ${
-                isDark ? 'text-white' : 'text-[#1A1A1A]'
+                isDark ? 'text-white' : 'text-brand-secondary'
               }`}
             >
               {members[index].name}
             </h3>
             <div
               className={`h-[2px] w-10 my-3 transition-colors duration-500 ${
-                isDark ? 'bg-[#F5C518]' : 'bg-[#1A1A1A]'
+                isDark ? 'bg-brand-primary' : 'bg-brand-secondary'
               }`}
             />
             <p
@@ -237,7 +241,7 @@ export const TeamGallery: React.FC<TeamGalleryProps> = ({ members, isDark }) => 
               aria-label={`Go to image ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-400 ${
                 i === index
-                  ? `w-7 ${isDark ? 'bg-[#F5C518]' : 'bg-[#1A1A1A]'}`
+                  ? `w-7 ${isDark ? 'bg-brand-primary' : 'bg-brand-secondary'}`
                   : `w-1.5 ${isDark ? 'bg-white/15' : 'bg-gray-300'}`
               }`}
             />

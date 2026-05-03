@@ -90,13 +90,13 @@ export function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-black text-white pt-16 md:pt-24 pb-10 overflow-hidden border-t border-white/10">
+    <footer ref={footerRef} className="bg-brand-secondary text-white pt-16 md:pt-24 pb-10 overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div ref={contentRef} className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 lg:gap-8 mb-16">
           {/* Brand Info */}
           <div className="col-span-2 md:col-span-1 space-y-4 flex flex-col items-start text-left">
             <h3 className="text-3xl md:text-4xl font-serif font-bold tracking-tighter">
-              SAGAR <span className="text-[#F5C518]">LUITEL</span>
+              SAGAR <span className="text-brand-third dark:text-brand-primary transition-colors duration-700">LUITEL</span>
             </h3>
             <p className="text-gray-400 font-mono text-[10px] uppercase tracking-widest leading-relaxed max-w-xs">
               Front End Magician & WebGL Architect. Engineering immersive digital realms for visionaries.
@@ -130,14 +130,14 @@ export function Footer() {
                 { label: 'Contact', href: '/#contact' }
               ].map((item) => (
                 <li key={item.label}>
-                  <Link to={item.href} className="text-sm text-gray-400 hover:text-[#FF6B9D] transition-colors">
+                  <Link to={item.href} className="text-sm text-gray-400 hover:text-brand-third transition-colors">
                     {item.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link to="/store" className="text-sm text-[#FF6B9D] hover:text-[#F5C518] transition-colors font-bold flex items-center gap-2">
-                  Store <span className="w-1 h-1 rounded-full bg-[#FF6B9D]" />
+                <Link to="/store" className="text-sm text-brand-primary hover:text-brand-third dark:text-brand-third dark:hover:text-brand-primary transition-colors font-bold flex items-center gap-2">
+                  Store <span className="w-1 h-1 rounded-full bg-brand-third dark:bg-brand-primary" />
                 </Link>
               </li>
             </ul>
@@ -148,7 +148,7 @@ export function Footer() {
             <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-500 mb-5">Wizardry</h4>
             <ul className="space-y-3">
               {['React Three Fiber', 'WebGL / Shaders', 'GSAP Animation', 'Performance Math', 'Frontend Architecture'].map((item) => (
-                <li key={item} className="text-sm text-gray-400 hover:text-[#F5C518] transition-colors cursor-default">{item}</li>
+                <li key={item} className="text-sm text-gray-400 hover:text-brand-primary transition-colors cursor-default">{item}</li>
               ))}
             </ul>
           </div>
@@ -161,7 +161,7 @@ export function Footer() {
               href="mailto:sagar.luitel.0909@gmail.com" 
               className="group relative text-base md:text-xl font-serif font-bold text-white transition-all duration-300 inline-block"
             >
-              <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#22C55E] group-hover:to-[#38B2AC]">
+              <span className="relative z-10 group-hover:text-brand-primary transition-colors">
                 sagar.luitel.0909@gmail.com
               </span>
             </a>

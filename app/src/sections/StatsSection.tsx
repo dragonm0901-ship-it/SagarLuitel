@@ -6,8 +6,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   { label: 'GSAP', detail: 'Complex timelines & SVG magic.', color: '#88CE02' },
-  { label: 'Lenis', detail: 'Next-gen cinematic scrolling.', color: '#FF98A2' }, // Peach color for Lenis
-  { label: 'Framer', detail: 'Declarative physics-based UI.', gradient: 'linear-gradient(135deg, #0a0a0a 0%, #808080 50%, #f4f4f5 100%)' }, // Jet black, grey, off-white
+  { label: 'Lenis', detail: 'Next-gen cinematic scrolling.', color: '#FF98A2' },
+  { label: 'Framer', detail: 'Declarative physics-based UI.', color: '#2B2D42' },
 ];
 
 export function StatsSection() {
@@ -42,7 +42,7 @@ export function StatsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="border-y border-gray-200 dark:border-white/10 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700">
+    <section ref={sectionRef} className="border-y border-gray-200 dark:border-white/5 bg-white dark:bg-brand-secondary transition-colors duration-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-white/10">
           {stats.map((stat, index) => (
@@ -55,18 +55,14 @@ export function StatsSection() {
                 className="relative inline-block text-4xl lg:text-7xl font-serif font-bold mb-4 transition-all duration-500 group-hover:scale-110"
               >
                 {/* Default Dark Text */}
-                <span className="text-[#1A1A1A] dark:text-white transition-opacity duration-300 relative z-10 group-hover:opacity-0">
+                <span className="text-brand-secondary dark:text-white transition-opacity duration-300 relative z-10 group-hover:opacity-0">
                     {stat.label}
                 </span>
 
                 {/* Hover Colored / Gradient Text Layer */}
                 <span 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 whitespace-nowrap"
-                    style={{
-                      ...(stat.gradient 
-                        ? { backgroundImage: stat.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', color: 'transparent' }
-                        : { color: stat.color })
-                    }}
+                    className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 whitespace-nowrap ${stat.label === 'Framer' ? 'dark:text-white' : ''}`}
+                    style={stat.label === 'Framer' ? {} : { color: stat.color }}
                 >
                     {stat.label}
                 </span>

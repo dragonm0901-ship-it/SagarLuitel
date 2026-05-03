@@ -93,7 +93,7 @@ export function PortfolioSection() {
   }, [isMobile]);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-[#FAFAFA] dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden">
+    <section ref={sectionRef} id="portfolio" className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-white dark:bg-brand-secondary transition-colors duration-700 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
@@ -101,8 +101,8 @@ export function PortfolioSection() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 md:mb-16"
         >
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-[#1A1A1A] dark:text-white transition-colors duration-700 mb-4 leading-[1.1] md:leading-[0.9] tracking-tighter">
-              Selected <span className="text-[#FF6B9D]">impact</span> projects
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-black text-brand-secondary dark:text-white transition-colors duration-700 mb-4 leading-[1.1] md:leading-[0.9] tracking-tighter">
+              Selected <span className="text-brand-third dark:text-brand-primary transition-colors duration-700">impact</span> projects
             </h2>
             <p className="text-gray-500 dark:text-gray-400 transition-colors duration-700 text-lg max-w-lg leading-relaxed">
               Curated collection showcasing technical depth and strategic design.
@@ -114,13 +114,13 @@ export function PortfolioSection() {
               <button 
                 onClick={() => navigate('/projects')}
                 data-cursor-text="view collection"
-                className="group relative bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:shadow-2xl active:scale-95"
+                className="group relative bg-brand-secondary dark:bg-brand-primary text-white px-8 py-4 rounded-[4px] font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:shadow-2xl active:scale-95"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   View All Projects
                   <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B9D] to-[#F5C518] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-black dark:bg-brand-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </button>
             </Magnetic>
           </div>

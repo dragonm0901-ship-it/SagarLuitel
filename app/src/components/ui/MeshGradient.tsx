@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const colors = ['#F5C518', '#FF6B9D', '#4A90E2', '#FF8C42'];
+const colors = ['#0f7bff', '#ff930f', '#2B2D42'];
 
 class Bubble {
   x: number;
